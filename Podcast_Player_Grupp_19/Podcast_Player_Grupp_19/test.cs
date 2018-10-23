@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Podcast_Player_Grupp_19 {
     class test {
+        
         private string TestString { get; set; }
+        private string kuk { get; set; }
     }
 }
