@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threaeding.Tasks;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Podcast_Player_Grupp_19 {
@@ -16,4 +17,3 @@ namespace Podcast_Player_Grupp_19 {
         }
     }
 }
-//asfjhjashfkjaf
