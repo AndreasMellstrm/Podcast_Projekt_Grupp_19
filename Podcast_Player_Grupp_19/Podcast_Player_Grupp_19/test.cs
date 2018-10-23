@@ -8,6 +8,6 @@ namespace Podcast_Player_Grupp_19 {
     class test {
         
         private string TestString { get; set; }
-        
+        //Här kan man va.
     }
 }
