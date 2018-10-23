@@ -16,4 +16,5 @@ namespace Podcast_Player_Grupp_19 {
             Application.Run(new PodcastGUI());
         }
     }
-} //Testar /Hugo
+} //Testar /Hugo :D
+
