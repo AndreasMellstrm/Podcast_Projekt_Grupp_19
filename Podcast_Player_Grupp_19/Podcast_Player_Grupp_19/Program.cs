@@ -13,7 +13,7 @@ namespace Podcast_Player_Grupp_19 {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new PodcastGUI());
         }
     }
 } //Testar /Hugo
