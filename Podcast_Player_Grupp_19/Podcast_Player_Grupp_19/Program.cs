@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Threaeding.Tasks;
 using System.Windows.Forms;
 
 namespace Podcast_Player_Grupp_19 {
@@ -13,7 +12,8 @@ namespace Podcast_Player_Grupp_19 {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new PodcastGUI());
         }
     }
 }
+//asfjhjashfkjaf
