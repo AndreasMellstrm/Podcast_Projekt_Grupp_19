@@ -46,15 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PodcastGui.cs">
+    <Compile Include="PL\PodcastGui.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PodcastGui.Designer.cs">
+    <Compile Include="PL\PodcastGui.Designer.cs">
       <DependentUpon>PodcastGui.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="PL\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="PodcastGui.resx">
+    <EmbeddedResource Include="PL\PodcastGui.resx">
       <DependentUpon>PodcastGui.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -78,6 +78,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BLL\" />
+    <Folder Include="DAL\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
