@@ -41,6 +41,10 @@
             this.tbUrl = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.lblUrl = new System.Windows.Forms.Label();
+            this.tbCategory = new System.Windows.Forms.TextBox();
+            this.lblAddCategory = new System.Windows.Forms.Label();
+            this.btnAddCategory = new System.Windows.Forms.Button();
+            this.btnAddPodcast = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -80,11 +84,11 @@
             // 
             // btnPlay
             // 
-            this.btnPlay.Location = new System.Drawing.Point(441, 237);
+            this.btnPlay.Location = new System.Drawing.Point(837, 517);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(243, 121);
             this.btnPlay.TabIndex = 5;
-            this.btnPlay.Text = "button1";
+            this.btnPlay.Text = "PlayEpisode";
             this.btnPlay.UseVisualStyleBackColor = true;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
@@ -153,7 +157,7 @@
             // 
             this.tbUrl.Location = new System.Drawing.Point(52, 162);
             this.tbUrl.Name = "tbUrl";
-            this.tbUrl.Size = new System.Drawing.Size(672, 22);
+            this.tbUrl.Size = new System.Drawing.Size(632, 22);
             this.tbUrl.TabIndex = 8;
             this.tbUrl.TextChanged += new System.EventHandler(this.tbUrl_TextChanged);
             // 
@@ -172,11 +176,53 @@
             this.lblUrl.TabIndex = 10;
             this.lblUrl.Text = "Url: ";
             // 
+            // tbCategory
+            // 
+            this.tbCategory.Location = new System.Drawing.Point(837, 160);
+            this.tbCategory.Name = "tbCategory";
+            this.tbCategory.Size = new System.Drawing.Size(259, 22);
+            this.tbCategory.TabIndex = 11;
+            this.tbCategory.TextChanged += new System.EventHandler(this.tbCategory_TextChanged);
+            // 
+            // lblAddCategory
+            // 
+            this.lblAddCategory.AutoSize = true;
+            this.lblAddCategory.Location = new System.Drawing.Point(834, 140);
+            this.lblAddCategory.Name = "lblAddCategory";
+            this.lblAddCategory.Size = new System.Drawing.Size(94, 17);
+            this.lblAddCategory.TabIndex = 12;
+            this.lblAddCategory.Text = "Add Category";
+            this.lblAddCategory.Click += new System.EventHandler(this.lblAddCategory_Click);
+            // 
+            // btnAddCategory
+            // 
+            this.btnAddCategory.Location = new System.Drawing.Point(837, 188);
+            this.btnAddCategory.Name = "btnAddCategory";
+            this.btnAddCategory.Size = new System.Drawing.Size(75, 23);
+            this.btnAddCategory.TabIndex = 13;
+            this.btnAddCategory.Text = "Add Category";
+            this.btnAddCategory.UseVisualStyleBackColor = true;
+            this.btnAddCategory.Click += new System.EventHandler(this.btnAddCategory_Click);
+            // 
+            // btnAddPodcast
+            // 
+            this.btnAddPodcast.Location = new System.Drawing.Point(413, 335);
+            this.btnAddPodcast.Name = "btnAddPodcast";
+            this.btnAddPodcast.Size = new System.Drawing.Size(75, 23);
+            this.btnAddPodcast.TabIndex = 14;
+            this.btnAddPodcast.Text = "Add Podcast";
+            this.btnAddPodcast.UseVisualStyleBackColor = true;
+            this.btnAddPodcast.Click += new System.EventHandler(this.btnAddPodcast_Click);
+            // 
             // PodcastGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1163, 781);
+            this.Controls.Add(this.btnAddPodcast);
+            this.Controls.Add(this.btnAddCategory);
+            this.Controls.Add(this.lblAddCategory);
+            this.Controls.Add(this.tbCategory);
             this.Controls.Add(this.lblUrl);
             this.Controls.Add(this.tbUrl);
             this.Controls.Add(this.lvEpisodes);
@@ -211,6 +257,10 @@
         private System.Windows.Forms.TextBox tbUrl;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Label lblUrl;
+        private System.Windows.Forms.TextBox tbCategory;
+        private System.Windows.Forms.Label lblAddCategory;
+        private System.Windows.Forms.Button btnAddCategory;
+        private System.Windows.Forms.Button btnAddPodcast;
     }
 }
 

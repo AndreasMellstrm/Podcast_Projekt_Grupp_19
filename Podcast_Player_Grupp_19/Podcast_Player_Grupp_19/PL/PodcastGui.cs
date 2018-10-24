@@ -41,5 +41,21 @@ namespace Podcast_Player_Grupp_19 {
         private void tbUrl_TextChanged(object sender, EventArgs e) {
 
         }
+
+        private void lblAddCategory_Click(object sender, EventArgs e) {
+
+        }
+
+        private void btnAddCategory_Click(object sender, EventArgs e) {
+
+        }
+
+        private void tbCategory_TextChanged(object sender, EventArgs e) {
+
+        }
+
+        private void btnAddPodcast_Click(object sender, EventArgs e) {
+
+        }
     }
 }
