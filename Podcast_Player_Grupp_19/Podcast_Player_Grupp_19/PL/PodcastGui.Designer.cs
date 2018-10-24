@@ -23,20 +23,24 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lvCategory = new System.Windows.Forms.ListView();
             this.chCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnPlay = new System.Windows.Forms.Button();
             this.lvPodcasts = new System.Windows.Forms.ListView();
-            this.lvEpisodes = new System.Windows.Forms.ListView();
             this.chPodEpiCount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chPodAuthor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chPodFreq = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chPodCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvEpisodes = new System.Windows.Forms.ListView();
             this.chEpiEpisode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chEpiName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chEpiLength = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chPodCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tbUrl = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.lblUrl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -99,20 +103,6 @@
             this.lvPodcasts.View = System.Windows.Forms.View.Details;
             this.lvPodcasts.SelectedIndexChanged += new System.EventHandler(this.lvPodcasts_SelectedIndexChanged);
             // 
-            // lvEpisodes
-            // 
-            this.lvEpisodes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chEpiEpisode,
-            this.chEpiName,
-            this.chEpiLength});
-            this.lvEpisodes.Location = new System.Drawing.Point(12, 616);
-            this.lvEpisodes.Name = "lvEpisodes";
-            this.lvEpisodes.Size = new System.Drawing.Size(672, 153);
-            this.lvEpisodes.TabIndex = 7;
-            this.lvEpisodes.UseCompatibleStateImageBehavior = false;
-            this.lvEpisodes.View = System.Windows.Forms.View.Details;
-            this.lvEpisodes.SelectedIndexChanged += new System.EventHandler(this.lvEpisodes_SelectedIndexChanged);
-            // 
             // chPodEpiCount
             // 
             this.chPodEpiCount.Text = "Episodes";
@@ -126,6 +116,24 @@
             // chPodFreq
             // 
             this.chPodFreq.Text = "Update every:";
+            // 
+            // chPodCategory
+            // 
+            this.chPodCategory.Text = "Category";
+            // 
+            // lvEpisodes
+            // 
+            this.lvEpisodes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chEpiEpisode,
+            this.chEpiName,
+            this.chEpiLength});
+            this.lvEpisodes.Location = new System.Drawing.Point(12, 616);
+            this.lvEpisodes.Name = "lvEpisodes";
+            this.lvEpisodes.Size = new System.Drawing.Size(672, 153);
+            this.lvEpisodes.TabIndex = 7;
+            this.lvEpisodes.UseCompatibleStateImageBehavior = false;
+            this.lvEpisodes.View = System.Windows.Forms.View.Details;
+            this.lvEpisodes.SelectedIndexChanged += new System.EventHandler(this.lvEpisodes_SelectedIndexChanged);
             // 
             // chEpiEpisode
             // 
@@ -141,15 +149,36 @@
             // 
             this.chEpiLength.Text = "Length";
             // 
-            // chPodCategory
+            // tbUrl
             // 
-            this.chPodCategory.Text = "Category";
+            this.tbUrl.Location = new System.Drawing.Point(52, 162);
+            this.tbUrl.Name = "tbUrl";
+            this.tbUrl.Size = new System.Drawing.Size(672, 22);
+            this.tbUrl.TabIndex = 8;
+            this.tbUrl.TextChanged += new System.EventHandler(this.tbUrl_TextChanged);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // lblUrl
+            // 
+            this.lblUrl.AutoSize = true;
+            this.lblUrl.Location = new System.Drawing.Point(12, 165);
+            this.lblUrl.Name = "lblUrl";
+            this.lblUrl.Size = new System.Drawing.Size(34, 17);
+            this.lblUrl.TabIndex = 10;
+            this.lblUrl.Text = "Url: ";
             // 
             // PodcastGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1163, 781);
+            this.Controls.Add(this.lblUrl);
+            this.Controls.Add(this.tbUrl);
             this.Controls.Add(this.lvEpisodes);
             this.Controls.Add(this.lvPodcasts);
             this.Controls.Add(this.btnPlay);
@@ -179,6 +208,9 @@
         private System.Windows.Forms.ColumnHeader chEpiName;
         private System.Windows.Forms.ColumnHeader chEpiLength;
         private System.Windows.Forms.ColumnHeader chPodCategory;
+        private System.Windows.Forms.TextBox tbUrl;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.Label lblUrl;
     }
 }
 

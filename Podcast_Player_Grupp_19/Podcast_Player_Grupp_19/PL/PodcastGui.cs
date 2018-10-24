@@ -37,5 +37,9 @@ namespace Podcast_Player_Grupp_19 {
         private void lvEpisodes_SelectedIndexChanged(object sender, EventArgs e) {
 
         }
+
+        private void tbUrl_TextChanged(object sender, EventArgs e) {
+
+        }
     }
 }
