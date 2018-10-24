@@ -50,7 +50,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 388);
+            this.label1.Location = new System.Drawing.Point(12, 270);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(66, 17);
             this.label1.TabIndex = 2;
@@ -59,7 +59,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 596);
+            this.label2.Location = new System.Drawing.Point(12, 478);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(66, 17);
             this.label2.TabIndex = 3;
@@ -69,7 +69,7 @@
             // 
             this.lvCategory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chCategory});
-            this.lvCategory.Location = new System.Drawing.Point(12, 211);
+            this.lvCategory.Location = new System.Drawing.Point(12, 93);
             this.lvCategory.Name = "lvCategory";
             this.lvCategory.Size = new System.Drawing.Size(377, 147);
             this.lvCategory.TabIndex = 4;
@@ -84,7 +84,7 @@
             // 
             // btnPlay
             // 
-            this.btnPlay.Location = new System.Drawing.Point(837, 517);
+            this.btnPlay.Location = new System.Drawing.Point(837, 399);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(243, 121);
             this.btnPlay.TabIndex = 5;
@@ -99,7 +99,7 @@
             this.chPodAuthor,
             this.chPodFreq,
             this.chPodCategory});
-            this.lvPodcasts.Location = new System.Drawing.Point(12, 408);
+            this.lvPodcasts.Location = new System.Drawing.Point(12, 290);
             this.lvPodcasts.Name = "lvPodcasts";
             this.lvPodcasts.Size = new System.Drawing.Size(672, 185);
             this.lvPodcasts.TabIndex = 6;
@@ -131,7 +131,7 @@
             this.chEpiEpisode,
             this.chEpiName,
             this.chEpiLength});
-            this.lvEpisodes.Location = new System.Drawing.Point(12, 616);
+            this.lvEpisodes.Location = new System.Drawing.Point(12, 498);
             this.lvEpisodes.Name = "lvEpisodes";
             this.lvEpisodes.Size = new System.Drawing.Size(672, 153);
             this.lvEpisodes.TabIndex = 7;
@@ -155,7 +155,7 @@
             // 
             // tbUrl
             // 
-            this.tbUrl.Location = new System.Drawing.Point(52, 162);
+            this.tbUrl.Location = new System.Drawing.Point(52, 44);
             this.tbUrl.Name = "tbUrl";
             this.tbUrl.Size = new System.Drawing.Size(632, 22);
             this.tbUrl.TabIndex = 8;
@@ -170,7 +170,7 @@
             // lblUrl
             // 
             this.lblUrl.AutoSize = true;
-            this.lblUrl.Location = new System.Drawing.Point(12, 165);
+            this.lblUrl.Location = new System.Drawing.Point(12, 47);
             this.lblUrl.Name = "lblUrl";
             this.lblUrl.Size = new System.Drawing.Size(34, 17);
             this.lblUrl.TabIndex = 10;
@@ -178,7 +178,7 @@
             // 
             // tbCategory
             // 
-            this.tbCategory.Location = new System.Drawing.Point(837, 160);
+            this.tbCategory.Location = new System.Drawing.Point(837, 42);
             this.tbCategory.Name = "tbCategory";
             this.tbCategory.Size = new System.Drawing.Size(259, 22);
             this.tbCategory.TabIndex = 11;
@@ -187,7 +187,7 @@
             // lblAddCategory
             // 
             this.lblAddCategory.AutoSize = true;
-            this.lblAddCategory.Location = new System.Drawing.Point(834, 140);
+            this.lblAddCategory.Location = new System.Drawing.Point(834, 22);
             this.lblAddCategory.Name = "lblAddCategory";
             this.lblAddCategory.Size = new System.Drawing.Size(94, 17);
             this.lblAddCategory.TabIndex = 12;
@@ -196,7 +196,7 @@
             // 
             // btnAddCategory
             // 
-            this.btnAddCategory.Location = new System.Drawing.Point(837, 188);
+            this.btnAddCategory.Location = new System.Drawing.Point(837, 70);
             this.btnAddCategory.Name = "btnAddCategory";
             this.btnAddCategory.Size = new System.Drawing.Size(75, 23);
             this.btnAddCategory.TabIndex = 13;
@@ -206,7 +206,7 @@
             // 
             // btnAddPodcast
             // 
-            this.btnAddPodcast.Location = new System.Drawing.Point(413, 335);
+            this.btnAddPodcast.Location = new System.Drawing.Point(413, 217);
             this.btnAddPodcast.Name = "btnAddPodcast";
             this.btnAddPodcast.Size = new System.Drawing.Size(75, 23);
             this.btnAddPodcast.TabIndex = 14;
