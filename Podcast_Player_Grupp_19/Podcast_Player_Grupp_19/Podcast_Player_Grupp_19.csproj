@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\Category.cs" />
+    <Compile Include="BLL\IList.cs" />
     <Compile Include="BLL\Player.cs" />
     <Compile Include="DAL\FeedReader.cs" />
     <Compile Include="PL\PodcastGui.cs">
