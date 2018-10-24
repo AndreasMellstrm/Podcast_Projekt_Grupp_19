@@ -12,6 +12,7 @@ namespace Podcast_Player_Grupp_19.BLL {
         public int NumberOfEpisodes { get; set; }
         public int UpdateFrequency { get; set; }
         public DAL.FeedReader FeedReader{ get; set; }
+        public static ItemList<Podcast> PodcastList { get; set; }
 
         public Podcast(string Url) {
             FeedReader= new DAL.FeedReader(Url);
