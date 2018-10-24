@@ -56,10 +56,6 @@ namespace Podcast_Player_Grupp_19 {
             BLL.Category category = new BLL.Category(cat);
         }
 
-        private void tbCategory_TextChanged(object sender, EventArgs e) {
-
-        }
-
         private void btnAddPodcast_Click(object sender, EventArgs e) {
 
         }
