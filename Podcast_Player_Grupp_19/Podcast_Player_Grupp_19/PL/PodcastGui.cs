@@ -17,5 +17,25 @@ namespace Podcast_Player_Grupp_19 {
         private void Form1_Load(object sender, EventArgs e) {
 
         }
+
+        
+
+        
+
+        private void lvCategory_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
+
+        private void btnPlay_Click(object sender, EventArgs e) {
+
+        }
+
+        private void lvPodcasts_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
+
+        private void lvEpisodes_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
     }
 }
