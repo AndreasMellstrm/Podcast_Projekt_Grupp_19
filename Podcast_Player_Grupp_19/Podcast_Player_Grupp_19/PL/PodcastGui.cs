@@ -20,6 +20,7 @@ namespace Podcast_Player_Grupp_19 {
 
         private void lvCategory_SelectedIndexChanged(object sender, EventArgs e) {
 
+
         }
 
         private void btnPlay_Click(object sender, EventArgs e) {
@@ -56,9 +57,7 @@ namespace Podcast_Player_Grupp_19 {
             BLL.Category category = new BLL.Category(cat);
         }
 
-        private void tbCategory_TextChanged(object sender, EventArgs e) {
-
-        }
+        
 
         private void btnAddPodcast_Click(object sender, EventArgs e) {
 

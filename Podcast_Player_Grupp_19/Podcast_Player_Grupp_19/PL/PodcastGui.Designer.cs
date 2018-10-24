@@ -182,7 +182,6 @@
             this.tbCategory.Name = "tbCategory";
             this.tbCategory.Size = new System.Drawing.Size(259, 22);
             this.tbCategory.TabIndex = 11;
-            this.tbCategory.TextChanged += new System.EventHandler(this.tbCategory_TextChanged);
             // 
             // lblAddCategory
             // 
