@@ -5,18 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Podcast_Player_Grupp_19.BLL
-{
-    public class Category
-    {
-        public string CategoryName { get; set; }
+namespace Podcast_Player_Grupp_19.BLL {
+    public class Category {
 
-        public Category(string name)
-        {
+        public static string CategoryName { get; set; }
+
+        public Category(string name) {
+
             CategoryName = name;
+            Console.WriteLine(name);
         }
-
     }
+}
+    
+    
     public class CategoryList<T> where T : IList
     {
         void AddToList(Object obj, List<T> listName)
@@ -37,3 +39,4 @@ namespace Podcast_Player_Grupp_19.BLL
         }
     }
 }
+

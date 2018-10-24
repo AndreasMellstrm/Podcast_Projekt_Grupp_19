@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace Podcast_Player_Grupp_19.BLL
 {
+
+    
     interface IList
     {
         void AddToList(object obj, List<> list);
 
         void RemoveFromList();
     }
+    
 }

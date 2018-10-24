@@ -44,9 +44,16 @@ namespace Podcast_Player_Grupp_19 {
         private void lblAddCategory_Click(object sender, EventArgs e) {
 
         }
-
+        //Press this button to send the chosen category name from the user to create a new object in the Category() class.
         private void btnAddCategory_Click(object sender, EventArgs e) {
-
+            //Runs the following method which is created down below.
+            getCategoryInput();
+            
+        }
+        //Get the category name from the user input,
+        private void getCategoryInput() {
+            string cat = tbCategory.Text;
+            BLL.Category category = new BLL.Category(cat);
         }
 
         private void tbCategory_TextChanged(object sender, EventArgs e) {
