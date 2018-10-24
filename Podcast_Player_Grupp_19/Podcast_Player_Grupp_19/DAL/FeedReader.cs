@@ -9,12 +9,12 @@ using System.ServiceModel.Syndication;
 namespace Podcast_Player_Grupp_19.DAL {
     class FeedReader {
 
-        public SyndicationFeed feed { get; set; }
-        private XmlTextReader reader { get; set; }
+        public SyndicationFeed Feed { get; set; }
+        private XmlTextReader Reader { get; set; }
 
         public FeedReader(string url) {
-            reader = new XmlTextReader(url);
-            feed = SyndicationFeed.Load(reader);
+            Reader = new XmlTextReader(url);
+            Feed = SyndicationFeed.Load(Reader);
         }
     }
 }
