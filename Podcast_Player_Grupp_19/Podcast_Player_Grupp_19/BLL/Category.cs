@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,23 +18,35 @@ namespace Podcast_Player_Grupp_19.BLL
         }
 
     }
-    public class CategoryList<T> where T : IList
+    public class ItemList<T> : IList<T>
     {
-        void AddToList(Object obj, List<T> listName)
+        public List<T> List { get; set; }
+
+        public ItemList(T item)
         {
-            if(!listName.Contains(obj))
+            List = new List<T>();
+        }
+        public void AddToList(T item)
+        {
+            if (!List.Contains(item))
             {
-                listName.Add(obj);
+                List.Add(item);
             }
             else
             {
-                MessageBox.Show("List "+listName+" already contains " +obj+" .", "System Error");
+                MessageBox.Show("Listan " + List + " innehåller redan " + item + " .", "Error Message");
             }
         }
-
-        void IList.RemoveFromList()
+        public void RemoveFromList(T item)
         {
-            throw new NotImplementedException();
+            if (List.Contains(item))
+            {
+                List.Remove(item);
+            }
+            else
+            {
+                MessageBox.Show("Det gick inte att ta bort " +item+" för att listan inte innehåller " + item + ".", "Error Message");
+            }
         }
     }
 }

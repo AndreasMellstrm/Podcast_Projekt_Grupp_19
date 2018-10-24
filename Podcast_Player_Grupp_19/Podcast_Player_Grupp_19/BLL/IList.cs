@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Podcast_Player_Grupp_19.BLL
 {
-    interface IList
+    interface IList<T>
     {
-        void AddToList(object obj, List<> list);
+        void AddToList(T obj);
 
-        void RemoveFromList();
+        void RemoveFromList(T obj);
     }
 }
