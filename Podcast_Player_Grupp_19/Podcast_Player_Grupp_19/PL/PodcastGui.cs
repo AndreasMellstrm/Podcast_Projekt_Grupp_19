@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Podcast_Player_Grupp_19.BLL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,6 +11,8 @@ using System.Windows.Forms;
 
 namespace Podcast_Player_Grupp_19 {
     public partial class PodcastGUI : Form {
+
+
         public PodcastGUI() {
             InitializeComponent();
         }
@@ -49,11 +52,6 @@ namespace Podcast_Player_Grupp_19 {
             //Runs the following method which is created down below.
             AddCategory();
             
-        }
-        //Get the category name from the user input,
-        private void AddCategory() {
-            string cat = tbCategory.Text;
-            BLL.Category category = new BLL.Category(cat);
         }
 
         private void btnAddPodcast_Click(object sender, EventArgs e) {
