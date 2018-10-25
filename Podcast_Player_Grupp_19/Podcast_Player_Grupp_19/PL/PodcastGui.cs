@@ -18,6 +18,13 @@ namespace Podcast_Player_Grupp_19 {
             InitializeComponent();
         }
 
+        private void UpdateCategoryList() {
+            lvCategory.Items.Clear();
+            foreach(Category category in CategoryList.List) {
+                lvCategory.Items.Add(category.CategoryName);
+            }
+        }
+
         private void Form1_Load(object sender, EventArgs e) {
 
         }
@@ -53,6 +60,7 @@ namespace Podcast_Player_Grupp_19 {
             //Runs the following method which is created down below.
 
             var Category = new Category(tbCategory.Text, CategoryList);
+            UpdateCategoryList();
             
         }
 
