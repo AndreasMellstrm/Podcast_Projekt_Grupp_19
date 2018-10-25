@@ -8,7 +8,7 @@ namespace Podcast_Player_Grupp_19.BLL
 {
     interface IList<T>
     {
-        void AddToList(T obj);
+        void AddToList(T obj, string userInput);
 
         void RemoveFromList(T obj);
     }

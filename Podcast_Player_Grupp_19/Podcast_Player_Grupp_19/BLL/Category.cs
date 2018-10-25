@@ -13,24 +13,13 @@ namespace Podcast_Player_Grupp_19.BLL
     {
         public string CategoryName { get; set; }
 
-        public Category(string userInput, ItemList<Category> CategoryList)
+        public Category(string userInput)
         {
             CategoryName = userInput;
-            AddCategory(userInput, CategoryList);
         }
 
         //
-        public void AddCategory(string userInput, ItemList<Category> CategoryList)
-        {
-            if(!CategoryList.List.Any((cat) => cat.CategoryName == userInput))
-            {
-                CategoryList.List.Add(this);
-            }
-            else
-            {
-                MessageBox.Show("Listan innehåller redan " + userInput + " .", "Error Message");
-            }
-        }
+       
     }
 }
 /* public List<Category> List { get; set; }

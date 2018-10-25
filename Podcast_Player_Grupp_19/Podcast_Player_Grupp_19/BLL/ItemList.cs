@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,16 +17,15 @@ namespace Podcast_Player_Grupp_19.BLL
         {
             List = new List<T>();
         }
-        public void AddToList(T item)
+        public void AddToList(T item, string userInput)
         {
-            if (!List.Contains(item))
-            {
+            if (!List.Any((i) => i.GetType().GetProperty("CategoryName").GetValue(i).ToString() == userInput)) {
                 List.Add(item);
             }
-            else
-            {
-                MessageBox.Show("Listan " + List + " innehåller redan " + item + " .", "Error Message");
+            else {
+                MessageBox.Show("Listan innehåller redan " + userInput + ".", "Error Message");
             }
+            
         }
         public void RemoveFromList(T item)
         {
