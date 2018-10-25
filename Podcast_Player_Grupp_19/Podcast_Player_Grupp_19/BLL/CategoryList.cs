@@ -7,16 +7,15 @@ using System.Windows.Forms;
 
 namespace Podcast_Player_Grupp_19.BLL
 {
-
-    public class ItemList<T> : IList<T>
+    class CategoryList : IList<Category>
     {
-        private List<T> List { get; set; }
+        public List<Category> List { get; set; }
 
-        public ItemList()
+        public CategoryList()
         {
-            List = new List<T>();
+            List = new List<Category>();
         }
-        public virtual void AddToList(T item)
+        public void AddToList(Category item)
         {
             if (!List.Contains(item))
             {
@@ -27,7 +26,7 @@ namespace Podcast_Player_Grupp_19.BLL
                 MessageBox.Show("Listan " + List + " innehåller redan " + item + " .", "Error Message");
             }
         }
-        public void RemoveFromList(T item)
+        public void RemoveFromList(Category item)
         {
             if (List.Contains(item))
             {

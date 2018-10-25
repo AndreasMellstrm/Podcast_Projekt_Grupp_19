@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\Category.cs" />
+    <Compile Include="BLL\CategoryList.cs" />
     <Compile Include="BLL\IList.cs" />
     <Compile Include="BLL\ItemList.cs" />
     <Compile Include="BLL\Player.cs" />
