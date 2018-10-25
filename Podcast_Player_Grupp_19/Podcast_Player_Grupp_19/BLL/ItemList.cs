@@ -10,13 +10,13 @@ namespace Podcast_Player_Grupp_19.BLL
 
     public class ItemList<T> : IList<T>
     {
-        private List<T> List { get; set; }
+        public List<T> List { get; private set; }
 
         public ItemList()
         {
             List = new List<T>();
         }
-        public virtual void AddToList(T item)
+        public void AddToList(T item)
         {
             if (!List.Contains(item))
             {

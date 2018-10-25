@@ -12,6 +12,7 @@ using System.Windows.Forms;
 namespace Podcast_Player_Grupp_19 {
     public partial class PodcastGUI : Form {
 
+        public ItemList<Category> CategoryList = new ItemList<Category>();
 
         public PodcastGUI() {
             InitializeComponent();
@@ -50,7 +51,8 @@ namespace Podcast_Player_Grupp_19 {
         //Press this button to send the chosen category name from the user to create a new object in the Category() class.
         private void btnAddCategory_Click(object sender, EventArgs e) {
             //Runs the following method which is created down below.
-            AddCategory();
+
+            var Category = new Category(tbCategory.Text, CategoryList);
             
         }
 
