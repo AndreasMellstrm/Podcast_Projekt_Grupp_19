@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 using System.Xml;
 using System.ServiceModel.Syndication;
+
 
 namespace Podcast_Player_Grupp_19.DAL {
     class FeedReader {
@@ -16,6 +18,8 @@ namespace Podcast_Player_Grupp_19.DAL {
             Reader = new XmlTextReader(url);
             Feed = SyndicationFeed.Load(Reader);
         }
+
+
     }
 }
 
