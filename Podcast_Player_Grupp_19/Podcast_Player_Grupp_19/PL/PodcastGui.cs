@@ -18,13 +18,19 @@ namespace Podcast_Player_Grupp_19 {
             InitializeComponent();
         }
 
-        private void UpdateCategoryList() {
-            lvCategory.Items.Clear();
-            foreach(Category category in CategoryList.List) {
-                lvCategory.Items.Add(category.Name);
+
+        private void RemoveListItems(ListView listView, ItemList.List ) {
+            try {
+                foreach (ListViewItem selectedIndex in lvCategory.SelectedItems) {
+                    CategoryList.RemoveFromList(lvCategory.SelectedItems[selectedIndex.Index].Text);
+                }
+                list.UpdateList(listView);
+            }
+            catch (ArgumentOutOfRangeException) {
+                MessageBox.Show("You must select the Category object that you want to remove");
             }
         }
-
+   
         private void Form1_Load(object sender, EventArgs e) {
 
         }
@@ -72,21 +78,6 @@ namespace Podcast_Player_Grupp_19 {
 
         private void btnRemoveCategory_Click(object sender, EventArgs e) {
 
-            Category category;
-
-            try {
-                var listItem = lvCategory.SelectedItems[0].Text;
-
-                
-
-                UpdateCategoryList();
-                // CategoryList.RemoveFromList(Catew, listItem);
-                Console.WriteLine(listItem);
-                
-
-            }catch(ArgumentOutOfRangeException) {
-                MessageBox.Show("You must select the Category object that you want to remove");
-            }
-        }
+            
     }
 }
