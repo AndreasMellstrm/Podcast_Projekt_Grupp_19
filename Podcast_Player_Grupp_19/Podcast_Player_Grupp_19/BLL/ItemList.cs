@@ -19,7 +19,7 @@ namespace Podcast_Player_Grupp_19.BLL
         }
         public void AddToList(T item, string userInput)
         {
-            if (!List.Any((i) => i.GetType().GetProperty("CategoryName").GetValue(i).ToString() == userInput)) {
+            if (!List.Any((i) => i.GetType().GetProperty("Name").GetValue(i).ToString() == userInput)) {
                 List.Add(item);
             }
             else {

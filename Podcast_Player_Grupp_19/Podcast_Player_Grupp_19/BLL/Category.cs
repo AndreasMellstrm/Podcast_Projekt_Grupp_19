@@ -11,11 +11,11 @@ namespace Podcast_Player_Grupp_19.BLL
 {
     public class Category
     {
-        public string CategoryName { get; set; }
+        public string Name { get; set; }
 
         public Category(string userInput)
         {
-            CategoryName = userInput;
+            Name = userInput;
         }
 
         //
