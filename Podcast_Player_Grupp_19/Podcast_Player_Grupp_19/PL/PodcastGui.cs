@@ -28,7 +28,7 @@ namespace Podcast_Player_Grupp_19 {
                 list.UpdateList(listView);
             }
             catch (ArgumentOutOfRangeException) {
-                MessageBox.Show("You must select the Category object that you want to remove");
+                MessageBox.Show("You must select the  object that you want to remove");
             }
         }
 
