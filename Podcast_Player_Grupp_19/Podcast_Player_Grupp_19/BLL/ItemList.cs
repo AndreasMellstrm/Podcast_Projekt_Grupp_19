@@ -33,12 +33,5 @@ namespace Podcast_Player_Grupp_19.BLL
                 List.RemoveAll(item => item.GetType().GetProperty("Name").GetValue(item).ToString() == userInput);
             }
         }
-
-        public void UpdateList(ListView listView) {
-            listView.Items.Clear();
-            foreach (T item in List) {
-                listView.Items.Add(item.GetType().GetProperty("Name").GetValue(item).ToString());
-            }
-        }
     }
 }

@@ -25,10 +25,17 @@ namespace Podcast_Player_Grupp_19 {
                 foreach (ListViewItem selectedIndex in listView.SelectedItems) {
                     list.RemoveFromList(listView.SelectedItems[selectedIndex.Index].Text);
                 }
-                list.UpdateList(listView);
+                UpdateListView(listView,list);
             }
             catch (ArgumentOutOfRangeException) {
                 MessageBox.Show("You must select the  object that you want to remove");
+            }
+        }
+
+        public void UpdateListView<T>(ListView listView, ItemList<T> ItemList) {
+            listView.Items.Clear();
+            foreach (T item in ItemList.List) {
+                listView.Items.Add(item.GetType().GetProperty("Name").GetValue(item).ToString());
             }
         }
 
@@ -68,7 +75,7 @@ namespace Podcast_Player_Grupp_19 {
             string userInput = tbCategory.Text;
             var Category = new Category(userInput);
             CategoryList.AddToList(Category, userInput);
-            CategoryList.UpdateList(lvCategory);
+            UpdateListView(lvCategory,CategoryList);
             tbCategory.Clear();
 
         }
