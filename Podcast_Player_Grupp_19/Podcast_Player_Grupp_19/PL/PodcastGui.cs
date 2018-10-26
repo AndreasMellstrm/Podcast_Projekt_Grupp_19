@@ -69,5 +69,20 @@ namespace Podcast_Player_Grupp_19 {
         private void btnAddPodcast_Click(object sender, EventArgs e) {
 
         }
+
+        private void btnRemoveCategory_Click(object sender, EventArgs e) {
+            try {
+                // här ska variabeln ge det markerade objektet i lvCategory // => var selectedItem = lvCategory.SelectedIndices;
+
+                var test = lvCategory.SelectedItems[0];
+                Console.WriteLine(test);
+
+                // lvCategory.Items.RemoveAt(lvCategory.SelectedIndices[0]);
+                
+
+            }catch(ArgumentOutOfRangeException) {
+                MessageBox.Show("Du måste välja vilken kategori du vill radera");
+            }
+        }
     }
 }
