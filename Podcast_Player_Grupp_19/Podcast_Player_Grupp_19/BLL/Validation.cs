@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace Podcast_Player_Grupp_19.BLL
 {
-    interface IList<T>
+    class Validation
     {
-        void AddToList(T obj, string userInput);
-
-        void RemoveFromList(string userInput);
     }
 }
