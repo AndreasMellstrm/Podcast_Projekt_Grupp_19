@@ -72,13 +72,16 @@ namespace Podcast_Player_Grupp_19 {
 
         private void btnRemoveCategory_Click(object sender, EventArgs e) {
 
-            try {
-                var test = lvCategory.SelectedItems[0].Text;
+            Category category;
 
-                foreach(ListViewItem selectedItems in lvCategory.SelectedItems) {
-                    lvCategory.Items.Remove(selectedItems);
-                }
-                Console.WriteLine(test);
+            try {
+                var listItem = lvCategory.SelectedItems[0].Text;
+
+                
+
+                UpdateCategoryList();
+                // CategoryList.RemoveFromList(Catew, listItem);
+                Console.WriteLine(listItem);
                 
 
             }catch(ArgumentOutOfRangeException) {
