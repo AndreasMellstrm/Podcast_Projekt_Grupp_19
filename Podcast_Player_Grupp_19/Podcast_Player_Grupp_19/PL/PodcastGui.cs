@@ -19,10 +19,11 @@ namespace Podcast_Player_Grupp_19 {
         }
 
 
-        private void RemoveListItems(ListView listView, ItemList.List ) {
+
+        private void RemoveListItems<T>(ListView listView, ItemList<T> list) {
             try {
-                foreach (ListViewItem selectedIndex in lvCategory.SelectedItems) {
-                    CategoryList.RemoveFromList(lvCategory.SelectedItems[selectedIndex.Index].Text);
+                foreach (ListViewItem selectedIndex in listView.SelectedItems) {
+                    list.RemoveFromList(listView.SelectedItems[selectedIndex.Index].Text);
                 }
                 list.UpdateList(listView);
             }
@@ -30,7 +31,7 @@ namespace Podcast_Player_Grupp_19 {
                 MessageBox.Show("You must select the Category object that you want to remove");
             }
         }
-   
+
         private void Form1_Load(object sender, EventArgs e) {
 
         }
@@ -67,17 +68,19 @@ namespace Podcast_Player_Grupp_19 {
             string userInput = tbCategory.Text;
             var Category = new Category(userInput);
             CategoryList.AddToList(Category, userInput);
-            UpdateCategoryList();
+            CategoryList.UpdateList(lvCategory);
             tbCategory.Clear();
 
         }
 
         private void btnAddPodcast_Click(object sender, EventArgs e) {
-
         }
 
-        private void btnRemoveCategory_Click(object sender, EventArgs e) {
 
-            
+        private void btnRemoveCategory_Click(object sender, EventArgs e) {
+            RemoveListItems(lvCategory, CategoryList);
+
+        }
     }
 }
+
