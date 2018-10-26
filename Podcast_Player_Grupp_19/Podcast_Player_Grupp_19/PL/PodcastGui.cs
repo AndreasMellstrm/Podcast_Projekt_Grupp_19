@@ -21,7 +21,7 @@ namespace Podcast_Player_Grupp_19 {
         private void UpdateCategoryList() {
             lvCategory.Items.Clear();
             foreach(Category category in CategoryList.List) {
-                lvCategory.Items.Add(category.CategoryName);
+                lvCategory.Items.Add(category.Name);
             }
         }
 
@@ -71,17 +71,18 @@ namespace Podcast_Player_Grupp_19 {
         }
 
         private void btnRemoveCategory_Click(object sender, EventArgs e) {
+
             try {
-                // här ska variabeln ge det markerade objektet i lvCategory // => var selectedItem = lvCategory.SelectedIndices;
+                var test = lvCategory.SelectedItems[0].Text;
 
-                var test = lvCategory.SelectedItems[0];
+                foreach(ListViewItem selectedItems in lvCategory.SelectedItems) {
+                    lvCategory.Items.Remove(selectedItems);
+                }
                 Console.WriteLine(test);
-
-                // lvCategory.Items.RemoveAt(lvCategory.SelectedIndices[0]);
                 
 
             }catch(ArgumentOutOfRangeException) {
-                MessageBox.Show("Du måste välja vilken kategori du vill radera");
+                MessageBox.Show("You must select the Category object that you want to remove");
             }
         }
     }
