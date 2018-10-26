@@ -27,15 +27,10 @@ namespace Podcast_Player_Grupp_19.BLL
             }
             
         }
-        public void RemoveFromList(T item)
+        public void RemoveFromList( string userInput)
         {
-            if (List.Contains(item))
-            {
-                List.Remove(item);
-            }
-            else
-            {
-                MessageBox.Show("Det gick inte att ta bort " + item + " för att listan inte innehåller " + item + ".", "Error Message");
+            if (List.Any((i) => i.GetType().GetProperty("Name").GetValue(i).ToString() == userInput)) {
+                List.RemoveAll(item => item.GetType().GetProperty("Name").GetValue(item).ToString() == userInput);
             }
         }
     }

@@ -20,6 +20,7 @@ namespace Podcast_Player_Grupp_19.BLL {
             this.Category = Category;
             this.NumberOfEpisodes = FeedReader.Feed.Items.Count();
             this.UpdateFrequency = UpdateFrequency;
+            
         }
     }
 }

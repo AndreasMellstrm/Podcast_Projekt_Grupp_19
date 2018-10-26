@@ -10,6 +10,6 @@ namespace Podcast_Player_Grupp_19.BLL
     {
         void AddToList(T obj, string userInput);
 
-        void RemoveFromList(T obj);
+        void RemoveFromList(string userInput);
     }
 }
