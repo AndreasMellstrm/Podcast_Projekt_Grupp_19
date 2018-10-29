@@ -12,7 +12,7 @@ namespace Podcast_Player_Grupp_19.BLL {
    public class Serializer<T> {
         private string Path { get; set; }
         private JsonSerializer JsonSerializer{ get; set; }
-        private string JsonFile = "files.json";
+        
 
         public Serializer(string pathToJson) {
             Path = pathToJson;

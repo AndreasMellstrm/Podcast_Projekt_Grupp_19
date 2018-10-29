@@ -19,6 +19,7 @@ namespace Podcast_Player_Grupp_19.DAL {
             Feed = SyndicationFeed.Load(Reader);
         }
 
+        
 
     }
 }

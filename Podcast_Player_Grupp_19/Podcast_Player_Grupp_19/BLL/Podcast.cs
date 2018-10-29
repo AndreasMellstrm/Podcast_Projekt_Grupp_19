@@ -19,7 +19,7 @@ namespace Podcast_Player_Grupp_19.BLL {
             FeedReader= new DAL.FeedReader(Url);
             this.Title = FeedReader.Feed.Title.ToString();
             this.Category = Category;
-            this.UpdateFrequency = UpdateFrequency;
+            
             
         }
 

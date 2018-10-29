@@ -17,56 +17,48 @@ namespace Podcast_Player_Grupp_19 {
         private ItemList<Podcast> PodcastList { get; set; }
         private Serializer<List<Category>> CategorySerializer {get; set;}
         private Serializer<List<Podcast>> PodcastSerializer { get; set; }
-
-        private string JsonFile = "categories.json";
+        private string PodcastFile = "podcasts.json";
+        private string CategoryFile = "categories.json";
 
         public PodcastGUI() {
             InitializeComponent();
             CategoryList = new ItemList<Category>();
             PodcastList = new ItemList<Podcast>();
+            CategorySerializer = new Serializer<List<Category>>(CategoryFile);
+            PodcastSerializer = new Serializer<List<Podcast>>(PodcastFile);
         }
 
 
 
-        private void RemoveListItems<T>(ListView listView, ItemList<T> list) {
+        private void RemoveListItems<T>(ListView listView, ItemList<T> list, Serializer<List<T>> serializer) {
             try {
                 foreach (ListViewItem selectedIndex in listView.SelectedItems) {
                     list.RemoveFromList(listView.SelectedItems[selectedIndex.Index].Text);
                 }
-                UpdateListView(listView,list);
+                UpdateListView(listView,list,serializer);
             }
             catch (ArgumentOutOfRangeException) {
                 MessageBox.Show("You must select the  object that you want to remove");
             }
         }
 
-        public void UpdateListView<T>(ListView listView, ItemList<T> ItemList) {
+        public void UpdateListView<T>(ListView listView, ItemList<T> ItemList, Serializer<List<T>> serializer) {
             listView.Items.Clear();
             foreach (T item in ItemList.List) {
                 listView.Items.Add(item.GetType().GetProperty("Name").GetValue(item).ToString());
             }
-            Serializer.Serialize(CategoryList.List);
+            serializer.Serialize(ItemList.List);
         }
             
         private void Form1_Load(object sender, EventArgs e) {
-            something();    
+            DeserializeList(lvCategory,CategoryList,CategorySerializer,CategoryFile);    
         }
 
-        private void DeserializeList<T>(Serializer<T> serializer) {
-            serializer = new Serializer<ItemList<T>>(JsonFile);
+        private void DeserializeList<T>(ListView listView, ItemList<T> itemList,Serializer<List<T>> Serializer, string JsonFile) {
             if (File.Exists(JsonFile)) {
-                List.Any()
-            }
-
-
-
-
-            if (File.Exists(JsonFile)) {
-                List.any((i) = Serializer.DeSerialize();
-                UpdateListView(lvCategory, CategoryList);
-            } else {
-                CategoryList.List = new List<Category>();
-            }
+                itemList.List = Serializer.DeSerialize();
+                UpdateListView(listView, itemList, Serializer);
+            } 
         }
             
         private void lvCategory_SelectedIndexChanged(object sender, EventArgs e) {
@@ -101,7 +93,7 @@ namespace Podcast_Player_Grupp_19 {
             string userInput = tbCategory.Text;
             var Category = new Category(userInput);
             CategoryList.AddToList(Category, userInput);
-            UpdateListView(lvCategory,CategoryList);
+            UpdateListView(lvCategory,CategoryList,CategorySerializer);
             tbCategory.Clear();
             
             
@@ -112,13 +104,13 @@ namespace Podcast_Player_Grupp_19 {
             string userInput = tbUrl.Text;
             var Podcast = new Podcast(userInput);
             PodcastList.AddToList(Podcast);
-            UpdateListView(lvPodcasts, PodcastList);
+            UpdateListView(lvPodcasts, PodcastList, PodcastSerializer);
             tbUrl.Clear();
         }
 
 
         private void btnRemoveCategory_Click(object sender, EventArgs e) {
-            RemoveListItems(lvCategory, CategoryList);
+            RemoveListItems(lvCategory, CategoryList,CategorySerializer);
 
         }
     }
