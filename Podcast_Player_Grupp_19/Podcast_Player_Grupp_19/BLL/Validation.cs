@@ -9,11 +9,11 @@ namespace Podcast_Player_Grupp_19.BLL
 {
     class Validation
     {
+        //Regex to check if string starts with http or https
+        Regex rgxUrl = new Regex(@"^(http|https|www)://.*$");
+
         public bool ValidUserInput(string userInput, out string errorMessage)
         {
-            //Regex to check if string starts with http or https
-            Regex rgxUrl = new Regex(@"^(http|https|www)://.*$");
-
             // Confirm that the user input string is not empty.
             if (userInput.Length == 0)
             {
@@ -22,9 +22,9 @@ namespace Podcast_Player_Grupp_19.BLL
             }
 
             // Confirm that there is an "@" and a "." in the email address, and in the correct order.
-            if (emailAddress.IndexOf("@") > -1)
+            if (userInput.IndexOf("@") > -1)
             {
-                if (emailAddress.IndexOf(".", emailAddress.IndexOf("@")) > emailAddress.IndexOf("@"))
+                if (userInput.IndexOf(".", userInput.IndexOf("@")) > userInput.IndexOf("@"))
                 {
                     errorMessage = "";
                     return true;
@@ -44,9 +44,15 @@ namespace Podcast_Player_Grupp_19.BLL
                 return false;
             }
 
-            if (!url.StartsWith)
+            if (url.StartsWith(rgxUrl.ToString()))
             {
-
+                errorMessage = "";
+                return true;
+            }
+            else
+            {
+                errorMessage = "Url:n måste börja med antingen 'https://', 'http://' eller 'www://'";
+                return false;
             }
         }
     }
