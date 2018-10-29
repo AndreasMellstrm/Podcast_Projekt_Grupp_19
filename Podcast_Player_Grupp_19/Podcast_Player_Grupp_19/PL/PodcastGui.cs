@@ -84,7 +84,7 @@ namespace Podcast_Player_Grupp_19 {
         private void btnAddPodcast_Click(object sender, EventArgs e) {
             string userInput = tbUrl.Text;
             var Podcast = new Podcast(userInput);
-            PodcastList.AddToList(Podcast, userInput);
+            PodcastList.AddToList(Podcast);
             UpdateListView(lvPodcasts, PodcastList);
             tbUrl.Clear();
         }
