@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,9 +15,15 @@ namespace Podcast_Player_Grupp_19 {
 
         private ItemList<Category> CategoryList { get; set; }
         private ItemList<Podcast> PodcastList { get; set; }
+        private Serializer<List<Category>> CategorySerializer {get; set;}
+        private Serializer<List<Podcast>> PodcastSerializer { get; set; }
+
+        private string JsonFile = "categories.json";
 
         public PodcastGUI() {
             InitializeComponent();
+            CategoryList = new ItemList<Category>();
+            PodcastList = new ItemList<Podcast>();
         }
 
 
@@ -38,12 +45,30 @@ namespace Podcast_Player_Grupp_19 {
             foreach (T item in ItemList.List) {
                 listView.Items.Add(item.GetType().GetProperty("Name").GetValue(item).ToString());
             }
+            Serializer.Serialize(CategoryList.List);
         }
-
+            
         private void Form1_Load(object sender, EventArgs e) {
-
+            something();    
         }
 
+        private void DeserializeList<T>(Serializer<T> serializer) {
+            serializer = new Serializer<ItemList<T>>(JsonFile);
+            if (File.Exists(JsonFile)) {
+                List.Any()
+            }
+
+
+
+
+            if (File.Exists(JsonFile)) {
+                List.any((i) = Serializer.DeSerialize();
+                UpdateListView(lvCategory, CategoryList);
+            } else {
+                CategoryList.List = new List<Category>();
+            }
+        }
+            
         private void lvCategory_SelectedIndexChanged(object sender, EventArgs e) {
 
         }
@@ -78,6 +103,8 @@ namespace Podcast_Player_Grupp_19 {
             CategoryList.AddToList(Category, userInput);
             UpdateListView(lvCategory,CategoryList);
             tbCategory.Clear();
+            
+            
 
         }
 

@@ -11,7 +11,7 @@ namespace Podcast_Player_Grupp_19.BLL
 
     public class ItemList<T> : IList<T>
     {
-        public List<T> List { get; private set; }
+        public List<T> List { get; set; }
 
         public ItemList()
         {
