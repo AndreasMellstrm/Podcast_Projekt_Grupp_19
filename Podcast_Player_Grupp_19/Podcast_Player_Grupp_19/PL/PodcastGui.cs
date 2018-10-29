@@ -12,7 +12,8 @@ using System.Windows.Forms;
 namespace Podcast_Player_Grupp_19 {
     public partial class PodcastGUI : Form {
 
-        public ItemList<Category> CategoryList = new ItemList<Category>();
+        private ItemList<Category> CategoryList { get; set; }
+        private ItemList<Podcast> PodcastList { get; set; }
 
         public PodcastGUI() {
             InitializeComponent();
@@ -81,6 +82,11 @@ namespace Podcast_Player_Grupp_19 {
         }
 
         private void btnAddPodcast_Click(object sender, EventArgs e) {
+            string userInput = tbUrl.Text;
+            var Podcast = new Podcast(userInput);
+            PodcastList.AddToList(Podcast, userInput);
+            UpdateListView(lvPodcasts, PodcastList);
+            tbUrl.Clear();
         }
 
 

@@ -27,6 +27,16 @@ namespace Podcast_Player_Grupp_19.BLL
             }
             
         }
+
+        public void AddToList(T item) {
+            if (!List.Any((i) => i.GetType().GetProperty("Title").GetValue(i).ToString() == item.GetType().GetProperty("Title").GetValue(item).ToString())) {
+                List.Add(item);
+            }
+            else {
+                MessageBox.Show("Listan innehåller redan den podcasten.", "Error Message");
+            }
+        }
+
         public void RemoveFromList( string userInput)
         {
             if (List.Any((i) => i.GetType().GetProperty("Name").GetValue(i).ToString() == userInput)) {
