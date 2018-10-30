@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Podcast_Player_Grupp_19.BLL {
     class Podcast {
 
-        public string Title { get; set; }
+        public string Name { get; set; }
         public Category Category { get; set; }
         public ItemList<PodcastEpisode> PodcastEpisodes { get; set; }
         public int UpdateFrequency { get; set; }
@@ -17,7 +17,9 @@ namespace Podcast_Player_Grupp_19.BLL {
 
         public Podcast(string Url) {
             FeedReader= new DAL.FeedReader(Url);
-            this.Title = FeedReader.Feed.Title.ToString();
+            foreach(var item in FeedReader.Feed.Items) {
+                Name = item.Title.Text;
+            }
             this.Category = Category;
             
             

@@ -12,14 +12,24 @@ namespace Podcast_Player_Grupp_19.DAL {
     class FeedReader {
 
         public SyndicationFeed Feed { get; set; }
-        private XmlTextReader Reader { get; set; }
 
         public FeedReader(string url) {
-            Reader = new XmlTextReader(url);
-            Feed = SyndicationFeed.Load(Reader);
+            Feed = new SyndicationFeed();
+            GetRssData(url);
         }
 
-        
+        public async void GetRssData(string url) {
+            var feed = await GetFeed(url);
+            Feed = feed;
+        }
+
+        public async Task<SyndicationFeed> GetFeed(string url) {
+            var task = Task.Factory.StartNew(() => {
+                XmlReader reader = XmlReader.Create(url);
+                return SyndicationFeed.Load(reader);
+            });
+            return await task;
+        }
 
     }
 }
