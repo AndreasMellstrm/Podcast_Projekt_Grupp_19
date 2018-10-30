@@ -19,21 +19,11 @@ namespace Podcast_Player_Grupp_19.BLL
             {
                 errorMessage = "Inmatning saknas.";
                 return false;
-            }
-
-            // Confirm that there is an "@" and a "." in the email address, and in the correct order.
-            if (userInput.IndexOf("@") > -1)
+            } else
             {
-                if (userInput.IndexOf(".", userInput.IndexOf("@")) > userInput.IndexOf("@"))
-                {
-                    errorMessage = "";
-                    return true;
-                }
+                errorMessage = "";
+                return true;
             }
-
-            errorMessage = "email address must be valid email address format.\n" +
-               "For example 'someone@example.com' ";
-            return false;
         }
 
         public bool ValidURL(string url, out string errorMessage)
