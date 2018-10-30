@@ -16,10 +16,9 @@ namespace Podcast_Player_Grupp_19.BLL {
         
 
         public Podcast(string Url) {
-            FeedReader= new DAL.FeedReader(Url);
-            foreach(var item in FeedReader.Feed.Items) {
-                Name = item.Title.Text;
-            }
+            FeedReader= new DAL.FeedReader();
+            FeedReader.GetRssData(Url);
+            Name = FeedReader.Feed.Title.Text;
             this.Category = Category;
             
             

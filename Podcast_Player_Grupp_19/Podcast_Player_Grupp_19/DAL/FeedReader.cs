@@ -13,9 +13,8 @@ namespace Podcast_Player_Grupp_19.DAL {
 
         public SyndicationFeed Feed { get; set; }
 
-        public FeedReader(string url) {
+        public FeedReader() {
             Feed = new SyndicationFeed();
-            GetRssData(url);
         }
 
         public async void GetRssData(string url) {

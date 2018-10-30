@@ -104,7 +104,7 @@ namespace Podcast_Player_Grupp_19 {
             string userInput = tbUrl.Text;
             var Podcast = new Podcast(userInput);
             PodcastList.AddToList(Podcast);
-            UpdateListView(lvPodcasts, PodcastList, PodcastSerializer);
+            //UpdateListView(lvPodcasts, PodcastList, PodcastSerializer);
             tbUrl.Clear();
         }
 
