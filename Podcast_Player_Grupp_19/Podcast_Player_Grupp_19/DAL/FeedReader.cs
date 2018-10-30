@@ -17,7 +17,7 @@ namespace Podcast_Player_Grupp_19.DAL {
             Feed = new SyndicationFeed();
         }
 
-        public async void GetRssData(string url) {
+        public async Task GetRssData(string url) {
             var feed = await GetFeed(url);
             Feed = feed;
         }
