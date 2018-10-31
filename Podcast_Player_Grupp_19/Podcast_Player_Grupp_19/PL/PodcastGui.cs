@@ -49,7 +49,21 @@ namespace Podcast_Player_Grupp_19 {
             }
             serializer.Serialize(ItemList.List);
         }
-            
+        
+        public void UpdateListView2<T>(ListView listView, ItemList<T> ItemList, Serializer<List<T>> serializer)
+        {
+            listView.Items.Clear();
+            foreach(Podcast item in PodcastList.List)
+            {
+                var listViewItem = new ListViewItem(new[]
+                {
+                    "Banankontakt", item.Name, "1", item.Category
+                });
+                listView.Items.Add(listViewItem);
+            }
+        }
+        
+        
         private void Form1_Load(object sender, EventArgs e) {
             DeserializeList(lvCategory,CategoryList,CategorySerializer,CategoryFile);    
         }
@@ -105,7 +119,7 @@ namespace Podcast_Player_Grupp_19 {
             Podcast Podcast = new Podcast();
             await Podcast.AsyncPodcast(userInput);
             PodcastList.AddToList(Podcast);
-            UpdateListView(lvPodcasts, PodcastList, PodcastSerializer);
+            UpdateListView2(lvPodcasts, PodcastList, PodcastSerializer);
             tbUrl.Clear();
         }
 

@@ -9,22 +9,23 @@ namespace Podcast_Player_Grupp_19.BLL {
     class Podcast {
 
         public string Name { get; set; }
-        public Category Category { get; set; }
+        public string Category { get; set; }
         public ItemList<PodcastEpisode> PodcastEpisodes { get; set; }
         public int UpdateFrequency { get; set; }
         public DAL.FeedReader FeedReader{ get; set; }
         
 
         public Podcast() {
-            
-            this.Category = Category;
+
+            Category = "Hej";
         }
 
         public async Task AsyncPodcast(string url)
         {
             FeedReader = new DAL.FeedReader();
             await FeedReader.GetRssData(url);
-            Name = FeedReader.Feed.Title.ToString();
+            Name = FeedReader.Feed.Title.Text;
+            //GetPodcastEpisodes();
         }
 
         public void GetPodcastEpisodes() {
