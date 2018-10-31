@@ -20,8 +20,11 @@ namespace Podcast_Player_Grupp_19.BLL {
             await FeedReader.GetRssData(Url);
             Name = FeedReader.Feed.Title.ToString();
             this.Category = Category;
-            
-            
+        }
+
+        public async Task asyncPodcast()
+        {
+
         }
 
         public void GetPodcastEpisodes() {
