@@ -57,7 +57,7 @@ namespace Podcast_Player_Grupp_19 {
             {
                 var listViewItem = new ListViewItem(new[]
                 {
-                    "Banankontakt", item.Name, "1", item.Category
+                    item.PodcastEpisodes.List.Count.ToString(), item.Name, "1", item.Category
                 });
                 listView.Items.Add(listViewItem);
             }

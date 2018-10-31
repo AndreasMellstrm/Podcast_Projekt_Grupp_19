@@ -19,7 +19,6 @@ namespace Podcast_Player_Grupp_19.BLL {
 
             this.Category = Category;
             PodcastEpisodes = new ItemList<PodcastEpisode>();
-
         }
 
         public async Task AsyncPodcast(string url)
@@ -31,10 +30,12 @@ namespace Podcast_Player_Grupp_19.BLL {
         }
 
         public void GetPodcastEpisodes() {
+            List<PodcastEpisode> List = new List<PodcastEpisode>();
             foreach(SyndicationItem item in FeedReader.Feed.Items) {
                 var PodcastEpisode = new PodcastEpisode(item);
-                PodcastEpisodes.AddToList(PodcastEpisode);
+                PodcastEpisodes.List.Add(PodcastEpisode);
             }
+            
         }
     }
 }
