@@ -15,16 +15,16 @@ namespace Podcast_Player_Grupp_19.BLL {
         public DAL.FeedReader FeedReader{ get; set; }
         
 
-        public async Task Podcast(string Url) {
-            FeedReader= new DAL.FeedReader();
-            await FeedReader.GetRssData(Url);
-            Name = FeedReader.Feed.Title.ToString();
+        public Podcast() {
+            
             this.Category = Category;
         }
 
-        public async Task asyncPodcast()
+        public async Task AsyncPodcast(string url)
         {
-
+            FeedReader = new DAL.FeedReader();
+            await FeedReader.GetRssData(url);
+            Name = FeedReader.Feed.Title.ToString();
         }
 
         public void GetPodcastEpisodes() {

@@ -100,11 +100,12 @@ namespace Podcast_Player_Grupp_19 {
 
         }
 
-        private void btnAddPodcast_Click(object sender, EventArgs e) {
+        private async void btnAddPodcast_Click(object sender, EventArgs e) {
             string userInput = tbUrl.Text;
-            var Podcast = new Podcast(userInput);
+            Podcast Podcast = new Podcast();
+            await Podcast.AsyncPodcast(userInput);
             PodcastList.AddToList(Podcast);
-            //UpdateListView(lvPodcasts, PodcastList, PodcastSerializer);
+            UpdateListView(lvPodcasts, PodcastList, PodcastSerializer);
             tbUrl.Clear();
         }
 
