@@ -15,9 +15,10 @@ namespace Podcast_Player_Grupp_19.BLL {
         public DAL.FeedReader FeedReader{ get; set; }
         
 
-        public Podcast(string Category) {
+        public Podcast(string Category = "N/A") {
 
             this.Category = Category;
+            PodcastEpisodes = new ItemList<PodcastEpisode>();
 
         }
 
@@ -26,7 +27,7 @@ namespace Podcast_Player_Grupp_19.BLL {
             FeedReader = new DAL.FeedReader();
             await FeedReader.GetRssData(url);
             Name = FeedReader.Feed.Title.Text;
-            //GetPodcastEpisodes();
+            GetPodcastEpisodes();
         }
 
         public void GetPodcastEpisodes() {
