@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,10 +16,14 @@ namespace Podcast_Player_Grupp_19 {
 
         private ItemList<Category> CategoryList { get; set; }
         private ItemList<Podcast> PodcastList { get; set; }
+        private ItemList<PodcastEpisode> EpisodeList { get; set; }
         private Serializer<List<Category>> CategorySerializer {get; set;}
         private Serializer<List<Podcast>> PodcastSerializer { get; set; }
         private string PodcastFile = "podcasts.json";
         private string CategoryFile = "categories.json";
+
+        private DAL.FeedReader FeedReader { get; set; }
+
 
         public PodcastGUI() {
             InitializeComponent();
@@ -26,6 +31,8 @@ namespace Podcast_Player_Grupp_19 {
             PodcastList = new ItemList<Podcast>();
             CategorySerializer = new Serializer<List<Category>>(CategoryFile);
             PodcastSerializer = new Serializer<List<Podcast>>(PodcastFile);
+
+            EpisodeList = new ItemList<PodcastEpisode>();
         }
 
 
@@ -62,6 +69,8 @@ namespace Podcast_Player_Grupp_19 {
                 listView.Items.Add(listViewItem);
             }
         }
+
+        
         
         
         private void Form1_Load(object sender, EventArgs e) {
@@ -112,6 +121,19 @@ namespace Podcast_Player_Grupp_19 {
             
             
 
+        }
+        public void UpdateEpisodeList<T>(ListView listView, ItemList<T> ItemList, Serializer<List<T>> serializer){
+            
+            var UserInput = lvPodcasts.SelectedItems[0].Text;
+            foreach(SyndicationItem item in FeedReader.Feed.Items) {
+                string x = item.Title.Text;
+                lvPodcasts.Items.Add(x);
+            }
+            
+            
+
+
+            
         }
 
         private async void btnAddPodcast_Click(object sender, EventArgs e) {

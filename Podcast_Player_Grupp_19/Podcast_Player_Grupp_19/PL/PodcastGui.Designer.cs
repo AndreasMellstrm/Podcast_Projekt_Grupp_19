@@ -117,11 +117,13 @@
             // 
             // chPodEpiCount
             // 
+            this.chPodEpiCount.DisplayIndex = 0;
             this.chPodEpiCount.Text = "Episodes";
             this.chPodEpiCount.Width = 63;
             // 
             // chPodAuthor
             // 
+            this.chPodAuthor.DisplayIndex = 1;
             this.chPodAuthor.Text = "Author";
             this.chPodAuthor.Width = 147;
             // 
