@@ -116,11 +116,22 @@ namespace Podcast_Player_Grupp_19 {
 
         private async void btnAddPodcast_Click(object sender, EventArgs e) {
             string userInput = tbUrl.Text;
-            Podcast Podcast = new Podcast();
-            await Podcast.AsyncPodcast(userInput);
-            PodcastList.AddToList(Podcast);
-            UpdateListView2(lvPodcasts, PodcastList, PodcastSerializer);
-            tbUrl.Clear();
+            var countSelections = lvCategory.SelectedItems.Count;
+
+            if(countSelections == 1) {
+                Podcast Podcast = new Podcast(lvCategory.SelectedItems[0].Text);
+                await Podcast.AsyncPodcast(userInput);
+                PodcastList.AddToList(Podcast);
+                UpdateListView2(lvPodcasts, PodcastList, PodcastSerializer);
+                tbUrl.Clear();
+            } else if(countSelections > 1) {
+                MessageBox.Show("Please select one category only");
+                lvCategory.SelectedItems.Clear();
+
+            }
+            else if(countSelections == 0){
+                MessageBox.Show("Please select a category");
+            }
         }
 
 

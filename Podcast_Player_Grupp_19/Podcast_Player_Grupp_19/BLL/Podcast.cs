@@ -15,9 +15,10 @@ namespace Podcast_Player_Grupp_19.BLL {
         public DAL.FeedReader FeedReader{ get; set; }
         
 
-        public Podcast() {
+        public Podcast(string Category) {
 
-            Category = "Hej";
+            this.Category = Category;
+
         }
 
         public async Task AsyncPodcast(string url)
