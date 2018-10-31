@@ -33,7 +33,7 @@ namespace Podcast_Player_Grupp_19 {
         private void RemoveListItems<T>(ListView listView, ItemList<T> list, Serializer<List<T>> serializer) {
             try {
                 foreach (ListViewItem selectedIndex in listView.SelectedItems) {
-                    list.RemoveFromList(listView.SelectedItems[selectedIndex.Index].Text);
+                    list.RemoveFromList(selectedIndex.Text);
                 }
                 UpdateListView(listView,list,serializer);
             }
@@ -100,11 +100,12 @@ namespace Podcast_Player_Grupp_19 {
 
         }
 
-        private void btnAddPodcast_Click(object sender, EventArgs e) {
+        private async void btnAddPodcast_Click(object sender, EventArgs e) {
             string userInput = tbUrl.Text;
-            var Podcast = new Podcast(userInput);
+            Podcast Podcast = new Podcast();
+            await Podcast.AsyncPodcast(userInput);
             PodcastList.AddToList(Podcast);
-            //UpdateListView(lvPodcasts, PodcastList, PodcastSerializer);
+            UpdateListView(lvPodcasts, PodcastList, PodcastSerializer);
             tbUrl.Clear();
         }
 
