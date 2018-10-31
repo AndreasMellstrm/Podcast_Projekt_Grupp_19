@@ -33,7 +33,7 @@ namespace Podcast_Player_Grupp_19 {
         private void RemoveListItems<T>(ListView listView, ItemList<T> list, Serializer<List<T>> serializer) {
             try {
                 foreach (ListViewItem selectedIndex in listView.SelectedItems) {
-                    list.RemoveFromList(listView.SelectedItems[selectedIndex.Index].Text);
+                    list.RemoveFromList(selectedIndex.Text);
                 }
                 UpdateListView(listView,list,serializer);
             }
