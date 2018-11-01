@@ -18,17 +18,18 @@ namespace Podcast_Player_Grupp_19.BLL
             this.Interval = interval;
 
         }
+        /*
         private async void OnTimeOutEvt(Object sender, ElapsedEventArgs e)
         {
             await Podcast.AsyncPodcast(podcast.Url);
         }
-
+        
         private void InitTimer()
         {
             updateTimer = new System.Timers.Timer(300000);
             updateTimer.Elapsed += OnTimeOutEvt;
             updateTimer.AutoReset = true;
             updateTimer.Enabled = true;
-        }
+        }*/
     }
 }
