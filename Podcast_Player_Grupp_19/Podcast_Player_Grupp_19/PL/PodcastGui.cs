@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -70,21 +71,44 @@ namespace Podcast_Player_Grupp_19 {
             }
         }
 
-        private void UpdatePodcastEpisodes(ListView ListView, ListView UpdatedListView) {
-            ListView.Items.Clear();
+        private void UpdatePodcastEpisodes() {
+            lvEpisodes.Items.Clear();
+
             var PodcastSelections =
                 from Podcast in PodcastList.List
-                where Podcast.Name == ListView.SelectedItems[0].Text
+                where Podcast.Name == lvPodcasts.SelectedItems[0].SubItems[1].Text
+            select Podcast;
+            var SelectedPodcast = PodcastSelections.ToList();
+
+
+                foreach (PodcastEpisode item in SelectedPodcast[0].PodcastEpisodes) {
+                    var listViewItem = new ListViewItem(new[]
+                    {
+                    item.Title, "1"
+                });
+                    lvEpisodes.Items.Add(listViewItem);
+                }
+            } 
+        private void ShowEpisodeInfo() {
+
+            var PodcastSelections =
+                from Podcast in PodcastList.List
+                where Podcast.Name == lvPodcasts.SelectedItems[0].SubItems[1].Text
                 select Podcast;
             var SelectedPodcast = PodcastSelections.ToList();
 
-            foreach (PodcastEpisode item in SelectedPodcast[0].PodcastEpisodes) {
-                var listViewItem = new ListViewItem(new[]
-                {
-                    item.Id, item.Title, "1"
-                });
-                UpdatedListView.Items.Add(listViewItem);
-            }
+            var podcastInfo =
+                from PodcastEpisode in SelectedPodcast[0].PodcastEpisodes
+                where PodcastEpisode.Title == lvEpisodes.SelectedItems[0].SubItems[0].Text
+                select PodcastEpisode;
+
+            var SelectedEpisode = podcastInfo.ToList();
+            tbEpisodeInfo.Text = StripHtml(SelectedEpisode[0].Description);
+            
+
+        }
+        private static string StripHtml(string input) {
+            return Regex.Replace(input, "<.*?>", string.Empty);
         }
 
 
@@ -111,11 +135,11 @@ namespace Podcast_Player_Grupp_19 {
         }
 
         private void lvPodcasts_SelectedIndexChanged(object sender, EventArgs e) {
-            UpdatePodcastEpisodes(lvPodcasts,lvEpisodes);
+            UpdatePodcastEpisodes();
         }
 
         private void lvEpisodes_SelectedIndexChanged(object sender, EventArgs e) {
-
+            ShowEpisodeInfo();
         }
 
         private void tbUrl_TextChanged(object sender, EventArgs e) {

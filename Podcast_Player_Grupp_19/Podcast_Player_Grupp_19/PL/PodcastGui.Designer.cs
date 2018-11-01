@@ -35,7 +35,6 @@
             this.chPodFreq = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chPodCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvEpisodes = new System.Windows.Forms.ListView();
-            this.chEpiEpisode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chEpiName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chEpiLength = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tbUrl = new System.Windows.Forms.TextBox();
@@ -46,27 +45,25 @@
             this.btnAddCategory = new System.Windows.Forms.Button();
             this.btnAddPodcast = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.btnRemoveCategory = new System.Windows.Forms.Button();
+            this.tbEpisodeInfo = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 219);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(12, 270);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 13);
+            this.label1.Size = new System.Drawing.Size(66, 17);
             this.label1.TabIndex = 2;
             this.label1.Text = "Podcasts";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 405);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(12, 498);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 13);
+            this.label2.Size = new System.Drawing.Size(66, 17);
             this.label2.TabIndex = 3;
             this.label2.Text = "Episodes";
             // 
@@ -74,10 +71,10 @@
             // 
             this.lvCategory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chCategory});
-            this.lvCategory.Location = new System.Drawing.Point(9, 75);
-            this.lvCategory.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.lvCategory.Location = new System.Drawing.Point(12, 92);
+            this.lvCategory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lvCategory.Name = "lvCategory";
-            this.lvCategory.Size = new System.Drawing.Size(284, 120);
+            this.lvCategory.Size = new System.Drawing.Size(377, 147);
             this.lvCategory.TabIndex = 4;
             this.lvCategory.UseCompatibleStateImageBehavior = false;
             this.lvCategory.View = System.Windows.Forms.View.Details;
@@ -90,10 +87,10 @@
             // 
             // btnPlay
             // 
-            this.btnPlay.Location = new System.Drawing.Point(534, 236);
-            this.btnPlay.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnPlay.Location = new System.Drawing.Point(712, 290);
+            this.btnPlay.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(327, 151);
+            this.btnPlay.Size = new System.Drawing.Size(436, 186);
             this.btnPlay.TabIndex = 5;
             this.btnPlay.Text = "Play Episode";
             this.btnPlay.UseVisualStyleBackColor = true;
@@ -102,14 +99,14 @@
             // lvPodcasts
             // 
             this.lvPodcasts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chPodEpiCount,
             this.chPodAuthor,
+            this.chPodEpiCount,
             this.chPodFreq,
             this.chPodCategory});
-            this.lvPodcasts.Location = new System.Drawing.Point(9, 236);
-            this.lvPodcasts.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.lvPodcasts.Location = new System.Drawing.Point(12, 290);
+            this.lvPodcasts.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lvPodcasts.Name = "lvPodcasts";
-            this.lvPodcasts.Size = new System.Drawing.Size(505, 151);
+            this.lvPodcasts.Size = new System.Drawing.Size(672, 185);
             this.lvPodcasts.TabIndex = 6;
             this.lvPodcasts.UseCompatibleStateImageBehavior = false;
             this.lvPodcasts.View = System.Windows.Forms.View.Details;
@@ -119,7 +116,7 @@
             // 
             this.chPodEpiCount.DisplayIndex = 0;
             this.chPodEpiCount.Text = "Episodes";
-            this.chPodEpiCount.Width = 63;
+            this.chPodEpiCount.Width = 85;
             // 
             // chPodAuthor
             // 
@@ -138,22 +135,16 @@
             // lvEpisodes
             // 
             this.lvEpisodes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chEpiEpisode,
             this.chEpiName,
             this.chEpiLength});
-            this.lvEpisodes.Location = new System.Drawing.Point(9, 422);
-            this.lvEpisodes.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.lvEpisodes.Location = new System.Drawing.Point(12, 519);
+            this.lvEpisodes.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lvEpisodes.Name = "lvEpisodes";
-            this.lvEpisodes.Size = new System.Drawing.Size(505, 125);
+            this.lvEpisodes.Size = new System.Drawing.Size(672, 153);
             this.lvEpisodes.TabIndex = 7;
             this.lvEpisodes.UseCompatibleStateImageBehavior = false;
             this.lvEpisodes.View = System.Windows.Forms.View.Details;
             this.lvEpisodes.SelectedIndexChanged += new System.EventHandler(this.lvEpisodes_SelectedIndexChanged);
-            // 
-            // chEpiEpisode
-            // 
-            this.chEpiEpisode.Text = "Episode";
-            this.chEpiEpisode.Width = 77;
             // 
             // chEpiName
             // 
@@ -166,10 +157,10 @@
             // 
             // tbUrl
             // 
-            this.tbUrl.Location = new System.Drawing.Point(39, 36);
-            this.tbUrl.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.tbUrl.Location = new System.Drawing.Point(52, 44);
+            this.tbUrl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbUrl.Name = "tbUrl";
-            this.tbUrl.Size = new System.Drawing.Size(475, 20);
+            this.tbUrl.Size = new System.Drawing.Size(632, 22);
             this.tbUrl.TabIndex = 8;
             this.tbUrl.TextChanged += new System.EventHandler(this.tbUrl_TextChanged);
             // 
@@ -182,37 +173,35 @@
             // lblUrl
             // 
             this.lblUrl.AutoSize = true;
-            this.lblUrl.Location = new System.Drawing.Point(9, 38);
-            this.lblUrl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblUrl.Location = new System.Drawing.Point(12, 47);
             this.lblUrl.Name = "lblUrl";
-            this.lblUrl.Size = new System.Drawing.Size(26, 13);
+            this.lblUrl.Size = new System.Drawing.Size(34, 17);
             this.lblUrl.TabIndex = 10;
             this.lblUrl.Text = "Url: ";
             // 
             // tbCategory
             // 
-            this.tbCategory.Location = new System.Drawing.Point(628, 34);
-            this.tbCategory.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.tbCategory.Location = new System.Drawing.Point(837, 42);
+            this.tbCategory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbCategory.Name = "tbCategory";
-            this.tbCategory.Size = new System.Drawing.Size(195, 20);
+            this.tbCategory.Size = new System.Drawing.Size(259, 22);
             this.tbCategory.TabIndex = 11;
             // 
             // lblAddCategory
             // 
             this.lblAddCategory.AutoSize = true;
-            this.lblAddCategory.Location = new System.Drawing.Point(626, 18);
-            this.lblAddCategory.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblAddCategory.Location = new System.Drawing.Point(835, 22);
             this.lblAddCategory.Name = "lblAddCategory";
-            this.lblAddCategory.Size = new System.Drawing.Size(71, 13);
+            this.lblAddCategory.Size = new System.Drawing.Size(94, 17);
             this.lblAddCategory.TabIndex = 12;
             this.lblAddCategory.Text = "Add Category";
             // 
             // btnAddCategory
             // 
-            this.btnAddCategory.Location = new System.Drawing.Point(628, 57);
-            this.btnAddCategory.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnAddCategory.Location = new System.Drawing.Point(837, 70);
+            this.btnAddCategory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAddCategory.Name = "btnAddCategory";
-            this.btnAddCategory.Size = new System.Drawing.Size(56, 19);
+            this.btnAddCategory.Size = new System.Drawing.Size(75, 23);
             this.btnAddCategory.TabIndex = 13;
             this.btnAddCategory.Text = "Add Category";
             this.btnAddCategory.UseVisualStyleBackColor = true;
@@ -220,10 +209,10 @@
             // 
             // btnAddPodcast
             // 
-            this.btnAddPodcast.Location = new System.Drawing.Point(9, 197);
-            this.btnAddPodcast.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnAddPodcast.Location = new System.Drawing.Point(12, 242);
+            this.btnAddPodcast.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAddPodcast.Name = "btnAddPodcast";
-            this.btnAddPodcast.Size = new System.Drawing.Size(56, 19);
+            this.btnAddPodcast.Size = new System.Drawing.Size(75, 23);
             this.btnAddPodcast.TabIndex = 14;
             this.btnAddPodcast.Text = "Add Podcast";
             this.btnAddPodcast.UseVisualStyleBackColor = true;
@@ -232,37 +221,39 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(531, 405);
+            this.label3.Location = new System.Drawing.Point(708, 498);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(25, 13);
+            this.label3.Size = new System.Drawing.Size(31, 17);
             this.label3.TabIndex = 16;
             this.label3.Text = "Info";
             // 
-            // listView1
-            // 
-            this.listView1.Location = new System.Drawing.Point(534, 422);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(327, 125);
-            this.listView1.TabIndex = 17;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            // 
             // btnRemoveCategory
             // 
-            this.btnRemoveCategory.Location = new System.Drawing.Point(298, 172);
+            this.btnRemoveCategory.Location = new System.Drawing.Point(397, 212);
+            this.btnRemoveCategory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnRemoveCategory.Name = "btnRemoveCategory";
-            this.btnRemoveCategory.Size = new System.Drawing.Size(122, 23);
+            this.btnRemoveCategory.Size = new System.Drawing.Size(163, 28);
             this.btnRemoveCategory.TabIndex = 18;
             this.btnRemoveCategory.Text = "Remove Category";
             this.btnRemoveCategory.UseVisualStyleBackColor = true;
             this.btnRemoveCategory.Click += new System.EventHandler(this.btnRemoveCategory_Click);
             // 
+            // tbEpisodeInfo
+            // 
+            this.tbEpisodeInfo.Location = new System.Drawing.Point(712, 519);
+            this.tbEpisodeInfo.Name = "tbEpisodeInfo";
+            this.tbEpisodeInfo.Size = new System.Drawing.Size(436, 153);
+            this.tbEpisodeInfo.TabIndex = 19;
+            this.tbEpisodeInfo.Text = "";
+            // 
             // PodcastGUI
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(872, 634);
+            this.ClientSize = new System.Drawing.Size(1163, 780);
+            this.Controls.Add(this.tbEpisodeInfo);
             this.Controls.Add(this.btnRemoveCategory);
-            this.Controls.Add(this.listView1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnAddPodcast);
             this.Controls.Add(this.btnAddCategory);
@@ -276,7 +267,7 @@
             this.Controls.Add(this.lvCategory);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "PodcastGUI";
             this.Text = "       ";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -296,7 +287,6 @@
         private System.Windows.Forms.ColumnHeader chPodEpiCount;
         private System.Windows.Forms.ColumnHeader chPodAuthor;
         private System.Windows.Forms.ColumnHeader chPodFreq;
-        private System.Windows.Forms.ColumnHeader chEpiEpisode;
         private System.Windows.Forms.ColumnHeader chEpiName;
         private System.Windows.Forms.ColumnHeader chEpiLength;
         private System.Windows.Forms.ColumnHeader chPodCategory;
@@ -308,8 +298,8 @@
         private System.Windows.Forms.Button btnAddCategory;
         private System.Windows.Forms.Button btnAddPodcast;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button btnRemoveCategory;
+        private System.Windows.Forms.RichTextBox tbEpisodeInfo;
     }
 }
 
