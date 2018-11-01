@@ -95,7 +95,6 @@ namespace Podcast_Player_Grupp_19 {
                 from PodcastEpisode in SelectedPodcast.PodcastEpisodes
                 where PodcastEpisode.Title == lvEpisodes.SelectedItems[0].SubItems[0].Text
                 select PodcastEpisode;
-
             var SelectedEpisode = podcastInfo.ToList();
             if(SelectedEpisode[0].Description == "") {
                 tbEpisodeInfo.Text = "There is no available description for this episode.";
