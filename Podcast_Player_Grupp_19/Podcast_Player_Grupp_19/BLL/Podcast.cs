@@ -10,13 +10,15 @@ namespace Podcast_Player_Grupp_19.BLL {
 
         public string Name { get; set; }
         public string Category { get; set; }
+        private string Url { get; set; }
         public List<PodcastEpisode> PodcastEpisodes { get; set; }
         public int UpdateFrequency { get; set; }
         public DAL.FeedReader FeedReader{ get; set; }
         
 
-        public Podcast(string Category = "N/A") {
+        public Podcast(string url, string Category = "N/A") {
 
+            this.Url = url;
             this.Category = Category;
             PodcastEpisodes = new List<PodcastEpisode>();
         }
