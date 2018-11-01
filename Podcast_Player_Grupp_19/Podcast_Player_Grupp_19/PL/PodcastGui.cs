@@ -64,16 +64,31 @@ namespace Podcast_Player_Grupp_19 {
             {
                 var listViewItem = new ListViewItem(new[]
                 {
-                    item.PodcastEpisodes.List.Count.ToString(), item.Name, "1", item.Category
+                    item.PodcastEpisodes.Count.ToString(), item.Name, "1", item.Category
                 });
                 listView.Items.Add(listViewItem);
             }
         }
 
-        
-        
-        
-        private void Form1_Load(object sender, EventArgs e) {
+        private void UpdatePodcastEpisodes(ListView ListView, ListView UpdatedListView) {
+            ListView.Items.Clear();
+            var PodcastSelections =
+                from Podcast in PodcastList.List
+                where Podcast.Name == ListView.SelectedItems[0].Text
+                select Podcast;
+            var SelectedPodcast = PodcastSelections.ToList();
+
+            foreach (PodcastEpisode item in SelectedPodcast[0].PodcastEpisodes) {
+                var listViewItem = new ListViewItem(new[]
+                {
+                    item.Id, item.Title, "1"
+                });
+                UpdatedListView.Items.Add(listViewItem);
+            }
+        }
+
+
+            private void Form1_Load(object sender, EventArgs e) {
             DeserializeList(lvCategory,CategoryList,CategorySerializer,CategoryFile);    
         }
 
@@ -96,7 +111,7 @@ namespace Podcast_Player_Grupp_19 {
         }
 
         private void lvPodcasts_SelectedIndexChanged(object sender, EventArgs e) {
-
+            UpdatePodcastEpisodes(lvPodcasts,lvEpisodes);
         }
 
         private void lvEpisodes_SelectedIndexChanged(object sender, EventArgs e) {
@@ -122,18 +137,16 @@ namespace Podcast_Player_Grupp_19 {
             
 
         }
-        public void UpdateEpisodeList<T>(ListView listView, ItemList<T> ItemList, Serializer<List<T>> serializer){
+        private void FillEpisodeList(ListView ListView, Podcast Podcast){
             
-            var UserInput = lvPodcasts.SelectedItems[0].Text;
-            foreach(SyndicationItem item in FeedReader.Feed.Items) {
-                string x = item.Title.Text;
-                lvPodcasts.Items.Add(x);
+            var selectedPodcast = lvPodcasts.SelectedItems;
+
+            if(selectedPodcast.Count == 1) {
+                foreach(Podcast EpisodeItem in PodcastList.List) {
+
+                    //lvEpisodes.Items.Add().Text;
+                }
             }
-            
-            
-
-
-            
         }
 
         private async void btnAddPodcast_Click(object sender, EventArgs e) {

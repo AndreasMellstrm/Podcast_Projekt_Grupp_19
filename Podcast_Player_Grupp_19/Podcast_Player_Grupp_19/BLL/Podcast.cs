@@ -10,7 +10,7 @@ namespace Podcast_Player_Grupp_19.BLL {
 
         public string Name { get; set; }
         public string Category { get; set; }
-        public ItemList<PodcastEpisode> PodcastEpisodes { get; set; }
+        public List<PodcastEpisode> PodcastEpisodes { get; set; }
         public int UpdateFrequency { get; set; }
         public DAL.FeedReader FeedReader{ get; set; }
         
@@ -18,7 +18,7 @@ namespace Podcast_Player_Grupp_19.BLL {
         public Podcast(string Category = "N/A") {
 
             this.Category = Category;
-            PodcastEpisodes = new ItemList<PodcastEpisode>();
+            PodcastEpisodes = new List<PodcastEpisode>();
         }
 
         public async Task AsyncPodcast(string url)
@@ -33,7 +33,7 @@ namespace Podcast_Player_Grupp_19.BLL {
             List<PodcastEpisode> List = new List<PodcastEpisode>();
             foreach(SyndicationItem item in FeedReader.Feed.Items) {
                 var PodcastEpisode = new PodcastEpisode(item);
-                PodcastEpisodes.List.Add(PodcastEpisode);
+                PodcastEpisodes.Add(PodcastEpisode);
             }
             
         }
