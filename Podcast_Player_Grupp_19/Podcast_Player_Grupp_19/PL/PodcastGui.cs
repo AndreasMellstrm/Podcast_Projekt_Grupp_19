@@ -122,18 +122,16 @@ namespace Podcast_Player_Grupp_19 {
             
 
         }
-        public void UpdateEpisodeList<T>(ListView listView, ItemList<T> ItemList, Serializer<List<T>> serializer){
+        private void FillEpisodeList(ListView ListView, Podcast Podcast){
             
-            var UserInput = lvPodcasts.SelectedItems[0].Text;
-            foreach(SyndicationItem item in FeedReader.Feed.Items) {
-                string x = item.Title.Text;
-                lvPodcasts.Items.Add(x);
+            var selectedPodcast = lvPodcasts.SelectedItems;
+
+            if(selectedPodcast.Count == 1) {
+                foreach(Podcast EpisodeItem in PodcastList.List) {
+
+                    lvEpisodes.Items.Add().Text;
+                }
             }
-            
-            
-
-
-            
         }
 
         private async void btnAddPodcast_Click(object sender, EventArgs e) {
