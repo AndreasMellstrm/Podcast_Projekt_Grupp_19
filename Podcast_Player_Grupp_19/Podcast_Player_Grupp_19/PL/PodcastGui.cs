@@ -34,8 +34,6 @@ namespace Podcast_Player_Grupp_19 {
             PodcastSerializer = new Serializer<List<Podcast>>(PodcastFile);
         }
 
-
-
         private void RemoveListItems<T>(ListView listView, ItemList<T> list, Serializer<List<T>> serializer) {
             try {
                 foreach (ListViewItem selectedIndex in listView.SelectedItems) {

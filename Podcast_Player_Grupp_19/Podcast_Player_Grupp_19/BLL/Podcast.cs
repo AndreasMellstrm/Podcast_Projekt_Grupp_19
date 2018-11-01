@@ -11,6 +11,7 @@ namespace Podcast_Player_Grupp_19.BLL {
         public string Name { get; set; }
         public string Category { get; set; }
         private string Url { get; set; }
+        private Timer Timer { get; set; }
         public List<PodcastEpisode> PodcastEpisodes { get; set; }
         public int UpdateFrequency { get; set; }
         public DAL.FeedReader FeedReader{ get; set; }
