@@ -34,29 +34,41 @@ namespace Podcast_Player_Grupp_19 {
             PodcastSerializer = new Serializer<List<Podcast>>(PodcastFile);
         }
 
-        private void RemoveListItems<T>(ListView listView, ItemList<T> list, Serializer<List<T>> serializer) {
+        private void RemoveCategory<T>(Serializer<List<T>> serializer, ItemList<T> ItemList) {
             try {
-                foreach (ListViewItem selectedIndex in listView.SelectedItems) {
-                    list.RemoveFromList(selectedIndex.Text);
+                foreach (ListViewItem selectedIndex in lvCategory.SelectedItems) {
+                    CategoryList.RemoveFromList(selectedIndex.Text);
                 }
-                UpdateListView(listView,list,serializer);
+                UpdateLvCategory(ItemList,serializer);
+            }
+            catch (ArgumentOutOfRangeException) {
+                MessageBox.Show("You must select the  object that you want to remove");
+            }
+        }
+
+        private void RemovePodcast<T>(Serializer<List<T>> serializer, ItemList<T> ItemList) {
+            try {
+                foreach (ListViewItem selectedIndex in lvPodcasts.SelectedItems) {
+                    PodcastList.RemoveFromList(selectedIndex.Text);
+                }
+                UpdateLvPodcasts(ItemList, serializer);
             }
             catch (ArgumentOutOfRangeException) {
                 MessageBox.Show("You must select the  object that you want to remove");
             }
         }
         // här
-        public void UpdateListView<T>(ListView listView, ItemList<T> ItemList, Serializer<List<T>> serializer) {
-            listView.Items.Clear();
-            foreach (T item in ItemList.List) {
-                listView.Items.Add(item.GetType().GetProperty("Name").GetValue(item).ToString());
+        public void UpdateLvCategory<T>(ItemList<T> ItemList, Serializer<List<T>> serializer) {
+            lvCategory.Items.Clear();
+            foreach (Category Category in CategoryList.List) {
+                lvCategory.Items.Add(Category.GetType().GetProperty("Name").GetValue(Category).ToString());
             }
             serializer.Serialize(ItemList.List);
         }
         
-        public void UpdateListView2<T>(ListView listView, ItemList<T> ItemList, Serializer<List<T>> serializer)
+        public void UpdateLvPodcasts<T>(ItemList<T> ItemList, Serializer<List<T>> serializer)
         {
-            listView.Items.Clear();
+            lvPodcasts.Items.Clear();
             foreach(Podcast item in PodcastList.List)
             {
                 var listViewItem = new ListViewItem(new[]
@@ -64,7 +76,7 @@ namespace Podcast_Player_Grupp_19 {
                     item.PodcastEpisodes.Count.ToString(), item.Name, "1", item.Category
                 });
 
-                listView.Items.Add(listViewItem);
+                lvPodcasts.Items.Add(listViewItem);
             }
             serializer.Serialize(ItemList.List);
         }
@@ -95,7 +107,6 @@ namespace Podcast_Player_Grupp_19 {
                 from PodcastEpisode in SelectedPodcast.PodcastEpisodes
                 where PodcastEpisode.Title == lvEpisodes.SelectedItems[0].SubItems[0].Text
                 select PodcastEpisode;
-
             var SelectedEpisode = podcastInfo.ToList();
             if(SelectedEpisode[0].Description == "") {
                 tbEpisodeInfo.Text = "There is no available description for this episode.";
@@ -113,7 +124,8 @@ namespace Podcast_Player_Grupp_19 {
             private void Form1_Load(object sender, EventArgs e) {
             DeserializeList(CategoryList,CategorySerializer,CategoryFile);
             
-            UpdateListView(lvCategory, CategoryList, CategorySerializer);
+            UpdateLvCategory(CategoryList, CategorySerializer);
+            UpdateLvPodcasts(PodcastList, PodcastSerializer);
             
         }
 
@@ -149,7 +161,7 @@ namespace Podcast_Player_Grupp_19 {
             string userInput = tbCategory.Text;
             var Category = new Category(userInput);
             CategoryList.AddToList(Category, userInput);
-            UpdateListView(lvCategory,CategoryList,CategorySerializer);
+            UpdateLvCategory(CategoryList,CategorySerializer);
             tbCategory.Clear();
             
             
@@ -164,7 +176,7 @@ namespace Podcast_Player_Grupp_19 {
                 Podcast Podcast = new Podcast(tbUrl.Text, lvCategory.SelectedItems[0].Text);
                 await Podcast.AsyncPodcast(userInput);
                 PodcastList.AddToList(Podcast);
-                UpdateListView2(lvPodcasts, PodcastList, PodcastSerializer);
+                UpdateLvPodcasts(PodcastList, PodcastSerializer);
                 tbUrl.Clear();
                 
             } else if(countSelections > 1) {
@@ -179,7 +191,7 @@ namespace Podcast_Player_Grupp_19 {
 
 
         private void btnRemoveCategory_Click(object sender, EventArgs e) {
-            RemoveListItems(lvCategory, CategoryList,CategorySerializer);
+            RemoveCategory(CategorySerializer, CategoryList);
 
         }
 
@@ -189,9 +201,12 @@ namespace Podcast_Player_Grupp_19 {
             UpdatePodcastEpisodes();
         }
 
-        private void lvEpisodes_ItemActivate(object sender, EventArgs e)
-        {
+        private void lvEpisodes_ItemActivate(object sender, EventArgs e) {
             ShowEpisodeInfo();
+        }
+
+        private void btnRemovePodcast_Click(object sender, EventArgs e) {
+            RemovePodcast(PodcastSerializer,PodcastList);
         }
     }
 }
