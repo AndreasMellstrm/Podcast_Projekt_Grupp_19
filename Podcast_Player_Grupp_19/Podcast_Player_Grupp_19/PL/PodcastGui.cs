@@ -162,6 +162,7 @@ namespace Podcast_Player_Grupp_19 {
                 PodcastList.AddToList(Podcast);
                 UpdateListView2(lvPodcasts, PodcastList, PodcastSerializer);
                 tbUrl.Clear();
+                
             } else if(countSelections > 1) {
                 MessageBox.Show("Please select one category only");
                 lvCategory.SelectedItems.Clear();

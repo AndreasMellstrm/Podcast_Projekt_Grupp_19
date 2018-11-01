@@ -13,12 +13,43 @@ namespace Podcast_Player_Grupp_19.BLL {
         private string Path { get; set; }
         private JsonSerializer JsonSerializer{ get; set; }
         
+        
 
         public Serializer(string pathToJson) {
             Path = pathToJson;
             JsonSerializer = new JsonSerializer {
                 TypeNameHandling = TypeNameHandling.All
             };
+
+            
+        }
+
+
+        public static string XmlSerializer(object o) {
+            StringWriter sw = new StringWriter();
+            XmlTextWriter tw = null;
+            try {
+                XmlSerializer serializer = new XmlSerializer(o.GetType());
+                tw = new XmlTextWriter(sw);
+                serializer.Serialize(tw, o);
+            }catch(Exception ex) {
+
+            }
+            finally {
+                sw.Close();
+                if(tw != null) {
+                    tw.Close();
+                }
+            }
+            return sw.ToString();
+        }
+
+        public void test(T obj) {
+            using(var sw = new StreamWriter(Path)) {
+                using (var xtw = new XmlTextWriter(sw)) {
+
+                }
+            }
         }
 
         public void Serialize(T obj) {
