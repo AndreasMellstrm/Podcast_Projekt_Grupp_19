@@ -97,8 +97,12 @@ namespace Podcast_Player_Grupp_19 {
                 select PodcastEpisode;
 
             var SelectedEpisode = podcastInfo.ToList();
+            if(SelectedEpisode[0].Description == "") {
+                tbEpisodeInfo.Text = "There is no available description for this episode.";
+            }
+            else { 
             tbEpisodeInfo.Text = StripHtml(SelectedEpisode[0].Description);
-            
+            }
 
         }
         private static string StripHtml(string input) {

@@ -17,7 +17,7 @@ namespace Podcast_Player_Grupp_19.BLL {
         public DAL.FeedReader FeedReader{ get; set; }
         
 
-        public Podcast(string url, string Category = "N/A") {
+        public Podcast(string url, string Category) {
 
             this.Url = url;
             this.Category = Category;
