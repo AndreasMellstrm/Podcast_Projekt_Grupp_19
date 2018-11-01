@@ -134,18 +134,6 @@ namespace Podcast_Player_Grupp_19 {
 
         }
 
-        private void lvPodcasts_SelectedIndexChanged(object sender, EventArgs e) {
-            if (lvPodcasts.SelectedItems != null) {
-                SelectPodcast();
-                UpdatePodcastEpisodes();
-            }
-        }
-
-        private void lvEpisodes_SelectedIndexChanged(object sender, EventArgs e) {
-            ShowEpisodeInfo();
-
-        }
-
         private void tbUrl_TextChanged(object sender, EventArgs e) {
 
         }
@@ -190,6 +178,17 @@ namespace Podcast_Player_Grupp_19 {
         private void btnRemoveCategory_Click(object sender, EventArgs e) {
             RemoveListItems(lvCategory, CategoryList,CategorySerializer);
 
+        }
+
+        private void lvPodcasts_ItemActivate(object sender, EventArgs e)
+        {
+            SelectPodcast();
+            UpdatePodcastEpisodes();
+        }
+
+        private void lvEpisodes_ItemActivate(object sender, EventArgs e)
+        {
+            ShowEpisodeInfo();
         }
     }
 }
