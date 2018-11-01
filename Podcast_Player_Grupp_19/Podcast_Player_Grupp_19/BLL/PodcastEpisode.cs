@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Podcast_Player_Grupp_19.BLL {
     class PodcastEpisode {
 
-        public string Id { get; set; }
+        
         public string Title { get; set; }
         public decimal EpisodeLength { get; set; }
         public string Description { get; set; }
@@ -17,7 +17,6 @@ namespace Podcast_Player_Grupp_19.BLL {
 
         public PodcastEpisode(SyndicationItem item) {
 
-            Id = item.Id;
             Title = item.Title.Text;
             Description = item.Summary.Text;
             PodcastEpisodes = new ItemList<PodcastEpisode>();

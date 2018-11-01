@@ -17,7 +17,7 @@ namespace Podcast_Player_Grupp_19 {
 
         private ItemList<Category> CategoryList { get; set; }
         private ItemList<Podcast> PodcastList { get; set; }
-        private ItemList<PodcastEpisode> EpisodeList { get; set; }
+        private Podcast SelectedPodcast { get; set; }
         private Serializer<List<Category>> CategorySerializer {get; set;}
         private Serializer<List<Podcast>> PodcastSerializer { get; set; }
         private string PodcastFile = "podcasts.json";
@@ -32,8 +32,6 @@ namespace Podcast_Player_Grupp_19 {
             PodcastList = new ItemList<Podcast>();
             CategorySerializer = new Serializer<List<Category>>(CategoryFile);
             PodcastSerializer = new Serializer<List<Podcast>>(PodcastFile);
-
-            EpisodeList = new ItemList<PodcastEpisode>();
         }
 
 
@@ -49,7 +47,7 @@ namespace Podcast_Player_Grupp_19 {
                 MessageBox.Show("You must select the  object that you want to remove");
             }
         }
-
+        // här
         public void UpdateListView<T>(ListView listView, ItemList<T> ItemList, Serializer<List<T>> serializer) {
             listView.Items.Clear();
             foreach (T item in ItemList.List) {
@@ -67,38 +65,36 @@ namespace Podcast_Player_Grupp_19 {
                 {
                     item.PodcastEpisodes.Count.ToString(), item.Name, "1", item.Category
                 });
+
                 listView.Items.Add(listViewItem);
             }
+            serializer.Serialize(ItemList.List);
         }
 
         private void UpdatePodcastEpisodes() {
             lvEpisodes.Items.Clear();
-
-            var PodcastSelections =
-                from Podcast in PodcastList.List
-                where Podcast.Name == lvPodcasts.SelectedItems[0].SubItems[1].Text
-            select Podcast;
-            var SelectedPodcast = PodcastSelections.ToList();
-
-
-                foreach (PodcastEpisode item in SelectedPodcast[0].PodcastEpisodes) {
+                foreach (PodcastEpisode item in SelectedPodcast.PodcastEpisodes) {
                     var listViewItem = new ListViewItem(new[]
                     {
                     item.Title, "1"
                 });
                     lvEpisodes.Items.Add(listViewItem);
                 }
-            } 
-        private void ShowEpisodeInfo() {
+        }
 
+        private void SelectPodcast() {
             var PodcastSelections =
                 from Podcast in PodcastList.List
                 where Podcast.Name == lvPodcasts.SelectedItems[0].SubItems[1].Text
                 select Podcast;
-            var SelectedPodcast = PodcastSelections.ToList();
+            var PodcastSelectionsList = PodcastSelections.ToList();
+            SelectedPodcast = PodcastSelectionsList[0];
+        }
 
+        private void ShowEpisodeInfo() {
+            tbEpisodeInfo.Clear();
             var podcastInfo =
-                from PodcastEpisode in SelectedPodcast[0].PodcastEpisodes
+                from PodcastEpisode in SelectedPodcast.PodcastEpisodes
                 where PodcastEpisode.Title == lvEpisodes.SelectedItems[0].SubItems[0].Text
                 select PodcastEpisode;
 
@@ -113,13 +109,17 @@ namespace Podcast_Player_Grupp_19 {
 
 
             private void Form1_Load(object sender, EventArgs e) {
-            DeserializeList(lvCategory,CategoryList,CategorySerializer,CategoryFile);    
+            DeserializeList(CategoryList,CategorySerializer,CategoryFile);
+            
+            UpdateListView(lvCategory, CategoryList, CategorySerializer);
+            
         }
 
-        private void DeserializeList<T>(ListView listView, ItemList<T> itemList,Serializer<List<T>> Serializer, string JsonFile) {
+        private void DeserializeList<T>(ItemList<T> itemList,Serializer<List<T>> Serializer, string JsonFile) {
             if (File.Exists(JsonFile)) {
                 itemList.List = Serializer.DeSerialize();
-                UpdateListView(listView, itemList, Serializer);
+                
+                
             } 
         }
             
@@ -135,11 +135,15 @@ namespace Podcast_Player_Grupp_19 {
         }
 
         private void lvPodcasts_SelectedIndexChanged(object sender, EventArgs e) {
-            UpdatePodcastEpisodes();
+            if (lvPodcasts.SelectedItems != null) {
+                SelectPodcast();
+                UpdatePodcastEpisodes();
+            }
         }
 
         private void lvEpisodes_SelectedIndexChanged(object sender, EventArgs e) {
             ShowEpisodeInfo();
+
         }
 
         private void tbUrl_TextChanged(object sender, EventArgs e) {
@@ -149,7 +153,7 @@ namespace Podcast_Player_Grupp_19 {
         private void lblAddCategory_Click(object sender, EventArgs e) {
 
         }
-        //Press this button to send the chosen category name from the user to create a new object in the Category() class.
+        
         private void btnAddCategory_Click(object sender, EventArgs e) {
             //Runs the following method which is created down below.
             string userInput = tbCategory.Text;
@@ -161,24 +165,13 @@ namespace Podcast_Player_Grupp_19 {
             
 
         }
-        private void FillEpisodeList(ListView ListView, Podcast Podcast){
-            
-            var selectedPodcast = lvPodcasts.SelectedItems;
-
-            if(selectedPodcast.Count == 1) {
-                foreach(Podcast EpisodeItem in PodcastList.List) {
-
-                    //lvEpisodes.Items.Add().Text;
-                }
-            }
-        }
 
         private async void btnAddPodcast_Click(object sender, EventArgs e) {
             string userInput = tbUrl.Text;
             var countSelections = lvCategory.SelectedItems.Count;
 
             if(countSelections == 1) {
-                Podcast Podcast = new Podcast(lvCategory.SelectedItems[0].Text);
+                Podcast Podcast = new Podcast(tbUrl.Text, lvCategory.SelectedItems[0].Text);
                 await Podcast.AsyncPodcast(userInput);
                 PodcastList.AddToList(Podcast);
                 UpdateListView2(lvPodcasts, PodcastList, PodcastSerializer);
