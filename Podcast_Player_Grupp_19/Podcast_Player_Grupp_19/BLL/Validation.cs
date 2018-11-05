@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Podcast_Player_Grupp_19.BLL
 {
-    class Validation
+    static class Validation
     {
         //Regex to check if string starts with http or https
-        Regex rgxUrl = new Regex(@"^(http|https|www)://.*$");
+        static Regex rgxUrl = new Regex("^(http|https)");
 
-        public bool ValidUserInput(string userInput, out string errorMessage)
+        public static bool ValidUserInput(string userInput, out string errorMessage)
         {
             // Confirm that the user input string is not empty.
             if (userInput.Length == 0)
@@ -26,7 +26,7 @@ namespace Podcast_Player_Grupp_19.BLL
             }
         }
 
-        public bool ValidURL(string url, out string errorMessage)
+        public static bool ValidURL(string url, out string errorMessage)
         {
             if (url.Length == 0)
             {
@@ -34,14 +34,14 @@ namespace Podcast_Player_Grupp_19.BLL
                 return false;
             }
 
-            if (url.StartsWith(rgxUrl.ToString()))
+            if (rgxUrl.IsMatch(url))
             {
                 errorMessage = "";
                 return true;
             }
             else
             {
-                errorMessage = "Url:n måste börja med antingen 'https://', 'http://' eller 'www://'";
+                errorMessage = "Url:n måste börja med antingen 'https://', 'http://'";
                 return false;
             }
         }

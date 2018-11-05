@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Threading;
 using System.Xml;
 using System.ServiceModel.Syndication;
-
+using System.Net;
 
 namespace Podcast_Player_Grupp_19.DAL {
     class FeedReader {
@@ -18,18 +18,20 @@ namespace Podcast_Player_Grupp_19.DAL {
         }
 
         public async Task GetRssData(string url) {
-            var feed = await GetFeed(url);
-            Feed = feed;
+                var feed = await GetFeed(url);
+                Feed = feed;
         }
 
-        public async Task<SyndicationFeed> GetFeed(string url) {
-            var task = Task.Factory.StartNew(() => {
-                XmlReader reader = XmlReader.Create(url);
+
+        public async Task<SyndicationFeed> GetFeed(string url)
+        {
+            XmlReader reader = XmlReader.Create(url);
+            var task = Task.Factory.StartNew(() =>
+            {
                 return SyndicationFeed.Load(reader);
             });
-            return await task;
+            return await task;          
         }
-
     }
 }
 
