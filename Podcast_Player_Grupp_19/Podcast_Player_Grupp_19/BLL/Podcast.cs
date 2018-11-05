@@ -13,7 +13,7 @@ namespace Podcast_Player_Grupp_19.BLL {
         public string Category { get; set; }
         private string Url { get; set; }
         private int Interval { get; set; }
-        private Timer updateTimer;
+        public Timer UpdateTimer { get; set; }
         public List<PodcastEpisode> PodcastEpisodes { get; set; }
         public int UpdateFrequency { get; set; }
         public DAL.FeedReader FeedReader{ get; set; }
@@ -31,10 +31,10 @@ namespace Podcast_Player_Grupp_19.BLL {
 
         private void InitTimer(int interval = 300000)
         {
-            updateTimer = new Timer(interval);
-            updateTimer.Elapsed += OnTimeOutEvt;
-            updateTimer.AutoReset = true;
-            updateTimer.Enabled = true;
+            UpdateTimer = new Timer(interval);
+            UpdateTimer.Elapsed += OnTimeOutEvt;
+            UpdateTimer.AutoReset = true;
+            UpdateTimer.Enabled = true;
         }
         private async void OnTimeOutEvt(Object sender, ElapsedEventArgs e)
         {
