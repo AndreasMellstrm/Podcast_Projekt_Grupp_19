@@ -181,7 +181,7 @@ namespace Podcast_Player_Grupp_19 {
             var countSelections = lvCategory.SelectedItems.Count;
             string errorMessage = "";
 
-            if (Validation.ValidURL(userInputUrl, out errorMessage))
+            if (Validation.ValidURL(userInputUrl, out errorMessage) && Validation.ValidUserInput(userInputName, out errorMessage))
             {
 
                 if (countSelections == 1)
