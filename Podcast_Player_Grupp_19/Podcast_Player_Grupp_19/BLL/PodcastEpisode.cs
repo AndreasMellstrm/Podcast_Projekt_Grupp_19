@@ -15,16 +15,14 @@ namespace Podcast_Player_Grupp_19.BLL {
         public ItemList<PodcastEpisode> PodcastEpisodes { get; set; }
         
         
-        public PodcastEpisode(SyndicationItem item) {
-
-            Title = item.Title.Text;
-            Title = 
-            Description = item.Summary.Text;
-            PodcastEpisodes = new ItemList<PodcastEpisode>();
+        public PodcastEpisode() { 
             
         }
         
-        
+        public void GetPodcastEpisodeInfo(SyndicationItem item) {
+            Title = item.Title.Text;
+            Description = item.Summary.Text;
+        }
     }
 
     

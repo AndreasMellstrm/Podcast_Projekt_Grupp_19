@@ -60,7 +60,8 @@ namespace Podcast_Player_Grupp_19.BLL {
         public void GetPodcastEpisodes() {
             foreach(SyndicationItem item in FeedReader.Feed.Items) {
                 if (!PodcastEpisodes.Any((episode) => episode.Title == item.Title.Text)){
-                    var PodcastEpisode = new PodcastEpisode(item);
+                    var PodcastEpisode = new PodcastEpisode();
+                    PodcastEpisode.GetPodcastEpisodeInfo(item);
                     PodcastEpisodes.Add(PodcastEpisode);
                 }
             }

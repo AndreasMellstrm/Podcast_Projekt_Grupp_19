@@ -128,7 +128,7 @@ namespace Podcast_Player_Grupp_19 {
 
             private void Form1_Load(object sender, EventArgs e) {
             DeserializeList(CategoryList,CategorySerializer,CategoryFile);
-            
+            DeserializeList(PodcastList, PodcastSerializer, PodcastFile);
             UpdateLvCategory(CategoryList, CategorySerializer);
             UpdateLvPodcasts(PodcastList, PodcastSerializer);
             

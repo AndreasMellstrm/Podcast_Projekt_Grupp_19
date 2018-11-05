@@ -20,6 +20,8 @@ namespace Podcast_Player_Grupp_19.BLL {
             JsonSerializer = new JsonSerializer {
                 TypeNameHandling = TypeNameHandling.All
             };
+
+            
             
         }
         public void XmlSerialize(ItemList<Podcast> list )  {
@@ -48,11 +50,12 @@ namespace Podcast_Player_Grupp_19.BLL {
         public void toXML() { }
 
 
-        public T DeSerialize() {
+        public void DeSerialize() {
             using(var sr = new StreamReader(Path)) {
                 using(var jtr = new JsonTextReader(sr)) {
-                   
-                   return JsonSerializer.Deserialize<T>(jtr);
+                   var x = JsonConvert.DeserializeXNode(Path, "root");
+                    
+
                     
                 } 
             }
