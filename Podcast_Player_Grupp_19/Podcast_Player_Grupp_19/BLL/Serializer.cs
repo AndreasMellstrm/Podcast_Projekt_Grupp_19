@@ -24,6 +24,7 @@ namespace Podcast_Player_Grupp_19.BLL {
 
 
 
+
         }
         public void XmlSerialize(ItemList<Podcast> list) {
             if (list.List.Count != 0) {
@@ -33,7 +34,8 @@ namespace Podcast_Player_Grupp_19.BLL {
                 }
 
 
-            } else {
+            }
+            else {
 
             }
 
@@ -47,19 +49,25 @@ namespace Podcast_Player_Grupp_19.BLL {
                 }
             }
         }
-
-        public void test() {
-            XmlSerializer xml = new XmlSerializer(typeof(XDocument)) {
-                toXml().CreateReader(); 
-        }
-
-        public XDocument toXml() {
+        public T DeSerialize() {
             using (var sr = new StreamReader(Path)) {
                 using (var jtr = new JsonTextReader(sr)) {
-                    var x = JsonConvert.DeserializeXNode(Path, "root");
-
-
-                    return x;
+                    return JsonSerializer.Deserialize<T>(jtr);
                 }
             }
-        } } }
+        }
+        public void Save(T obj) {
+            using (var writer = new StreamWriter(Path)) {
+                var serializer = new XmlSerializer(this.GetType());
+                serializer.Serialize(writer, obj);
+                writer.Flush();
+            }
+        }
+        public ItemList<Podcast> Load() {
+            using (var stream = File.OpenRead(Path)) {
+                var serializer = new XmlSerializer(typeof(ItemList<Podcast>));
+                return serializer.Deserialize(stream) as ItemList<Podcast>;
+            }
+        }
+    }
+}

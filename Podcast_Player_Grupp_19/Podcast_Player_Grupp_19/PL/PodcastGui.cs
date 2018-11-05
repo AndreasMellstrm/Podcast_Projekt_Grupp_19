@@ -137,8 +137,6 @@ namespace Podcast_Player_Grupp_19 {
         private void DeserializeList<T>(ItemList<T> itemList,Serializer<List<T>> Serializer, string JsonFile) {
             if (File.Exists(JsonFile)) {
                 itemList.List = Serializer.DeSerialize();
-                
-                
             } 
         }
             
@@ -183,9 +181,9 @@ namespace Podcast_Player_Grupp_19 {
 
                 if (countSelections == 1)
                 {
-                    Podcast Podcast = new Podcast(tbUrl.Text, lvCategory.SelectedItems[0].Text);
+                    Podcast Podcast = new Podcast();
                     try { 
-                        await Podcast.AsyncPodcast(userInput);
+                        await Podcast.AsyncPodcast(userInput, lvCategory.SelectedItems[0].Text);
                         PodcastList.AddToList(Podcast);
                         UpdateLvPodcasts(PodcastList, PodcastSerializer);
                         tbUrl.Clear();
