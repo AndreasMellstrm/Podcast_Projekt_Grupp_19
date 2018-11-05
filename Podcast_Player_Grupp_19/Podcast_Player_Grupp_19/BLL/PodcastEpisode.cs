@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Podcast_Player_Grupp_19.BLL {
-    class PodcastEpisode {
+    public class PodcastEpisode {
 
         
         public string Title { get; set; }

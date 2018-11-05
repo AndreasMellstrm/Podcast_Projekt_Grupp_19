@@ -9,7 +9,7 @@ using System.ServiceModel.Syndication;
 using System.Net;
 
 namespace Podcast_Player_Grupp_19.DAL {
-    class FeedReader {
+    public class FeedReader {
 
         public SyndicationFeed Feed { get; set; }
 
