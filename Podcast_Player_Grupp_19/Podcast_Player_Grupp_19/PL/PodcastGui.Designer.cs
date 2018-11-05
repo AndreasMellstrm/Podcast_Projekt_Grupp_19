@@ -78,7 +78,7 @@
             this.lvCategory.TabIndex = 4;
             this.lvCategory.UseCompatibleStateImageBehavior = false;
             this.lvCategory.View = System.Windows.Forms.View.Details;
-            this.lvCategory.SelectedIndexChanged += new System.EventHandler(this.lvCategory_SelectedIndexChanged);
+            this.lvCategory.ItemActivate += new System.EventHandler(this.lvCategory_ItemActivate);
             // 
             // chCategory
             // 

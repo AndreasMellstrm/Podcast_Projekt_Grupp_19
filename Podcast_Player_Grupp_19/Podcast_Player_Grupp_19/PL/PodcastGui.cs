@@ -38,6 +38,15 @@ namespace Podcast_Player_Grupp_19 {
         private List<Podcast> SortPodcastListByName() {
             return PodcastList.List.OrderBy((i) => i.Name).ToList();
         }
+        
+        private void SortByCategory() {
+            var SelectedCategory = from Podcast in PodcastList.List
+                                     where Podcast.Category == lvCategory.SelectedItems[0].SubItems[0].Text
+                                     select Podcast;
+            UpdateLvPodcasts(SelectedCategory.ToList());
+            
+        }
+
 
         private void RemoveCategory<T>(Serializer<List<T>> serializer, ItemList<T> ItemList) {
             try {
@@ -51,12 +60,12 @@ namespace Podcast_Player_Grupp_19 {
             }
         }
 
-        private void RemovePodcast<T>(Serializer<List<T>> serializer, ItemList<T> ItemList) {
+        private void RemovePodcast(List<Podcast> List) {
             try {
                 foreach (ListViewItem selectedIndex in lvPodcasts.SelectedItems) {
                     PodcastList.RemoveFromList(selectedIndex.Text);
                 }
-                UpdateLvPodcasts(ItemList, serializer);
+                UpdateLvPodcasts(List);
             }
             catch (ArgumentOutOfRangeException) {
                 MessageBox.Show("You must select the podcast that you want to remove");
@@ -71,10 +80,10 @@ namespace Podcast_Player_Grupp_19 {
             serializer.Serialize(ItemList.List);
         }
         
-        public void UpdateLvPodcasts<T>(ItemList<T> ItemList, Serializer<List<T>> serializer)
+        public void UpdateLvPodcasts(List<Podcast> List)
         {
             lvPodcasts.Items.Clear();
-            foreach(Podcast item in PodcastList.List)
+            foreach(Podcast item in List)
             {
                 var listViewItem = new ListViewItem(new[]
                 {
@@ -83,7 +92,6 @@ namespace Podcast_Player_Grupp_19 {
 
                 lvPodcasts.Items.Add(listViewItem);
             }
-            serializer.Serialize(ItemList.List);
         }
 
         private void UpdatePodcastEpisodes() {
@@ -128,9 +136,9 @@ namespace Podcast_Player_Grupp_19 {
 
             private void Form1_Load(object sender, EventArgs e) {
             DeserializeList(CategoryList,CategorySerializer,CategoryFile);
-            DeserializeList(PodcastList, PodcastSerializer, PodcastFile);
+            //DeserializeList(PodcastList, PodcastSerializer, PodcastFile);
             UpdateLvCategory(CategoryList, CategorySerializer);
-            UpdateLvPodcasts(PodcastList, PodcastSerializer);
+            UpdateLvPodcasts(PodcastList.List);
             
         }
 
@@ -138,10 +146,6 @@ namespace Podcast_Player_Grupp_19 {
             if (File.Exists(JsonFile)) {
                 itemList.List = Serializer.DeSerialize();
             } 
-        }
-            
-        private void lvCategory_SelectedIndexChanged(object sender, EventArgs e) {
-
         }
 
         private void btnPlay_Click(object sender, EventArgs e) {
@@ -185,7 +189,7 @@ namespace Podcast_Player_Grupp_19 {
                     try { 
                         await Podcast.AsyncPodcast(userInput, lvCategory.SelectedItems[0].Text);
                         PodcastList.AddToList(Podcast);
-                        UpdateLvPodcasts(PodcastList, PodcastSerializer);
+                        UpdateLvPodcasts(PodcastList.List);
                         tbUrl.Clear();
                     }
                     catch(WebException ex)
@@ -229,12 +233,16 @@ namespace Podcast_Player_Grupp_19 {
         }
 
         private void btnRemovePodcast_Click(object sender, EventArgs e) {
-            RemovePodcast(PodcastSerializer,PodcastList);
+            RemovePodcast(PodcastList.List);
         }
 
         private void lvPodcasts_ColumnClick(object sender, ColumnClickEventArgs e) {
             PodcastList.List = SortPodcastListByName();
-            UpdateLvPodcasts(PodcastList, PodcastSerializer);
+            UpdateLvPodcasts(PodcastList.List);
+        }
+
+        private void lvCategory_ItemActivate(object sender, EventArgs e) {
+            SortByCategory();
         }
     }
 }
