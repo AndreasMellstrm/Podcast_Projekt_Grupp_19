@@ -74,10 +74,10 @@
             // 
             this.lvCategory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chCategory});
-            this.lvCategory.Location = new System.Drawing.Point(118, 170);
+            this.lvCategory.Location = new System.Drawing.Point(13, 165);
             this.lvCategory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lvCategory.Name = "lvCategory";
-            this.lvCategory.Size = new System.Drawing.Size(377, 146);
+            this.lvCategory.Size = new System.Drawing.Size(669, 146);
             this.lvCategory.TabIndex = 4;
             this.lvCategory.UseCompatibleStateImageBehavior = false;
             this.lvCategory.View = System.Windows.Forms.View.Details;
@@ -159,7 +159,7 @@
             this.tbUrl.Location = new System.Drawing.Point(118, 36);
             this.tbUrl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbUrl.Name = "tbUrl";
-            this.tbUrl.Size = new System.Drawing.Size(632, 22);
+            this.tbUrl.Size = new System.Drawing.Size(564, 22);
             this.tbUrl.TabIndex = 8;
             this.tbUrl.TextChanged += new System.EventHandler(this.tbUrl_TextChanged);
             // 
@@ -180,7 +180,7 @@
             // 
             // tbCategory
             // 
-            this.tbCategory.Location = new System.Drawing.Point(837, 42);
+            this.tbCategory.Location = new System.Drawing.Point(709, 165);
             this.tbCategory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbCategory.Name = "tbCategory";
             this.tbCategory.Size = new System.Drawing.Size(258, 22);
@@ -189,7 +189,7 @@
             // lblAddCategory
             // 
             this.lblAddCategory.AutoSize = true;
-            this.lblAddCategory.Location = new System.Drawing.Point(835, 22);
+            this.lblAddCategory.Location = new System.Drawing.Point(707, 144);
             this.lblAddCategory.Name = "lblAddCategory";
             this.lblAddCategory.Size = new System.Drawing.Size(94, 17);
             this.lblAddCategory.TabIndex = 12;
@@ -197,7 +197,7 @@
             // 
             // btnAddCategory
             // 
-            this.btnAddCategory.Location = new System.Drawing.Point(1121, 40);
+            this.btnAddCategory.Location = new System.Drawing.Point(973, 164);
             this.btnAddCategory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAddCategory.Name = "btnAddCategory";
             this.btnAddCategory.Size = new System.Drawing.Size(75, 23);
@@ -208,7 +208,7 @@
             // 
             // btnAddPodcast
             // 
-            this.btnAddPodcast.Location = new System.Drawing.Point(118, 326);
+            this.btnAddPodcast.Location = new System.Drawing.Point(13, 321);
             this.btnAddPodcast.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAddPodcast.Name = "btnAddPodcast";
             this.btnAddPodcast.Size = new System.Drawing.Size(75, 23);
@@ -229,7 +229,7 @@
             // 
             // btnRemoveCategory
             // 
-            this.btnRemoveCategory.Location = new System.Drawing.Point(332, 323);
+            this.btnRemoveCategory.Location = new System.Drawing.Point(227, 318);
             this.btnRemoveCategory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnRemoveCategory.Name = "btnRemoveCategory";
             this.btnRemoveCategory.Size = new System.Drawing.Size(163, 28);
@@ -261,7 +261,7 @@
             // 
             this.tbPodName.Location = new System.Drawing.Point(118, 90);
             this.tbPodName.Name = "tbPodName";
-            this.tbPodName.Size = new System.Drawing.Size(632, 22);
+            this.tbPodName.Size = new System.Drawing.Size(564, 22);
             this.tbPodName.TabIndex = 21;
             // 
             // label4
@@ -276,7 +276,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(115, 149);
+            this.label5.Location = new System.Drawing.Point(10, 144);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(121, 17);
             this.label5.TabIndex = 23;

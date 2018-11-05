@@ -10,6 +10,7 @@ namespace Podcast_Player_Grupp_19.BLL {
     public class Podcast {
 
         public string Name { get; set; }
+        public string FeedName { get; set; }
         public string Category { get; set; }
         private string Url { get; set; }
         private int Interval { get; set; }
@@ -35,7 +36,7 @@ namespace Podcast_Player_Grupp_19.BLL {
         }
         private async void OnTimeOutEvt(Object sender, ElapsedEventArgs e)
         {
-            await AsyncPodcast(Url, Category);
+            await AsyncPodcast(Url, FeedName, Category);
             System.Diagnostics.Debug.WriteLine("Hej");
         }
 
@@ -46,11 +47,11 @@ namespace Podcast_Player_Grupp_19.BLL {
             InitTimer(Interval);
         }
 
-        public async Task AsyncPodcast(string url, string Category)
+        public async Task AsyncPodcast(string url,string FeedName, string Category)
         {
             FeedReader = new DAL.FeedReader();
             await FeedReader.GetRssData(url);
-            Name = FeedReader.Feed.Title.Text;
+            Name = FeedName;
             Url = url;
             this.Category = Category;
             GetPodcastEpisodes();
