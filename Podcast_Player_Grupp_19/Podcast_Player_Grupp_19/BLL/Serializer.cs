@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 
@@ -12,6 +11,7 @@ namespace Podcast_Player_Grupp_19.BLL {
    public class Serializer<T> {
         private string Path { get; set; }
         private JsonSerializer JsonSerializer{ get; set; }
+        private XmlSerializer XmlSerializer { get; set; }
         
         
 
@@ -20,10 +20,22 @@ namespace Podcast_Player_Grupp_19.BLL {
             JsonSerializer = new JsonSerializer {
                 TypeNameHandling = TypeNameHandling.All
             };
-
             
         }
+        public void XmlSerialize(ItemList<Podcast> list )  {
+            if (list.List.Count != 0) {
+                XmlSerializer Xmlserializer = new XmlSerializer(typeof(ItemList<Podcast>));
+                using (TextWriter writer = new StreamWriter("Podcasts.xml")) {
+                    Xmlserializer.Serialize(writer, list);
+                }
 
+
+            } else {
+
+            }
+
+
+        }
 
         public void Serialize(T obj) {
             using(var sw = new StreamWriter(Path)) {
