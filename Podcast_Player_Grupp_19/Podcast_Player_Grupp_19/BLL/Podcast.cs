@@ -44,7 +44,7 @@ namespace Podcast_Player_Grupp_19.BLL {
 
         public void SetInterval(int userInput)
         {
-            updateTimer.Dispose();
+            UpdateTimer.Dispose();
             Interval = userInput;
             InitTimer(Interval);
         }
