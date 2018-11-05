@@ -42,6 +42,13 @@ namespace Podcast_Player_Grupp_19.BLL {
             System.Diagnostics.Debug.WriteLine("Hej");
         }
 
+        public void SetInterval(int userInput)
+        {
+            updateTimer.Dispose();
+            Interval = userInput;
+            InitTimer(Interval);
+        }
+
         public async Task AsyncPodcast(string url)
         {
             FeedReader = new DAL.FeedReader();
