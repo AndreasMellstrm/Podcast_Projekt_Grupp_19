@@ -35,6 +35,10 @@ namespace Podcast_Player_Grupp_19 {
             PodcastSerializer = new Serializer<List<Podcast>>(PodcastFile);
         }
 
+        private List<Podcast> SortPodcastListByName() {
+            return PodcastList.List.OrderBy((i) => i.Name).ToList();
+        }
+
         private void RemoveCategory<T>(Serializer<List<T>> serializer, ItemList<T> ItemList) {
             try {
                 foreach (ListViewItem selectedIndex in lvCategory.SelectedItems) {
@@ -43,7 +47,7 @@ namespace Podcast_Player_Grupp_19 {
                 UpdateLvCategory(ItemList,serializer);
             }
             catch (ArgumentOutOfRangeException) {
-                MessageBox.Show("You must select the  object that you want to remove");
+                MessageBox.Show("You must select the category that you want to remove");
             }
         }
 
@@ -55,7 +59,7 @@ namespace Podcast_Player_Grupp_19 {
                 UpdateLvPodcasts(ItemList, serializer);
             }
             catch (ArgumentOutOfRangeException) {
-                MessageBox.Show("You must select the  object that you want to remove");
+                MessageBox.Show("You must select the podcast that you want to remove");
             }
         }
         // här
@@ -87,7 +91,7 @@ namespace Podcast_Player_Grupp_19 {
                 foreach (PodcastEpisode item in SelectedPodcast.PodcastEpisodes) {
                     var listViewItem = new ListViewItem(new[]
                     {
-                    item.Title, "1"
+                    item.Title
                 });
                     lvEpisodes.Items.Add(listViewItem);
                 }
@@ -180,8 +184,7 @@ namespace Podcast_Player_Grupp_19 {
                 if (countSelections == 1)
                 {
                     Podcast Podcast = new Podcast(tbUrl.Text, lvCategory.SelectedItems[0].Text);
-                    try
-                    {
+                    try { 
                         await Podcast.AsyncPodcast(userInput);
                         PodcastList.AddToList(Podcast);
                         UpdateLvPodcasts(PodcastList, PodcastSerializer);
@@ -190,6 +193,7 @@ namespace Podcast_Player_Grupp_19 {
                     catch(WebException ex)
                     {
                         MessageBox.Show("Sidan hittades inte. Kontrollera URL:n och försök igen");
+                        Podcast.UpdateTimer.Dispose();
                         Console.Write(ex);
                     }
                 }
@@ -228,6 +232,11 @@ namespace Podcast_Player_Grupp_19 {
 
         private void btnRemovePodcast_Click(object sender, EventArgs e) {
             RemovePodcast(PodcastSerializer,PodcastList);
+        }
+
+        private void lvPodcasts_ColumnClick(object sender, ColumnClickEventArgs e) {
+            PodcastList.List = SortPodcastListByName();
+            UpdateLvPodcasts(PodcastList, PodcastSerializer);
         }
     }
 }
