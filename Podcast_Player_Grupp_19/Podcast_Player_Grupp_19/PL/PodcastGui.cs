@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.ServiceModel.Syndication;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -73,7 +74,7 @@ namespace Podcast_Player_Grupp_19 {
             {
                 var listViewItem = new ListViewItem(new[]
                 {
-                    item.PodcastEpisodes.Count.ToString(), item.Name, "1", item.Category
+                    item.Name, item.PodcastEpisodes.Count.ToString(), "1", item.Category
                 });
 
                 lvPodcasts.Items.Add(listViewItem);
@@ -95,7 +96,7 @@ namespace Podcast_Player_Grupp_19 {
         private void SelectPodcast() {
             var PodcastSelections =
                 from Podcast in PodcastList.List
-                where Podcast.Name == lvPodcasts.SelectedItems[0].SubItems[1].Text
+                where Podcast.Name == lvPodcasts.SelectedItems[0].SubItems[0].Text
                 select Podcast;
             var PodcastSelectionsList = PodcastSelections.ToList();
             SelectedPodcast = PodcastSelectionsList[0];
@@ -171,21 +172,41 @@ namespace Podcast_Player_Grupp_19 {
         private async void btnAddPodcast_Click(object sender, EventArgs e) {
             string userInput = tbUrl.Text;
             var countSelections = lvCategory.SelectedItems.Count;
+            string errorMessage = "";
 
-            if(countSelections == 1) {
-                Podcast Podcast = new Podcast(tbUrl.Text, lvCategory.SelectedItems[0].Text);
-                await Podcast.AsyncPodcast(userInput);
-                PodcastList.AddToList(Podcast);
-                UpdateLvPodcasts(PodcastList, PodcastSerializer);
-                tbUrl.Clear();
-                
-            } else if(countSelections > 1) {
-                MessageBox.Show("Please select one category only");
-                lvCategory.SelectedItems.Clear();
+            if (Validation.ValidURL(userInput, out errorMessage))
+            {
 
+                if (countSelections == 1)
+                {
+                    Podcast Podcast = new Podcast(tbUrl.Text, lvCategory.SelectedItems[0].Text);
+                    try
+                    {
+                        await Podcast.AsyncPodcast(userInput);
+                        PodcastList.AddToList(Podcast);
+                        UpdateLvPodcasts(PodcastList, PodcastSerializer);
+                        tbUrl.Clear();
+                    }
+                    catch(WebException ex)
+                    {
+                        MessageBox.Show("Sidan hittades inte. Kontrollera URL:n och försök igen");
+                        Console.Write(ex);
+                    }
+                }
+                else if (countSelections > 1)
+                {
+                    MessageBox.Show("Please select one category only");
+                    lvCategory.SelectedItems.Clear();
+
+                }
+                else if (countSelections == 0)
+                {
+                    MessageBox.Show("Please select a category");
+                }
             }
-            else if(countSelections == 0){
-                MessageBox.Show("Please select a category");
+            else
+            {
+                MessageBox.Show(errorMessage);
             }
         }
 
