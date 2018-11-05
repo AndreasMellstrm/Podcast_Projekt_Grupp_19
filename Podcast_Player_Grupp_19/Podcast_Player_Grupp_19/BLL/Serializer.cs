@@ -45,10 +45,15 @@ namespace Podcast_Player_Grupp_19.BLL {
             }
         }
 
+        public void toXML() { }
+
+
         public T DeSerialize() {
             using(var sr = new StreamReader(Path)) {
                 using(var jtr = new JsonTextReader(sr)) {
-                    return JsonSerializer.Deserialize<T>(jtr);
+                   
+                   return JsonSerializer.Deserialize<T>(jtr);
+                    
                 } 
             }
         }
