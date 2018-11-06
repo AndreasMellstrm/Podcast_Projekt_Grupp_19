@@ -16,12 +16,12 @@ using System.Windows.Forms;
 namespace Podcast_Player_Grupp_19 {
     public partial class PodcastGUI : Form {
 
-        private ItemList<Category> CategoryList { get; set; }
-        private ItemList<Podcast> PodcastList { get; set; }
+        private CategoryList<Category> CategoryList { get; set; }
+        private PodcastList<Podcast> PodcastList { get; set; }
         private Podcast SelectedPodcast { get; set; }
         private Serializer<List<Category>> CategorySerializer {get; set;}
         //private Serializer<List<Podcast>> PodcastSerializer { get; set; }
-        //private string PodcastFile = "podcasts.json";
+        private string PodcastFile = "podcasts.json";
         private string CategoryFile = "categories.json";
 
         private DAL.FeedReader FeedReader { get; set; }
@@ -29,8 +29,8 @@ namespace Podcast_Player_Grupp_19 {
 
         public PodcastGUI() {
             InitializeComponent();
-            CategoryList = new ItemList<Category>();
-            PodcastList = new ItemList<Podcast>();
+            CategoryList = new CategoryList<Category>();
+            PodcastList = new PodcastList<Podcast>();
             CategorySerializer = new Serializer<List<Category>>(CategoryFile);
             //PodcastSerializer = new Serializer<List<Podcast>>(PodcastFile);
         }
@@ -91,7 +91,7 @@ namespace Podcast_Player_Grupp_19 {
                 });
 
                 lvPodcasts.Items.Add(listViewItem);
-                PodcastList.SavePodcastList(PodcastList);
+                PodcastList.SaveList(PodcastFile);
             }
         }
 
@@ -149,7 +149,7 @@ namespace Podcast_Player_Grupp_19 {
 
         private async void DeserializeLists() {
             DeserializeList(CategoryList, CategorySerializer, CategoryFile);
-            await PodcastList.LoadPodcastList(PodcastList);
+            await PodcastList.LoadList(PodcastFile);
             UpdateLvCategory(CategoryList, CategorySerializer);
             UpdateLvPodcasts(PodcastList.List);
         }
@@ -172,7 +172,7 @@ namespace Podcast_Player_Grupp_19 {
         private void btnAddCategory_Click(object sender, EventArgs e) {
             string userInput = tbCategory.Text;
             var Category = new Category(userInput);
-            CategoryList.AddToList(Category, userInput);
+            CategoryList.AddToList(Category);
             UpdateLvCategory(CategoryList,CategorySerializer);
             tbCategory.Clear();
             

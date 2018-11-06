@@ -23,6 +23,6 @@ namespace Podcast_Player_Grupp_19.BLL
     }
 }
 
-public class CategoryList : ItemList<Category> {
+public class CategoryList<T> : ItemList<Category> {
 
 }
