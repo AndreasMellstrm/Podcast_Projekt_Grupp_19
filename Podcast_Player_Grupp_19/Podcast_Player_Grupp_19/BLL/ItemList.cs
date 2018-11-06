@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -29,7 +30,7 @@ namespace Podcast_Player_Grupp_19.BLL
         }
 
         public void AddToList(T item) {
-            if (!List.Any((i) => i.GetType().GetProperty("Name").GetValue(i).ToString() == item.GetType().GetProperty("Name").GetValue(item).ToString())) {
+            if (!List.Any((i) => i.GetType().GetProperty("Title").GetValue(i).ToString() == item.GetType().GetProperty("Title").GetValue(item).ToString())) {
                 List.Add(item);
             }
             else {
@@ -44,15 +45,33 @@ namespace Podcast_Player_Grupp_19.BLL
             }
         }
 
-        public List<string[]> PodcastListToArray(ItemList<Podcast> itemList) {
+        public void SavePodcastList(ItemList<Podcast> ItemList) {
             var PodcastListArray = new List<string[]>();
-            foreach(var Podcast in itemList.List) {
+            foreach(var Podcast in ItemList.List) {
                 string[] stringArray = new string[] {
-                    Podcast.Name, Podcast.FeedName, Podcast.Url, Podcast.Category, Podcast.Interval.ToString()
+                    Podcast.Name, Podcast.Url, Podcast.Category, Podcast.Interval.ToString()
                 };
                 PodcastListArray.Add(stringArray);
             }
-            return PodcastListArray;
+            var serializer = new Serializer<List<string[]>>("Podcasts.json");
+            serializer.Serialize(PodcastListArray);
+
+         
+        }
+
+        public async Task LoadPodcastList(ItemList<Podcast> itemList) {
+            if (File.Exists("Podcasts.json")) {
+                var serializer = new Serializer<List<string[]>>("Podcasts.json");
+                var PodcastStringArray = serializer.DeSerialize();
+                foreach (string[] stringArray in PodcastStringArray) {
+                    var Podcast = new Podcast(stringArray[0], stringArray[1], stringArray[2], int.Parse(stringArray[3]));
+                    await Podcast.AsyncPodcast();
+                    itemList.AddToList(Podcast);
+                }
+
+            }
+           
+
         }
     }
 }

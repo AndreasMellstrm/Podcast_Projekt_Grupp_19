@@ -91,6 +91,7 @@ namespace Podcast_Player_Grupp_19 {
                 });
 
                 lvPodcasts.Items.Add(listViewItem);
+                PodcastList.SavePodcastList(PodcastList);
             }
         }
 
@@ -102,6 +103,7 @@ namespace Podcast_Player_Grupp_19 {
                     item.Title
                 });
                     lvEpisodes.Items.Add(listViewItem);
+
                 }
         }
 
@@ -135,10 +137,7 @@ namespace Podcast_Player_Grupp_19 {
 
 
             private void Form1_Load(object sender, EventArgs e) {
-            DeserializeList(CategoryList,CategorySerializer,CategoryFile);
-            //DeserializeList(PodcastList, PodcastSerializer, PodcastFile);
-            UpdateLvCategory(CategoryList, CategorySerializer);
-            UpdateLvPodcasts(PodcastList.List);
+            DeserializeLists();
             
         }
 
@@ -146,6 +145,13 @@ namespace Podcast_Player_Grupp_19 {
             if (File.Exists(JsonFile)) {
                 itemList.List = Serializer.DeSerialize();
             } 
+        }
+
+        private async void DeserializeLists() {
+            DeserializeList(CategoryList, CategorySerializer, CategoryFile);
+            await PodcastList.LoadPodcastList(PodcastList);
+            UpdateLvCategory(CategoryList, CategorySerializer);
+            UpdateLvPodcasts(PodcastList.List);
         }
 
         private void btnPlay_Click(object sender, EventArgs e) {
@@ -178,6 +184,7 @@ namespace Podcast_Player_Grupp_19 {
         private async void btnAddPodcast_Click(object sender, EventArgs e) {
             string userInputUrl = tbUrl.Text;
             string userInputName = tbPodName.Text;
+            string userInputCategory = lvCategory.SelectedItems[0].Text;
             var countSelections = lvCategory.SelectedItems.Count;
             string errorMessage = "";
 
@@ -186,9 +193,9 @@ namespace Podcast_Player_Grupp_19 {
 
                 if (countSelections == 1)
                 {
-                    Podcast Podcast = new Podcast();
+                    Podcast Podcast = new Podcast(userInputName, userInputUrl, userInputCategory);
                     try { 
-                        await Podcast.AsyncPodcast(userInputUrl, userInputName, lvCategory.SelectedItems[0].Text);
+                        await Podcast.AsyncPodcast();
                         PodcastList.AddToList(Podcast);
                         UpdateLvPodcasts(PodcastList.List);
                         tbUrl.Clear();
