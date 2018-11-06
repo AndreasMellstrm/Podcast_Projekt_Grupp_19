@@ -1,5 +1,4 @@
 ﻿using Podcast_Player_Grupp_19.BLL;
-using Podcast_Player_Grupp_19.PL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -199,6 +198,7 @@ namespace Podcast_Player_Grupp_19 {
                         PodcastList.AddToList(Podcast);
                         UpdateLvPodcasts(PodcastList.List);
                         tbUrl.Clear();
+                        tbPodName.Clear();
                     }
                     catch(WebException ex)
                     {
@@ -254,9 +254,13 @@ namespace Podcast_Player_Grupp_19 {
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            var popup = new PopupForm();
-            popup.Show();
-        }
+            try {
+                SelectedPodcast.Url = tbUrl.Text;
+                tbUrl.Clear();
+            } catch (NullReferenceException) {
+                MessageBox.Show("To change a feeds URL, Please write the new URL into the URL textbox and select the feed of which you want to change.");
+            }
+        } 
     }
 }
 
