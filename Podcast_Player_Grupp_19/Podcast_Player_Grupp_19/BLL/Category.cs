@@ -7,19 +7,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Podcast_Player_Grupp_19.BLL
-{
-    public class Category
-    {
+namespace Podcast_Player_Grupp_19.BLL {
+    public class Category {
         public string Name { get; set; }
 
-        public Category(string userInput)
-        {
+        public Category(string userInput) {
             Name = userInput;
         }
 
         //
-       
+
     }
 }
 

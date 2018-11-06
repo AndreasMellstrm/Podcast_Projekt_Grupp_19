@@ -62,7 +62,8 @@ namespace Podcast_Player_Grupp_19.BLL {
             try {
                 await AsyncPodcast(Url);
                 this.Url = Url;
-            } catch (Exception) {
+            }
+            catch (Exception) {
                 MessageBox.Show("Please enter a valid URL");
             }
         }
@@ -70,9 +71,9 @@ namespace Podcast_Player_Grupp_19.BLL {
         public void GetPodcastEpisodes() {
             PodcastEpisodes.Clear();
             foreach (SyndicationItem item in FeedReader.Feed.Items) {
-                    var PodcastEpisode = new PodcastEpisode();
-                    PodcastEpisode.GetPodcastEpisodeInfo(item);
-                    PodcastEpisodes.Add(PodcastEpisode);
+                var PodcastEpisode = new PodcastEpisode();
+                PodcastEpisode.GetPodcastEpisodeInfo(item);
+                PodcastEpisodes.Add(PodcastEpisode);
             }
 
         }
@@ -98,7 +99,7 @@ namespace Podcast_Player_Grupp_19.BLL {
                     await Podcast.AsyncPodcast(Podcast.Url);
                     this.AddToList(Podcast);
                 }
-             
+
 
             }
         }
@@ -109,7 +110,7 @@ namespace Podcast_Player_Grupp_19.BLL {
                     Podcast.Name, Podcast.Url, Podcast.Category, Podcast.Interval.ToString()
                 };
                 PodcastListArray.Add(stringArray);
-                
+
             }
             var serializer = new Serializer<List<string[]>>(Path);
             serializer.Serialize(PodcastListArray);

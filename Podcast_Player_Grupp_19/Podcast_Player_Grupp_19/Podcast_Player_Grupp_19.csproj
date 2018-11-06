@@ -56,7 +56,7 @@
     <Compile Include="BLL\ItemList.cs" />
     <Compile Include="BLL\Podcast.cs" />
     <Compile Include="BLL\PodcastEpisode.cs" />
-    <Compile Include="BLL\Serializer.cs" />
+    <Compile Include="DAL\Serializer.cs" />
     <Compile Include="BLL\Validation.cs" />
     <Compile Include="DAL\FeedReader.cs" />
     <Compile Include="PL\PodcastGui.cs">

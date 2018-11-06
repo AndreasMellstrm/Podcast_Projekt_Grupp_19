@@ -18,23 +18,22 @@ namespace Podcast_Player_Grupp_19.DAL {
         }
 
         public async Task GetRssData(string url) {
-                var feed = await GetFeed(url);
-                Feed = feed;
+            var feed = await GetFeed(url);
+            Feed = feed;
         }
 
 
-        public async Task<SyndicationFeed> GetFeed(string url)
-        {
+        public async Task<SyndicationFeed> GetFeed(string url) {
             XmlReader reader = XmlReader.Create(url);
-            var task = Task.Factory.StartNew(() =>
-            {
+            var task = Task.Factory.StartNew(() => {
                 try {
                     return SyndicationFeed.Load(reader);
-                } catch (Exception) {
+                }
+                catch (Exception) {
                     return null;
                 }
             });
-            return await task;          
+            return await task;
         }
     }
 }

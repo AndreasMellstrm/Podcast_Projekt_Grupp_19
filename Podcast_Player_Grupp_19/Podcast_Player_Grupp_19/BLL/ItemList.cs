@@ -7,26 +7,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Podcast_Player_Grupp_19.BLL
-{
+namespace Podcast_Player_Grupp_19.BLL {
 
-    public class ItemList<T> : IList<T>
-    {
+    public class ItemList<T> : IList<T> {
         public List<T> List { get; set; }
 
-        public ItemList()
-        {
+        public ItemList() {
             List = new List<T>();
         }
-        public virtual void AddToList(T item)
-        {
+        public virtual void AddToList(T item) {
             if (!List.Any((i) => i.GetType().GetProperty("Name").GetValue(i).ToString() == item.GetType().GetProperty("Name").GetValue(item).ToString())) {
                 List.Add(item);
             }
             else {
                 MessageBox.Show("Listan innehåller redan det objektet", "Error Message");
             }
-            
+
         }
 
         public virtual void SaveList(string Path) {
@@ -34,8 +30,7 @@ namespace Podcast_Player_Grupp_19.BLL
             serializer.Serialize(this.List);
         }
 
-        public void RemoveFromList(string userInput)
-        {
+        public void RemoveFromList(string userInput) {
             if (List.Any((i) => i.GetType().GetProperty("Name").GetValue(i).ToString() == userInput)) {
                 List.RemoveAll(item => item.GetType().GetProperty("Name").GetValue(item).ToString() == userInput);
             }
@@ -53,8 +48,8 @@ namespace Podcast_Player_Grupp_19.BLL
 
 
         }
-           
 
-        }
+
     }
+}
 
