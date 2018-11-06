@@ -10,9 +10,9 @@ using Newtonsoft.Json;
 
 namespace Podcast_Player_Grupp_19.BLL {
     public class Serializer<T> {
+
         private string Path { get; set; }
         private JsonSerializer JsonSerializer { get; set; }
-
 
         public Serializer(string pathToJson) {
             Path = pathToJson;
@@ -22,6 +22,7 @@ namespace Podcast_Player_Grupp_19.BLL {
 
         }
 
+        // Serializes the object specified in the inparameter.
         public void Serialize(T obj) {
             using (var sw = new StreamWriter(Path)) {
                 using (var jtw = new JsonTextWriter(sw)) {
@@ -29,6 +30,8 @@ namespace Podcast_Player_Grupp_19.BLL {
                 }
             }
         }
+
+        // Deserializes the json file specified in the property Path
         public T DeSerialize() {
             using (var sr = new StreamReader(Path)) {
                 using (var jtr = new JsonTextReader(sr)) {

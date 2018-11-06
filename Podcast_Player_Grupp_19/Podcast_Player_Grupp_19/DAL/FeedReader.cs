@@ -17,12 +17,13 @@ namespace Podcast_Player_Grupp_19.DAL {
             Feed = new SyndicationFeed();
         }
 
+        // Sets the property Feed to the result of the method GetFeed() as soon as it finishes.
         public async Task GetRssData(string url) {
             var feed = await GetFeed(url);
             Feed = feed;
         }
 
-
+        //Asynchronously fetches the SyndicationFeed with the inparamter url
         public async Task<SyndicationFeed> GetFeed(string url) {
             XmlReader reader = XmlReader.Create(url);
             var task = Task.Factory.StartNew(() => {

@@ -14,9 +14,6 @@ namespace Podcast_Player_Grupp_19.BLL {
         public Category(string userInput) {
             Name = userInput;
         }
-
-        //
-
     }
 }
 

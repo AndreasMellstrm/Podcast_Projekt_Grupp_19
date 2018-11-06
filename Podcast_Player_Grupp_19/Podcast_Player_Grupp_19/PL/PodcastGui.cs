@@ -28,10 +28,12 @@ namespace Podcast_Player_Grupp_19 {
             PodcastList = new PodcastList<Podcast>();
         }
 
+        
         private List<Podcast> SortPodcastListByName() {
             return PodcastList.List.OrderBy((i) => i.Name).ToList();
         }
 
+        
         private void SortByCategory() {
             var SelectedCategory = from Podcast in PodcastList.List
                                    where Podcast.Category == lvCategory.SelectedItems[0].SubItems[0].Text
@@ -39,12 +41,13 @@ namespace Podcast_Player_Grupp_19 {
             UpdateLvPodcasts(SelectedCategory.ToList());
 
         }
-
+        // Adds a new podcast asynchronously.
         private async void AddPodcast() {
             string userInputUrl = tbUrl.Text;
             string userInputName = tbPodName.Text;
             int userInputInterval = GetMilliseconds(cbInterval.SelectedItem.ToString());
             string errorMessage = "";
+
             if (Validation.ValidURL(userInputUrl, out errorMessage) && Validation.ValidUserInput(userInputName, out errorMessage)) {
                 if (Validation.CountSelections(lvCategory.SelectedItems.Count, out errorMessage)) {
                     string userInputCategory = lvCategory.SelectedItems[0].Text;
@@ -55,7 +58,7 @@ namespace Podcast_Player_Grupp_19 {
                         PodcastList.AddToList(Podcast);
                         UpdateLvPodcasts(PodcastList.List);
                     }
-                    catch (WebException) {
+                    catch (Exception) {
                         MessageBox.Show("Sidan hittades inte. Kontrollera URL:n och försök igen");
                         Podcast.UpdateTimer.Dispose();
                     }
@@ -70,7 +73,7 @@ namespace Podcast_Player_Grupp_19 {
             tbUrl.Clear();
             tbPodName.Clear();
         }
-
+        //Removes the selected category/categories.
         private void RemoveCategory<T>(ItemList<T> ItemList) {
             try {
                 foreach (ListViewItem selectedIndex in lvCategory.SelectedItems) {
@@ -83,6 +86,7 @@ namespace Podcast_Player_Grupp_19 {
             }
         }
 
+        //Removes the selected podcast(s).
         private void RemovePodcast(List<Podcast> List) {
             try {
                 foreach (ListViewItem selectedIndex in lvPodcasts.SelectedItems) {
@@ -94,7 +98,7 @@ namespace Podcast_Player_Grupp_19 {
             }
             UpdateLvPodcasts(List);
         }
-
+        // Updates the Category listview when called
         public void UpdateLvCategory<T>(ItemList<T> ItemList) {
             lvCategory.Items.Clear();
             foreach (Category Category in CategoryList.List) {
@@ -103,6 +107,7 @@ namespace Podcast_Player_Grupp_19 {
             CategoryList.SaveList("categories.json");
         }
 
+        // Updates the Podcast listview when called
         public void UpdateLvPodcasts(List<Podcast> List) {
             lvEpisodes.Items.Clear();
             lvPodcasts.Items.Clear();
@@ -119,7 +124,7 @@ namespace Podcast_Player_Grupp_19 {
 
 
         }
-
+        // Updates the podcast episodes depending on the selected podcast.
         private void UpdatePodcastEpisodes() {
             lvEpisodes.Items.Clear();
             foreach (PodcastEpisode item in SelectedPodcast.PodcastEpisodes) {
@@ -133,6 +138,7 @@ namespace Podcast_Player_Grupp_19 {
 
         }
 
+        // method for selecting the podcast to use.
         public void SelectPodcast() {
             var PodcastSelections =
                 from Podcast in PodcastList.List
@@ -142,6 +148,7 @@ namespace Podcast_Player_Grupp_19 {
             SelectedPodcast = PodcastSelectionsList[0];
         }
 
+        //Display the selected episode's description in the textbox.
         private void ShowEpisodeInfo() {
             tbEpisodeInfo.Clear();
             var podcastInfo =
@@ -158,6 +165,7 @@ namespace Podcast_Player_Grupp_19 {
 
         }
 
+        //Change the URL of the selected podcast
         private async void ChangeUrl() {
             string url = tbUrl.Text;
             string errorMessage = "";
@@ -168,17 +176,80 @@ namespace Podcast_Player_Grupp_19 {
                     tbUrl.Clear();
                 }
                 catch (NullReferenceException) {
-                    MessageBox.Show("To change a feeds URL, Please write the new URL into the URL textbox and select the feed of which you want to change.");
+                    MessageBox.Show("Please select a podcast");
                 }
-
+            }
+            else
+            {
+                MessageBox.Show(errorMessage);
             }
         }
 
         private void ChangeInterval(int Interval) {
-            SelectedPodcast.SetInterval(Interval);
-            UpdateLvPodcasts(PodcastList.List);
+            try
+            {
+                SelectedPodcast.SetInterval(Interval);
+                UpdateLvPodcasts(PodcastList.List);
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Please select a podcast");
+            }
         }
 
+        //Change name of the currently selected category in the listview.
+        private void RenameCategory()
+        {
+            string errorMessage = "";
+            if(Validation.CountSelections(lvCategory.SelectedItems.Count, out errorMessage))
+            {
+                if (Validation.ValidUserInput(tbCategory.Text, out errorMessage))
+                {
+                        var CategorySelections = from Category in CategoryList.List
+                                                 where Category.Name == lvCategory.SelectedItems[0].Text
+                                                 select Category;
+                        var SelectedCategory = CategorySelections.ToList()[0];
+                        SelectedCategory.Name = tbCategory.Text;
+                    UpdateLvCategory(CategoryList);
+                        
+                }
+                else
+                {
+                    MessageBox.Show(errorMessage);
+                }
+                    
+                 
+            }
+            else
+            {
+                MessageBox.Show(errorMessage);
+            }
+        }
+
+        //Changes the category of the selected podcast in the listview.
+        private void SetPodcastCategory()
+        {
+            string errorMessage = "";
+            try
+            {
+                if (Validation.CountSelections(lvCategory.SelectedItems.Count, out errorMessage))
+                {
+                    SelectedPodcast.Category = lvCategory.SelectedItems[0].Text;
+                    UpdateLvPodcasts(PodcastList.List);
+                }
+
+                else
+                {
+                    MessageBox.Show(errorMessage);
+                }
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Please select a podcast");
+            }
+        }
+
+        //Get the milliseconds that corresponds to the input string.
         private int GetMilliseconds(string Interval) {
             switch (Interval) {
                 case "1 minute":
@@ -192,6 +263,7 @@ namespace Podcast_Player_Grupp_19 {
             }
         }
 
+        //Adds a new category object and displays it in the listview.
         private void AddCategory() {
             string userInput = tbCategory.Text;
             if (Validation.ValidUserInput(userInput, out string errorMessage)) {
@@ -205,6 +277,7 @@ namespace Podcast_Player_Grupp_19 {
             }
         }
 
+        //Removes all HTML code from the Episode description text.
         private static string StripHtml(string input) {
             return Regex.Replace(input, "<.*?>", string.Empty);
         }
@@ -212,23 +285,16 @@ namespace Podcast_Player_Grupp_19 {
 
         private void Form1_Load(object sender, EventArgs e) {
             DeserializeLists();
-            cbInterval.SelectedIndex = 0;
+            cbInterval.SelectedIndex = 0; //Set the default value to the one at index 0.
 
         }
 
+        //Deserializes the two .json files and updates the corresponding lists.
         private async void DeserializeLists() {
             CategoryList.LoadList(CategoryList, "categories.json");
             await PodcastList.LoadList("podcasts.json");
             UpdateLvCategory(CategoryList);
             UpdateLvPodcasts(PodcastList.List);
-        }
-
-        private void tbUrl_TextChanged(object sender, EventArgs e) {
-
-        }
-
-        private void lblAddCategory_Click(object sender, EventArgs e) {
-
         }
 
         private void btnAddCategory_Click(object sender, EventArgs e) {
@@ -276,6 +342,16 @@ namespace Podcast_Player_Grupp_19 {
 
         private void btnChangeInterval_Click(object sender, EventArgs e) {
             ChangeInterval(GetMilliseconds(cbInterval.SelectedItem.ToString()));
+        }
+
+        private void btnChangeCategory_Click(object sender, EventArgs e)
+        {
+            SetPodcastCategory();
+        }
+
+        private void btnRenameCategory_Click(object sender, EventArgs e)
+        {
+            RenameCategory();
         }
     }
 }

@@ -18,6 +18,7 @@ namespace Podcast_Player_Grupp_19.BLL {
 
         }
 
+        // Get the title and description for the podcast episode from the inparameter SyndicationItem item
         public void GetPodcastEpisodeInfo(SyndicationItem item) {
             Title = item.Title.Text;
             Description = item.Summary.Text;

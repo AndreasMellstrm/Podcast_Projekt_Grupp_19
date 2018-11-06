@@ -35,22 +35,27 @@ namespace Podcast_Player_Grupp_19.BLL {
             this.Interval = Interval;
 
         }
+
+        // Initializes a timer for this podcast object.
         private void InitTimer(int interval = 300000) {
             UpdateTimer = new System.Timers.Timer(interval);
             UpdateTimer.Elapsed += OnTimeOutEvt;
             UpdateTimer.AutoReset = true;
             UpdateTimer.Enabled = true;
         }
+        // When updated timer times out, this method is called asynchronously
         private async void OnTimeOutEvt(Object sender, ElapsedEventArgs e) {
             await AsyncPodcast(Url);
-            System.Diagnostics.Debug.WriteLine("Hej");
         }
+
+        // Dispose current UpdateTimer and init new one with userInput interval
         public void SetInterval(int userInput) {
             UpdateTimer.Dispose();
             Interval = userInput;
             InitTimer(Interval);
         }
 
+        // Asynchronous fetch of the Rss data through a FeedReader object which holds the SyndicationFeed 
         public async Task AsyncPodcast(string Url) {
             FeedReader = new DAL.FeedReader();
             await FeedReader.GetRssData(Url);
@@ -58,6 +63,7 @@ namespace Podcast_Player_Grupp_19.BLL {
             GetPodcastEpisodes();
         }
 
+        // Asynchronously changes the Url property of a Podcast Object
         public async Task ChangeUrl(string Url) {
             try {
                 await AsyncPodcast(Url);
@@ -68,6 +74,7 @@ namespace Podcast_Player_Grupp_19.BLL {
             }
         }
 
+        // Creates a PodcastEpisode object for each SyndicationItem in the SyndicationFeed
         public void GetPodcastEpisodes() {
             PodcastEpisodes.Clear();
             foreach (SyndicationItem item in FeedReader.Feed.Items) {
@@ -81,6 +88,7 @@ namespace Podcast_Player_Grupp_19.BLL {
 
     public class PodcastList<T> : ItemList<Podcast> {
 
+        // Method to add a Podcast object to a PodcastList
         public override void AddToList(Podcast item) {
             if (!List.Any((i) => i.GetType().GetProperty("Title").GetValue(i).ToString() == item.GetType().GetProperty("Title").GetValue(item).ToString())) {
                 List.Add(item);
@@ -90,6 +98,8 @@ namespace Podcast_Player_Grupp_19.BLL {
             }
         }
 
+        /* Deserializes the json file specified in the inparameter Path into a List of string[] 
+        and then creates a Podcast object for each string[] in the List.*/
         public async Task LoadList(string Path) {
             if (File.Exists(Path)) {
                 var serializer = new Serializer<List<string[]>>(Path);
@@ -103,6 +113,8 @@ namespace Podcast_Player_Grupp_19.BLL {
 
             }
         }
+        /* Creates a List of string[], adds a string[] to it for each Podcast in a PodcastList and
+        then serializes the List of string[] into a json file.*/
         public override void SaveList(string Path) {
             var PodcastListArray = new List<string[]>();
             foreach (var Podcast in this.List) {

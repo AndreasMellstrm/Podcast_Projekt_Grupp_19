@@ -7,9 +7,7 @@ using System.Windows.Forms;
 
 namespace Podcast_Player_Grupp_19 {
     static class Program {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
+
         [STAThread]
         static void Main() {
             Application.EnableVisualStyles();
@@ -17,7 +15,4 @@ namespace Podcast_Player_Grupp_19 {
             Application.Run(new PodcastGUI());
         }
     }
-} //Testar /Hugo :D
-  //Andreas
-  //Hugos kommentar
-  // Ludvig är snäll.
+}
