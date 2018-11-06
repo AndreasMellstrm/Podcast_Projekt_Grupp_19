@@ -22,10 +22,7 @@ namespace Podcast_Player_Grupp_19.BLL
        
     }
 }
-/* public List<Category> List { get; set; }s
 
-        public CategoryList()
-        {
-            List = new List<Category>();
-        }
-    }*/
+public class CategoryList : ItemList<Category> {
+
+}
