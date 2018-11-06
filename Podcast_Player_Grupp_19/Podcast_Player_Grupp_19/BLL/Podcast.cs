@@ -12,8 +12,10 @@ namespace Podcast_Player_Grupp_19.BLL {
         public string Name { get; set; }
         public string FeedName { get; set; }
         public string Category { get; set; }
-        private string Url { get; set; }
-        private int Interval { get; set; }
+        public string Title { get; set; }
+        public string Url { get; set; }
+
+        public int Interval { get; set; }
         public Timer UpdateTimer { get; set; }
         public List<PodcastEpisode> PodcastEpisodes { get; set; }
         public int UpdateFrequency { get; set; }
@@ -52,6 +54,7 @@ namespace Podcast_Player_Grupp_19.BLL {
             FeedReader = new DAL.FeedReader();
             await FeedReader.GetRssData(url);
             Name = FeedName;
+            Title = FeedReader.Feed.Title.Text; 
             Url = url;
             this.Category = Category;
             GetPodcastEpisodes();

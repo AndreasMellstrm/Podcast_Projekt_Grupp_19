@@ -50,6 +50,7 @@
             this.tbPodName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.chPodTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // label1
@@ -103,10 +104,11 @@
             // 
             this.lvPodcasts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chPodName,
+            this.chPodTitle,
             this.chPodEpiCount,
             this.chPodFreq,
             this.chPodCategory});
-            this.lvPodcasts.Location = new System.Drawing.Point(10, 377);
+            this.lvPodcasts.Location = new System.Drawing.Point(12, 378);
             this.lvPodcasts.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lvPodcasts.Name = "lvPodcasts";
             this.lvPodcasts.Size = new System.Drawing.Size(672, 185);
@@ -134,7 +136,7 @@
             // chPodCategory
             // 
             this.chPodCategory.Text = "Category";
-            this.chPodCategory.Width = 217;
+            this.chPodCategory.Width = 135;
             // 
             // lvEpisodes
             // 
@@ -282,6 +284,11 @@
             this.label5.TabIndex = 23;
             this.label5.Text = "Choose Category:";
             // 
+            // chPodTitle
+            // 
+            this.chPodTitle.Text = "Title";
+            this.chPodTitle.Width = 114;
+            // 
             // PodcastGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -342,6 +349,7 @@
         private System.Windows.Forms.TextBox tbPodName;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ColumnHeader chPodTitle;
     }
 }
 

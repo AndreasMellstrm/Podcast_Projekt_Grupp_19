@@ -87,7 +87,7 @@ namespace Podcast_Player_Grupp_19 {
             {
                 var listViewItem = new ListViewItem(new[]
                 {
-                    item.Name, item.PodcastEpisodes.Count.ToString(), "1", item.Category
+                    item.Name, item.Title, item.PodcastEpisodes.Count.ToString(), "1", item.Category
                 });
 
                 lvPodcasts.Items.Add(listViewItem);
@@ -188,7 +188,7 @@ namespace Podcast_Player_Grupp_19 {
                 {
                     Podcast Podcast = new Podcast();
                     try { 
-                        await Podcast.AsyncPodcast(userInputUrl,userInputName, lvCategory.SelectedItems[0].Text);
+                        await Podcast.AsyncPodcast(userInputUrl, userInputName, lvCategory.SelectedItems[0].Text);
                         PodcastList.AddToList(Podcast);
                         UpdateLvPodcasts(PodcastList.List);
                         tbUrl.Clear();
