@@ -1,4 +1,5 @@
 ﻿using Podcast_Player_Grupp_19.BLL;
+using Podcast_Player_Grupp_19.PL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,8 +21,8 @@ namespace Podcast_Player_Grupp_19 {
         private ItemList<Podcast> PodcastList { get; set; }
         private Podcast SelectedPodcast { get; set; }
         private Serializer<List<Category>> CategorySerializer {get; set;}
-        private Serializer<List<Podcast>> PodcastSerializer { get; set; }
-        private string PodcastFile = "podcasts.json";
+        //private Serializer<List<Podcast>> PodcastSerializer { get; set; }
+        //private string PodcastFile = "podcasts.json";
         private string CategoryFile = "categories.json";
 
         private DAL.FeedReader FeedReader { get; set; }
@@ -32,7 +33,7 @@ namespace Podcast_Player_Grupp_19 {
             CategoryList = new ItemList<Category>();
             PodcastList = new ItemList<Podcast>();
             CategorySerializer = new Serializer<List<Category>>(CategoryFile);
-            PodcastSerializer = new Serializer<List<Podcast>>(PodcastFile);
+            //PodcastSerializer = new Serializer<List<Podcast>>(PodcastFile);
         }
 
         private List<Podcast> SortPodcastListByName() {
@@ -71,7 +72,7 @@ namespace Podcast_Player_Grupp_19 {
                 MessageBox.Show("You must select the podcast that you want to remove");
             }
         }
-        // här
+        
         public void UpdateLvCategory<T>(ItemList<T> ItemList, Serializer<List<T>> serializer) {
             lvCategory.Items.Clear();
             foreach (Category Category in CategoryList.List) {
@@ -107,7 +108,7 @@ namespace Podcast_Player_Grupp_19 {
                 }
         }
 
-        private void SelectPodcast() {
+        public void SelectPodcast() {
             var PodcastSelections =
                 from Podcast in PodcastList.List
                 where Podcast.Name == lvPodcasts.SelectedItems[0].SubItems[0].Text
@@ -170,7 +171,6 @@ namespace Podcast_Player_Grupp_19 {
         }
         
         private void btnAddCategory_Click(object sender, EventArgs e) {
-            //Runs the following method which is created down below.
             string userInput = tbCategory.Text;
             var Category = new Category(userInput);
             CategoryList.AddToList(Category, userInput);
@@ -251,6 +251,11 @@ namespace Podcast_Player_Grupp_19 {
 
         private void lvCategory_ItemActivate(object sender, EventArgs e) {
             SortByCategory();
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
+            var popup = new PopupForm();
+            popup.Show();
         }
     }
 }
