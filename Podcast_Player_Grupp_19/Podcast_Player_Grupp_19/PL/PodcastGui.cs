@@ -28,12 +28,12 @@ namespace Podcast_Player_Grupp_19 {
             PodcastList = new PodcastList<Podcast>();
         }
 
-        
+
         private List<Podcast> SortPodcastListByName() {
             return PodcastList.List.OrderBy((i) => i.Name).ToList();
         }
 
-        
+
         private void SortByCategory() {
             var SelectedCategory = from Podcast in PodcastList.List
                                    where Podcast.Category == lvCategory.SelectedItems[0].SubItems[0].Text
@@ -179,72 +179,59 @@ namespace Podcast_Player_Grupp_19 {
                     MessageBox.Show("Please select a podcast");
                 }
             }
-            else
-            {
+            else {
                 MessageBox.Show(errorMessage);
             }
         }
 
         private void ChangeInterval(int Interval) {
-            try
-            {
+            try {
                 SelectedPodcast.SetInterval(Interval);
                 UpdateLvPodcasts(PodcastList.List);
             }
-            catch (NullReferenceException)
-            {
+            catch (NullReferenceException) {
                 MessageBox.Show("Please select a podcast");
             }
         }
 
         //Change name of the currently selected category in the listview.
-        private void RenameCategory()
-        {
+        private void RenameCategory() {
             string errorMessage = "";
-            if(Validation.CountSelections(lvCategory.SelectedItems.Count, out errorMessage))
-            {
-                if (Validation.ValidUserInput(tbCategory.Text, out errorMessage))
-                {
-                        var CategorySelections = from Category in CategoryList.List
-                                                 where Category.Name == lvCategory.SelectedItems[0].Text
-                                                 select Category;
-                        var SelectedCategory = CategorySelections.ToList()[0];
-                        SelectedCategory.Name = tbCategory.Text;
+            if (Validation.CountSelections(lvCategory.SelectedItems.Count, out errorMessage)) {
+                if (Validation.ValidUserInput(tbCategory.Text, out errorMessage)) {
+                    var CategorySelections = from Category in CategoryList.List
+                                             where Category.Name == lvCategory.SelectedItems[0].Text
+                                             select Category;
+                    var SelectedCategory = CategorySelections.ToList()[0];
+                    SelectedCategory.Name = tbCategory.Text;
                     UpdateLvCategory(CategoryList);
-                        
+
                 }
-                else
-                {
+                else {
                     MessageBox.Show(errorMessage);
                 }
-                    
-                 
+
+
             }
-            else
-            {
+            else {
                 MessageBox.Show(errorMessage);
             }
         }
 
         //Changes the category of the selected podcast in the listview.
-        private void SetPodcastCategory()
-        {
+        private void SetPodcastCategory() {
             string errorMessage = "";
-            try
-            {
-                if (Validation.CountSelections(lvCategory.SelectedItems.Count, out errorMessage))
-                {
+            try {
+                if (Validation.CountSelections(lvCategory.SelectedItems.Count, out errorMessage)) {
                     SelectedPodcast.Category = lvCategory.SelectedItems[0].Text;
                     UpdateLvPodcasts(PodcastList.List);
                 }
 
-                else
-                {
+                else {
                     MessageBox.Show(errorMessage);
                 }
             }
-            catch (NullReferenceException)
-            {
+            catch (NullReferenceException) {
                 MessageBox.Show("Please select a podcast");
             }
         }
@@ -344,13 +331,11 @@ namespace Podcast_Player_Grupp_19 {
             ChangeInterval(GetMilliseconds(cbInterval.SelectedItem.ToString()));
         }
 
-        private void btnChangeCategory_Click(object sender, EventArgs e)
-        {
+        private void btnChangeCategory_Click(object sender, EventArgs e) {
             SetPodcastCategory();
         }
 
-        private void btnRenameCategory_Click(object sender, EventArgs e)
-        {
+        private void btnRenameCategory_Click(object sender, EventArgs e) {
             RenameCategory();
         }
     }

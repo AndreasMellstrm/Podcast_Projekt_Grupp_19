@@ -24,20 +24,17 @@ namespace Podcast_Player_Grupp_19.BLL {
 
         public static bool ValidURL(string url, out string errorMessage) {
             // Returns false if no URL has been entered.
-            if (url.Length == 0)
-            {
+            if (url.Length == 0) {
                 errorMessage = "Please enter a valid URL";
                 return false;
             }
             // Returns true if the URL matches the RegEx string.
-            else if (rgxUrl.IsMatch(url))
-            {
+            else if (rgxUrl.IsMatch(url)) {
                 errorMessage = "";
                 return true;
             }
             // Returns false if the URL does not start with either https or http.
-            else
-            {
+            else {
                 errorMessage = "The URL have to start with eiter 'https' 'http'.";
                 return false;
             }
