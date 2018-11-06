@@ -41,7 +41,7 @@ namespace Podcast_Player_Grupp_19.BLL
             }
             else
             {
-                errorMessage = "Url:n måste börja med antingen 'https://', 'http://'";
+                errorMessage = "Url:n måste börja med antingen 'https eller 'http'";
                 return false;
             }
         }
