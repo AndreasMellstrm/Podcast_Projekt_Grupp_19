@@ -203,6 +203,22 @@ namespace Podcast_Player_Grupp_19 {
             }
         }
 
+        private void AddCategory()
+        {
+            string userInput = tbCategory.Text;
+            if (Validation.ValidUserInput(userInput, out string errorMessage))
+            {
+                var Category = new Category(userInput);
+                CategoryList.AddToList(Category);
+                UpdateLvCategory(CategoryList);
+                tbCategory.Clear();
+            }
+            else
+            {
+                MessageBox.Show(errorMessage);
+            }
+        }
+
         private static string StripHtml(string input) {
             return Regex.Replace(input, "<.*?>", string.Empty);
         }
@@ -230,11 +246,7 @@ namespace Podcast_Player_Grupp_19 {
         }
         
         private void btnAddCategory_Click(object sender, EventArgs e) {
-            string userInput = tbCategory.Text;
-            var Category = new Category(userInput);
-            CategoryList.AddToList(Category);
-            UpdateLvCategory(CategoryList);
-            tbCategory.Clear();
+            AddCategory();
         }
 
         private void btnAddPodcast_Click(object sender, EventArgs e)
