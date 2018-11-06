@@ -229,7 +229,7 @@
             // btnRemoveCategory
             // 
             this.btnRemoveCategory.Location = new System.Drawing.Point(227, 318);
-            this.btnRemoveCategory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRemoveCategory.Margin = new System.Windows.Forms.Padding(4);
             this.btnRemoveCategory.Name = "btnRemoveCategory";
             this.btnRemoveCategory.Size = new System.Drawing.Size(163, 28);
             this.btnRemoveCategory.TabIndex = 18;
@@ -300,7 +300,7 @@
             "10 minutes",
             "30 minutes"});
             this.cbInterval.Location = new System.Drawing.Point(137, 102);
-            this.cbInterval.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbInterval.Margin = new System.Windows.Forms.Padding(2);
             this.cbInterval.Name = "cbInterval";
             this.cbInterval.Size = new System.Drawing.Size(253, 24);
             this.cbInterval.TabIndex = 25;
@@ -318,7 +318,7 @@
             // btnChangeInterval
             // 
             this.btnChangeInterval.Location = new System.Drawing.Point(748, 86);
-            this.btnChangeInterval.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnChangeInterval.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangeInterval.Name = "btnChangeInterval";
             this.btnChangeInterval.Size = new System.Drawing.Size(97, 38);
             this.btnChangeInterval.TabIndex = 27;

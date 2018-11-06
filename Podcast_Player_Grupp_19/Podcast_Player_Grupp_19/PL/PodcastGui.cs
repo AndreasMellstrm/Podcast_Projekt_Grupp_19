@@ -19,11 +19,6 @@ namespace Podcast_Player_Grupp_19 {
         private CategoryList<Category> CategoryList { get; set; }
         private PodcastList<Podcast> PodcastList { get; set; }
         private Podcast SelectedPodcast { get; set; }
-        private Serializer<List<Category>> CategorySerializer {get; set;}
-        //private Serializer<List<Podcast>> PodcastSerializer { get; set; }
-        private string PodcastFile = "podcasts.json";
-        private string CategoryFile = "categories.json";
-
         private DAL.FeedReader FeedReader { get; set; }
 
 
@@ -31,8 +26,6 @@ namespace Podcast_Player_Grupp_19 {
             InitializeComponent();
             CategoryList = new CategoryList<Category>();
             PodcastList = new PodcastList<Podcast>();
-            CategorySerializer = new Serializer<List<Category>>(CategoryFile);
-            //PodcastSerializer = new Serializer<List<Podcast>>(PodcastFile);
         }
 
         private List<Podcast> SortPodcastListByName() {
@@ -114,7 +107,7 @@ namespace Podcast_Player_Grupp_19 {
             foreach (Category Category in CategoryList.List) {
                 lvCategory.Items.Add(Category.GetType().GetProperty("Name").GetValue(Category).ToString());
             }
-            CategoryList.SaveList(CategoryFile);
+            CategoryList.SaveList("categories.json");
         }
         
         public void UpdateLvPodcasts(List<Podcast> List)
@@ -131,7 +124,7 @@ namespace Podcast_Player_Grupp_19 {
 
                 lvPodcasts.Items.Add(listViewItem);
             }
-            PodcastList.SaveList(PodcastFile);
+            PodcastList.SaveList("podcasts.json");
 
 
         }
@@ -217,12 +210,13 @@ namespace Podcast_Player_Grupp_19 {
 
         private void Form1_Load(object sender, EventArgs e) {
             DeserializeLists();
+            cbInterval.SelectedIndex = 0;
             
         }
 
         private async void DeserializeLists() {
-                CategoryList.LoadList(CategoryList, CategoryFile);
-                await PodcastList.LoadList(PodcastFile);
+                CategoryList.LoadList(CategoryList, "categories.json");
+                await PodcastList.LoadList("podcasts.json");
                 UpdateLvCategory(CategoryList);
                 UpdateLvPodcasts(PodcastList.List);
         }
