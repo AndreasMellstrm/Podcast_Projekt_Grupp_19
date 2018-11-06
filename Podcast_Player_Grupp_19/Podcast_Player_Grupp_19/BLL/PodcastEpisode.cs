@@ -12,7 +12,6 @@ namespace Podcast_Player_Grupp_19.BLL {
         public string Title { get; set; }
         public decimal EpisodeLength { get; set; }
         public string Description { get; set; }
-        public ItemList<PodcastEpisode> PodcastEpisodes { get; set; }
         
         
         public PodcastEpisode() { 
