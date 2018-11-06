@@ -51,6 +51,7 @@ namespace Podcast_Player_Grupp_19 {
         {
             string userInputUrl = tbUrl.Text;
             string userInputName = tbPodName.Text;
+            int userInputInterval = GetMilliseconds(cbInterval.SelectedItem.ToString());
             string errorMessage = "";
             if (Validation.ValidURL(userInputUrl, out errorMessage) && Validation.ValidUserInput(userInputName, out errorMessage))
             {
@@ -58,14 +59,14 @@ namespace Podcast_Player_Grupp_19 {
                 {
                     string userInputCategory = lvCategory.SelectedItems[0].Text;
                     var countSelections = lvCategory.SelectedItems.Count;
-                    Podcast Podcast = new Podcast(userInputName, userInputUrl, userInputCategory);
+                    Podcast Podcast = new Podcast(userInputName, userInputUrl, userInputCategory, userInputInterval);
                     try
                     {
                         await Podcast.AsyncPodcast(Podcast.Url);
                         PodcastList.AddToList(Podcast);
                         UpdateLvPodcasts(PodcastList.List);
                     }
-                    catch (WebException ex)
+                    catch (WebException)
                     {
                         MessageBox.Show("Sidan hittades inte. Kontrollera URL:n och försök igen");
                         Podcast.UpdateTimer.Dispose();
@@ -84,12 +85,12 @@ namespace Podcast_Player_Grupp_19 {
             tbPodName.Clear();
         }
 
-        private void RemoveCategory<T>(Serializer<List<T>> serializer, ItemList<T> ItemList) {
+        private void RemoveCategory<T>(ItemList<T> ItemList) {
             try {
                 foreach (ListViewItem selectedIndex in lvCategory.SelectedItems) {
                     CategoryList.RemoveFromList(selectedIndex.Text);
                 }
-                UpdateLvCategory(ItemList,serializer);
+                UpdateLvCategory(ItemList);
             }
             catch (ArgumentOutOfRangeException) {
                 MessageBox.Show("You must select the category that you want to remove");
@@ -101,19 +102,19 @@ namespace Podcast_Player_Grupp_19 {
                 foreach (ListViewItem selectedIndex in lvPodcasts.SelectedItems) {
                     PodcastList.RemoveFromList(selectedIndex.Text);
                 }
-                UpdateLvPodcasts(List);
             }
             catch (ArgumentOutOfRangeException) {
                 MessageBox.Show("You must select the podcast that you want to remove");
             }
+            UpdateLvPodcasts(List);
         }
         
-        public void UpdateLvCategory<T>(ItemList<T> ItemList, Serializer<List<T>> serializer) {
+        public void UpdateLvCategory<T>(ItemList<T> ItemList) {
             lvCategory.Items.Clear();
             foreach (Category Category in CategoryList.List) {
                 lvCategory.Items.Add(Category.GetType().GetProperty("Name").GetValue(Category).ToString());
             }
-            serializer.Serialize(ItemList.List);
+            CategoryList.SaveList(CategoryFile);
         }
         
         public void UpdateLvPodcasts(List<Podcast> List)
@@ -122,16 +123,17 @@ namespace Podcast_Player_Grupp_19 {
             lvPodcasts.Items.Clear();
             foreach(Podcast item in List)
             {
+                
                 var listViewItem = new ListViewItem(new[]
                 {
-                    item.Name, item.Title, item.PodcastEpisodes.Count.ToString(), "1", item.Category
+                    item.Name, item.Title, item.PodcastEpisodes.Count.ToString(), (item.Interval/60000).ToString(), item.Category
                 });
 
                 lvPodcasts.Items.Add(listViewItem);
-                PodcastList.SaveList(PodcastFile);
             }
-            
-            
+            PodcastList.SaveList(PodcastFile);
+
+
         }
 
         private void UpdatePodcastEpisodes() {
@@ -144,6 +146,7 @@ namespace Podcast_Player_Grupp_19 {
                     lvEpisodes.Items.Add(listViewItem);
 
                 }
+            
         }
 
         public void SelectPodcast() {
@@ -196,13 +199,13 @@ namespace Podcast_Player_Grupp_19 {
         {
             switch (Interval)
             {
-                case "1 minute" :
+                case "1 minute":
                     return 60000;
-                case "10 minutes" :
+                case "10 minutes":
                     return 600000;
-                case "30 minutes" :
+                case "30 minutes":
                     return 1800000;
-                default :
+                default:
                     return 60000;
             }
         }
@@ -212,21 +215,15 @@ namespace Podcast_Player_Grupp_19 {
         }
 
 
-            private void Form1_Load(object sender, EventArgs e) {
+        private void Form1_Load(object sender, EventArgs e) {
             DeserializeLists();
             
         }
 
-        private void DeserializeList<T>(ItemList<T> itemList,Serializer<List<T>> Serializer, string JsonFile) {
-            if (File.Exists(JsonFile)) {
-                itemList.List = Serializer.DeSerialize();
-            } 
-        }
-
         private async void DeserializeLists() {
-                DeserializeList(CategoryList, CategorySerializer, CategoryFile);
+                CategoryList.LoadList(CategoryList, CategoryFile);
                 await PodcastList.LoadList(PodcastFile);
-                UpdateLvCategory(CategoryList, CategorySerializer);
+                UpdateLvCategory(CategoryList);
                 UpdateLvPodcasts(PodcastList.List);
         }
 
@@ -242,18 +239,19 @@ namespace Podcast_Player_Grupp_19 {
             string userInput = tbCategory.Text;
             var Category = new Category(userInput);
             CategoryList.AddToList(Category);
-            UpdateLvCategory(CategoryList,CategorySerializer);
+            UpdateLvCategory(CategoryList);
             tbCategory.Clear();
         }
 
         private void btnAddPodcast_Click(object sender, EventArgs e)
         {
             AddPodcast();
+
         }
 
 
         private void btnRemoveCategory_Click(object sender, EventArgs e) {
-            RemoveCategory(CategorySerializer, CategoryList);
+            RemoveCategory(CategoryList);
 
         }
 

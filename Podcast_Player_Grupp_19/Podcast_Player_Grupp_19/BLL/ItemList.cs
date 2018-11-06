@@ -29,6 +29,11 @@ namespace Podcast_Player_Grupp_19.BLL
             
         }
 
+        public virtual void SaveList(string Path) {
+            Serializer<List<T>> serializer = new Serializer<List<T>>(Path);
+            serializer.Serialize(this.List);
+        }
+
         public void RemoveFromList(string userInput)
         {
             if (List.Any((i) => i.GetType().GetProperty("Name").GetValue(i).ToString() == userInput)) {
@@ -39,8 +44,8 @@ namespace Podcast_Player_Grupp_19.BLL
         public void LoadList(ItemList<T> itemList, string Path) {
             if (File.Exists(Path)) {
                 var serializer = new Serializer<List<T>>(Path);
-                var PodcastStringArray = serializer.DeSerialize();
-                foreach (T item in itemList.List) {
+                var DeserializedList = serializer.DeSerialize();
+                foreach (T item in DeserializedList) {
                     itemList.AddToList(item);
                 }
 

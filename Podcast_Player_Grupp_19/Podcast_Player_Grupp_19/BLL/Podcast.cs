@@ -98,16 +98,18 @@ namespace Podcast_Player_Grupp_19.BLL {
                     await Podcast.AsyncPodcast(Podcast.Url);
                     this.AddToList(Podcast);
                 }
+             
 
             }
         }
-        public void SaveList(string Path) {
+        public override void SaveList(string Path) {
             var PodcastListArray = new List<string[]>();
             foreach (var Podcast in this.List) {
                 string[] stringArray = new string[] {
                     Podcast.Name, Podcast.Url, Podcast.Category, Podcast.Interval.ToString()
                 };
                 PodcastListArray.Add(stringArray);
+                
             }
             var serializer = new Serializer<List<string[]>>(Path);
             serializer.Serialize(PodcastListArray);
