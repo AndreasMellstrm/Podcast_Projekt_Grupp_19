@@ -43,5 +43,16 @@ namespace Podcast_Player_Grupp_19.BLL
                 List.RemoveAll(item => item.GetType().GetProperty("Name").GetValue(item).ToString() == userInput);
             }
         }
+
+        public List<string[]> PodcastListToArray(ItemList<Podcast> itemList) {
+            var PodcastListArray = new List<string[]>();
+            foreach(var Podcast in itemList.List) {
+                string[] stringArray = new string[] {
+                    Podcast.Name, Podcast.FeedName, Podcast.Url, Podcast.Category, Podcast.Internal.ToString
+                };
+                PodcastListArray.Add(stringArray);
+            }
+            return PodcastListArray;
+        }
     }
 }
