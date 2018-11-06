@@ -47,6 +47,42 @@ namespace Podcast_Player_Grupp_19 {
             
         }
 
+        private async void AddPodcast()
+        {
+            string userInputUrl = tbUrl.Text;
+            string userInputName = tbPodName.Text;
+            string errorMessage = "";
+            if (Validation.ValidURL(userInputUrl, out errorMessage) && Validation.ValidUserInput(userInputName, out errorMessage))
+            {
+                if (Validation.CountSelections(lvCategory.SelectedItems.Count, out errorMessage))
+                {
+                    string userInputCategory = lvCategory.SelectedItems[0].Text;
+                    var countSelections = lvCategory.SelectedItems.Count;
+                    Podcast Podcast = new Podcast(userInputName, userInputUrl, userInputCategory);
+                    try
+                    {
+                        await Podcast.AsyncPodcast(Podcast.Url);
+                        PodcastList.AddToList(Podcast);
+                        UpdateLvPodcasts(PodcastList.List);
+                    }
+                    catch (WebException ex)
+                    {
+                        MessageBox.Show("Sidan hittades inte. Kontrollera URL:n och försök igen");
+                        Podcast.UpdateTimer.Dispose();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(errorMessage);
+                }
+            }
+            else
+            {
+                MessageBox.Show(errorMessage);
+            }
+            tbUrl.Clear();
+            tbPodName.Clear();
+        }
 
         private void RemoveCategory<T>(Serializer<List<T>> serializer, ItemList<T> ItemList) {
             try {
@@ -150,6 +186,27 @@ namespace Podcast_Player_Grupp_19 {
             }
         }
 
+        private void ChangeInterval(int Interval)
+        {
+            SelectedPodcast.SetInterval(Interval);
+            UpdateLvPodcasts(PodcastList.List);
+        }
+
+        private int GetMilliseconds(string Interval)
+        {
+            switch (Interval)
+            {
+                case "1 minute" :
+                    return 60000;
+                case "10 minutes" :
+                    return 600000;
+                case "30 minutes" :
+                    return 1800000;
+                default :
+                    return 60000;
+            }
+        }
+
         private static string StripHtml(string input) {
             return Regex.Replace(input, "<.*?>", string.Empty);
         }
@@ -189,48 +246,9 @@ namespace Podcast_Player_Grupp_19 {
             tbCategory.Clear();
         }
 
-        private async void btnAddPodcast_Click(object sender, EventArgs e) {
-            string userInputUrl = tbUrl.Text;
-            string userInputName = tbPodName.Text;
-            string userInputCategory = lvCategory.SelectedItems[0].Text;
-            var countSelections = lvCategory.SelectedItems.Count;
-            string errorMessage = "";
-
-            if (Validation.ValidURL(userInputUrl, out errorMessage) && Validation.ValidUserInput(userInputName, out errorMessage))
-            {
-
-                if (countSelections == 1)
-                {
-                    Podcast Podcast = new Podcast(userInputName, userInputUrl, userInputCategory);
-                    try { 
-                        await Podcast.AsyncPodcast(Podcast.Url);
-                        PodcastList.AddToList(Podcast);
-                        UpdateLvPodcasts(PodcastList.List);
-                        tbUrl.Clear();
-                        tbPodName.Clear();
-                    }
-                    catch(WebException ex)
-                    {
-                        MessageBox.Show("Sidan hittades inte. Kontrollera URL:n och försök igen");
-                        Podcast.UpdateTimer.Dispose();
-                        Console.Write(ex);
-                    }
-                }
-                else if (countSelections > 1)
-                {
-                    MessageBox.Show("Please select one category only");
-                    lvCategory.SelectedItems.Clear();
-
-                }
-                else if (countSelections == 0)
-                {
-                    MessageBox.Show("Please select a category");
-                }
-            }
-            else
-            {
-                MessageBox.Show(errorMessage);
-            }
+        private void btnAddPodcast_Click(object sender, EventArgs e)
+        {
+            AddPodcast();
         }
 
 
@@ -266,6 +284,11 @@ namespace Podcast_Player_Grupp_19 {
         private void btnChangeUrl_Click(object sender, EventArgs e) {
             ChangeUrl();
             
+        }
+
+        private void btnChangeInterval_Click(object sender, EventArgs e)
+        {
+            ChangeInterval(GetMilliseconds(cbInterval.SelectedItem.ToString()));
         }
     }
 }
