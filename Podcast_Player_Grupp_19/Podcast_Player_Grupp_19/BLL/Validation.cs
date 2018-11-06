@@ -17,7 +17,7 @@ namespace Podcast_Player_Grupp_19.BLL
             // Confirm that the user input string is not empty.
             if (userInput.Length == 0)
             {
-                errorMessage = "Inmatning saknas.";
+                errorMessage = MissingInput();
                 return false;
             } else
             {
@@ -28,22 +28,43 @@ namespace Podcast_Player_Grupp_19.BLL
 
         public static bool ValidURL(string url, out string errorMessage)
         {
+            // Confirm that the user input (in this case the URL string) is not empty
             if (url.Length == 0)
             {
-                errorMessage = "Inmatning saknas.";
+                errorMessage = MissingInput();
                 return false;
             }
-
+            // The input string is valid
             if (rgxUrl.IsMatch(url))
             {
                 errorMessage = "";
                 return true;
             }
             else
-            {
-                errorMessage = "Url:n måste börja med antingen 'https eller 'http'";
+            {                   
+                errorMessage = "The URL have to start with eiter 'https' 'http'.";
                 return false;
             }
+        }
+
+        public static bool CountSelections(int i,out string errorMessage) {
+
+            if (i == 1) {
+                errorMessage = "";
+                return true;
+            }
+            else if (i > 1) {
+                errorMessage = "Please select one category only";
+                return false;
+            }
+            else {
+                errorMessage = "Please select a category";
+                return false;
+            }
+        }
+        private static string MissingInput() {
+            string message = "Missing Input.";
+            return message;
         }
     }
 }
