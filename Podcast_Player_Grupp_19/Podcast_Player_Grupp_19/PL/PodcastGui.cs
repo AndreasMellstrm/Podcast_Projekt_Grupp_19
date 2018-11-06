@@ -176,18 +176,19 @@ namespace Podcast_Player_Grupp_19 {
         }
 
         private async void btnAddPodcast_Click(object sender, EventArgs e) {
-            string userInput = tbUrl.Text;
+            string userInputUrl = tbUrl.Text;
+            string userInputName = tbPodName.Text;
             var countSelections = lvCategory.SelectedItems.Count;
             string errorMessage = "";
 
-            if (Validation.ValidURL(userInput, out errorMessage))
+            if (Validation.ValidURL(userInputUrl, out errorMessage) && Validation.ValidUserInput(userInputName, out errorMessage))
             {
 
                 if (countSelections == 1)
                 {
                     Podcast Podcast = new Podcast();
                     try { 
-                        await Podcast.AsyncPodcast(userInput, lvCategory.SelectedItems[0].Text);
+                        await Podcast.AsyncPodcast(userInputUrl,userInputName, lvCategory.SelectedItems[0].Text);
                         PodcastList.AddToList(Podcast);
                         UpdateLvPodcasts(PodcastList.List);
                         tbUrl.Clear();

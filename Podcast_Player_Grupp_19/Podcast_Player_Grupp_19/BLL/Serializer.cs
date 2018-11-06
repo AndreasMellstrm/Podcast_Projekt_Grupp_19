@@ -12,8 +12,6 @@ namespace Podcast_Player_Grupp_19.BLL {
     public class Serializer<T> {
         private string Path { get; set; }
         private JsonSerializer JsonSerializer { get; set; }
-        private XmlSerializer XmlSerializer { get; set; }
-
 
 
         public Serializer(string pathToJson) {
@@ -21,24 +19,6 @@ namespace Podcast_Player_Grupp_19.BLL {
             JsonSerializer = new JsonSerializer {
                 TypeNameHandling = TypeNameHandling.All
             };
-
-
-
-
-        }
-        public void XmlSerialize(ItemList<Podcast> list) {
-            if (list.List.Count != 0) {
-                XmlSerializer Xmlserializer = new XmlSerializer(typeof(ItemList<Podcast>));
-                using (TextWriter writer = new StreamWriter("Podcasts.xml")) {
-                    Xmlserializer.Serialize(writer, list);
-                }
-
-
-            }
-            else {
-
-            }
-
 
         }
 
@@ -54,19 +34,6 @@ namespace Podcast_Player_Grupp_19.BLL {
                 using (var jtr = new JsonTextReader(sr)) {
                     return JsonSerializer.Deserialize<T>(jtr);
                 }
-            }
-        }
-        public void Save(T obj) {
-            using (var writer = new StreamWriter(Path)) {
-                var serializer = new XmlSerializer(this.GetType());
-                serializer.Serialize(writer, obj);
-                writer.Flush();
-            }
-        }
-        public ItemList<Podcast> Load() {
-            using (var stream = File.OpenRead(Path)) {
-                var serializer = new XmlSerializer(typeof(ItemList<Podcast>));
-                return serializer.Deserialize(stream) as ItemList<Podcast>;
             }
         }
     }
