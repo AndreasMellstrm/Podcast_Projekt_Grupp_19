@@ -48,7 +48,7 @@ namespace Podcast_Player_Grupp_19.BLL
             var PodcastListArray = new List<string[]>();
             foreach(var Podcast in itemList.List) {
                 string[] stringArray = new string[] {
-                    Podcast.Name, Podcast.FeedName, Podcast.Url, Podcast.Category, Podcast.Internal.ToString
+                    Podcast.Name, Podcast.FeedName, Podcast.Url, Podcast.Category, Podcast.Interval.ToString()
                 };
                 PodcastListArray.Add(stringArray);
             }

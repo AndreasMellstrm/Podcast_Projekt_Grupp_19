@@ -38,7 +38,7 @@ namespace Podcast_Player_Grupp_19.BLL {
         }
         private async void OnTimeOutEvt(Object sender, ElapsedEventArgs e)
         {
-            await AsyncPodcast(Title, Url, FeedName, Category);
+            await AsyncPodcast(Url, FeedName, Category);
             System.Diagnostics.Debug.WriteLine("Hej");
         }
 
@@ -49,7 +49,7 @@ namespace Podcast_Player_Grupp_19.BLL {
             InitTimer(Interval);
         }
 
-        public async Task AsyncPodcast(string title, string url,string FeedName, string Category)
+        public async Task AsyncPodcast(string url,string FeedName, string Category)
         {
             FeedReader = new DAL.FeedReader();
             await FeedReader.GetRssData(url);
