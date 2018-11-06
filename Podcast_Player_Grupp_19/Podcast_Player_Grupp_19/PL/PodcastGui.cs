@@ -259,6 +259,8 @@ namespace Podcast_Player_Grupp_19 {
                 tbUrl.Clear();
             } catch (NullReferenceException) {
                 MessageBox.Show("To change a feeds URL, Please write the new URL into the URL textbox and select the feed of which you want to change.");
+            } catch (WebException) {
+                MessageBox.Show("Please enter a valid URL");
             }
         } 
     }
