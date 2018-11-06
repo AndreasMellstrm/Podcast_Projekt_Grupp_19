@@ -82,6 +82,7 @@ namespace Podcast_Player_Grupp_19 {
         
         public void UpdateLvPodcasts(List<Podcast> List)
         {
+            lvEpisodes.Items.Clear();
             lvPodcasts.Items.Clear();
             foreach(Podcast item in List)
             {
@@ -93,6 +94,8 @@ namespace Podcast_Player_Grupp_19 {
                 lvPodcasts.Items.Add(listViewItem);
                 PodcastList.SaveList(PodcastFile);
             }
+            
+            
         }
 
         private void UpdatePodcastEpisodes() {
@@ -131,6 +134,22 @@ namespace Podcast_Player_Grupp_19 {
             }
 
         }
+
+        private async void ChangeUrl() {
+            string url = tbUrl.Text;
+            string errorMessage = "";
+            if (Validation.ValidURL(url, out errorMessage)) {
+                try {
+                    await SelectedPodcast.ChangeUrl(tbUrl.Text);
+                    UpdateLvPodcasts(PodcastList.List);
+                    tbUrl.Clear();
+                } catch (NullReferenceException) {
+                    MessageBox.Show("To change a feeds URL, Please write the new URL into the URL textbox and select the feed of which you want to change.");
+                }
+
+            }
+        }
+
         private static string StripHtml(string input) {
             return Regex.Replace(input, "<.*?>", string.Empty);
         }
@@ -148,17 +167,10 @@ namespace Podcast_Player_Grupp_19 {
         }
 
         private async void DeserializeLists() {
-            DeserializeList(CategoryList, CategorySerializer, CategoryFile);
-            await PodcastList.LoadList(PodcastFile);
-            UpdateLvCategory(CategoryList, CategorySerializer);
-            UpdateLvPodcasts(PodcastList.List);
-        }
-
-        private void btnPlay_Click(object sender, EventArgs e) {
-
-            string path = @"C:\Users\User\Desktop\sample.mp3";
-            BLL.Player.Play(path);
-
+                DeserializeList(CategoryList, CategorySerializer, CategoryFile);
+                await PodcastList.LoadList(PodcastFile);
+                UpdateLvCategory(CategoryList, CategorySerializer);
+                UpdateLvPodcasts(PodcastList.List);
         }
 
         private void tbUrl_TextChanged(object sender, EventArgs e) {
@@ -175,9 +187,6 @@ namespace Podcast_Player_Grupp_19 {
             CategoryList.AddToList(Category);
             UpdateLvCategory(CategoryList,CategorySerializer);
             tbCategory.Clear();
-            
-            
-
         }
 
         private async void btnAddPodcast_Click(object sender, EventArgs e) {
@@ -194,7 +203,7 @@ namespace Podcast_Player_Grupp_19 {
                 {
                     Podcast Podcast = new Podcast(userInputName, userInputUrl, userInputCategory);
                     try { 
-                        await Podcast.AsyncPodcast();
+                        await Podcast.AsyncPodcast(Podcast.Url);
                         PodcastList.AddToList(Podcast);
                         UpdateLvPodcasts(PodcastList.List);
                         tbUrl.Clear();
@@ -253,16 +262,11 @@ namespace Podcast_Player_Grupp_19 {
             SortByCategory();
         }
 
-        private void button1_Click(object sender, EventArgs e) {
-            try {
-                SelectedPodcast.Url = tbUrl.Text;
-                tbUrl.Clear();
-            } catch (NullReferenceException) {
-                MessageBox.Show("To change a feeds URL, Please write the new URL into the URL textbox and select the feed of which you want to change.");
-            } catch (WebException) {
-                MessageBox.Show("Please enter a valid URL");
-            }
-        } 
+
+        private void btnChangeUrl_Click(object sender, EventArgs e) {
+            ChangeUrl();
+            
+        }
     }
 }
 

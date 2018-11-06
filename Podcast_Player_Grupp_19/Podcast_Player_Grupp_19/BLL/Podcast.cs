@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,7 +42,7 @@ namespace Podcast_Player_Grupp_19.BLL {
             UpdateTimer.Enabled = true;
         }
         private async void OnTimeOutEvt(Object sender, ElapsedEventArgs e) {
-            await AsyncPodcast();
+            await AsyncPodcast(Url);
             System.Diagnostics.Debug.WriteLine("Hej");
         }
         public void SetInterval(int userInput) {
@@ -50,11 +51,20 @@ namespace Podcast_Player_Grupp_19.BLL {
             InitTimer(Interval);
         }
 
-        public async Task AsyncPodcast() {
+        public async Task AsyncPodcast(string Url) {
             FeedReader = new DAL.FeedReader();
             await FeedReader.GetRssData(Url);
             Title = FeedReader.Feed.Title.Text;
             GetPodcastEpisodes();
+        }
+
+        public async Task ChangeUrl(string Url) {
+            try {
+                await AsyncPodcast(Url);
+                this.Url = Url;
+            } catch (Exception) {
+                MessageBox.Show("Please enter a valid URL");
+            }
         }
 
         public void GetPodcastEpisodes() {
@@ -85,7 +95,7 @@ namespace Podcast_Player_Grupp_19.BLL {
                 var PodcastStringArray = serializer.DeSerialize();
                 foreach (string[] stringArray in PodcastStringArray) {
                     Podcast Podcast = new Podcast(stringArray[0], stringArray[1], stringArray[2], int.Parse(stringArray[3]));
-                    await Podcast.AsyncPodcast();
+                    await Podcast.AsyncPodcast(Podcast.Url);
                     this.AddToList(Podcast);
                 }
 

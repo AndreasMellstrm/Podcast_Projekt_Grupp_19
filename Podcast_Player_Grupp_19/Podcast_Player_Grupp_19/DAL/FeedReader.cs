@@ -28,7 +28,11 @@ namespace Podcast_Player_Grupp_19.DAL {
             XmlReader reader = XmlReader.Create(url);
             var task = Task.Factory.StartNew(() =>
             {
-                return SyndicationFeed.Load(reader);
+                try {
+                    return SyndicationFeed.Load(reader);
+                } catch (Exception) {
+                    return null;
+                }
             });
             return await task;          
         }

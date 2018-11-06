@@ -54,7 +54,6 @@
     <Compile Include="BLL\Category.cs" />
     <Compile Include="BLL\IList.cs" />
     <Compile Include="BLL\ItemList.cs" />
-    <Compile Include="BLL\Player.cs" />
     <Compile Include="BLL\Podcast.cs" />
     <Compile Include="BLL\PodcastEpisode.cs" />
     <Compile Include="BLL\Serializer.cs" />

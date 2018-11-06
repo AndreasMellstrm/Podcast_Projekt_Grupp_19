@@ -28,7 +28,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lvCategory = new System.Windows.Forms.ListView();
             this.chCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnPlay = new System.Windows.Forms.Button();
             this.lvPodcasts = new System.Windows.Forms.ListView();
             this.chPodName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chPodTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -51,7 +50,7 @@
             this.tbPodName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnChangeUrl = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -89,17 +88,6 @@
             // 
             this.chCategory.Text = "Category";
             this.chCategory.Width = 378;
-            // 
-            // btnPlay
-            // 
-            this.btnPlay.Location = new System.Drawing.Point(891, 377);
-            this.btnPlay.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(436, 186);
-            this.btnPlay.TabIndex = 5;
-            this.btnPlay.Text = "Play Episode";
-            this.btnPlay.UseVisualStyleBackColor = true;
-            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
             // lvPodcasts
             // 
@@ -290,22 +278,22 @@
             this.label5.TabIndex = 23;
             this.label5.Text = "Choose Category:";
             // 
-            // button1
+            // btnChangeUrl
             // 
-            this.button1.Location = new System.Drawing.Point(748, 36);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(97, 45);
-            this.button1.TabIndex = 24;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnChangeUrl.Location = new System.Drawing.Point(748, 36);
+            this.btnChangeUrl.Name = "btnChangeUrl";
+            this.btnChangeUrl.Size = new System.Drawing.Size(97, 45);
+            this.btnChangeUrl.TabIndex = 24;
+            this.btnChangeUrl.Text = "Change URL";
+            this.btnChangeUrl.UseVisualStyleBackColor = true;
+            this.btnChangeUrl.Click += new System.EventHandler(this.btnChangeUrl_Click);
             // 
             // PodcastGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1363, 914);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnChangeUrl);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tbPodName);
@@ -321,7 +309,6 @@
             this.Controls.Add(this.tbUrl);
             this.Controls.Add(this.lvEpisodes);
             this.Controls.Add(this.lvPodcasts);
-            this.Controls.Add(this.btnPlay);
             this.Controls.Add(this.lvCategory);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -339,7 +326,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListView lvCategory;
         private System.Windows.Forms.ColumnHeader chCategory;
-        private System.Windows.Forms.Button btnPlay;
         private System.Windows.Forms.ListView lvPodcasts;
         private System.Windows.Forms.ListView lvEpisodes;
         private System.Windows.Forms.ColumnHeader chPodEpiCount;
@@ -362,7 +348,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ColumnHeader chPodTitle;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnChangeUrl;
     }
 }
 
